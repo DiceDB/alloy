@@ -1,4 +1,4 @@
-DiceDB Playground Backend
+DiceDB Playground Web
 ===
 
 DiceDB Playground is an interactive platform designed to let users experiment with [DiceDB](https://github.com/dicedb/dice/) commands in a live environment, similar to the Go Playground.
