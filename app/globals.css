@@ -1,8 +1,3 @@
-@media screen and (max-width: 768px) {
-    .columns {
-      flex-direction: column;
-    }
-    .column {
-      width: 100% !important;
-    }
-  }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
