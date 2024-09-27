@@ -1,8 +1,12 @@
 'use client';
 
 import { Search } from 'lucide-react';
+interface SearchBoxProps {
+  search: string;
+  setSearch: (search: string) => void;
+}
 
-export default function SearchBox({ search , setSearch}) {
+export default function SearchBox({ search , setSearch}: SearchBoxProps) {
   return (
     <div>
       <div className="mb-4">

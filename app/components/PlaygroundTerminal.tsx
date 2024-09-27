@@ -3,7 +3,14 @@
 import { useEffect, useRef } from 'react';
 import { Dice1 } from 'lucide-react';
 
-export default function PlaygroundTerminal({ output, command, setCommand, handleCommand }) {
+interface PlaygroundTerminalProps {
+  output: string[];
+  command: string;
+  setCommand: (value: string) => void;
+  handleCommand: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+export default function PlaygroundTerminal({ output, command, setCommand, handleCommand }: PlaygroundTerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

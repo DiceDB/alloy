@@ -70,7 +70,7 @@ export default function PlaygroundContainer() {
               output={output}
               command={command}
               setCommand={setCommand}
-              handleCommand={handleCommand}
+              handleCommand={(e) => handleCommand(e)}
             />
             <Footer timeLeft={formatTime(timeLeft)} triggers={triggers} />
           </div>
