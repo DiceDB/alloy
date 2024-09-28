@@ -7,8 +7,6 @@ export const metadata: Metadata = {
   description: "",
   icons: {
     icon: "https://dicedb.io/icon.png",
-    shortcut: "/shortcut.png",
-    apple: "/apple-touch-icon.png",
   },
 };
 

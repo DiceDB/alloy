@@ -61,14 +61,14 @@ export default function Playground() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-900">
       <div className="container mx-auto flex flex-col flex-grow px-2 py-6">
-        <header className="mb-6 flex items-center justify-between">
+        <header className="mb-6 flex items-center justify-between w-10 h-10">
           <div className="flex items-center">
             <Image
               src="https://dicedb.io/dicedb-logo-light.png"
               width={100}
               height={100}
               alt="DiceDB logo"
-              className="mr-2"
+              className="object-contain"
             />
             <h1 className="font-ariel font-light text-xl">PlayGround</h1>
           </div>
