@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
-import Cli from "@/components/Cli/Cli";
+import Cli from "@/components/CLI/CLI";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import SearchBox from "@/components/Search/SearchBox";
