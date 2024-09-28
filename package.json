@@ -10,10 +10,12 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.20",
     "lucide-react": "^0.446.0",
     "next": "14.2.13",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-terminal-ui": "^1.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",
