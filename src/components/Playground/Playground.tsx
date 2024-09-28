@@ -1,12 +1,13 @@
 "use client";
 
+import React from "react";
 import { useState, useEffect } from "react";
-import PlaygroundTerminal from "./PlaygroundTerminal";
-import Header from "./Header";
-import Footer from "./Footer";
-import SearchBox from "./SearchBox";
+import Cli from "@/components/Cli/Cli";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import SearchBox from "@/components/Search/SearchBox";
 
-export default function PlaygroundContainer() {
+export default function Playground() {
   const [command, setCommand] = useState("");
   const [output, setOutput] = useState<string[]>([]);
   const [triggers, setTriggers] = useState<number>(1000);
@@ -66,7 +67,7 @@ export default function PlaygroundContainer() {
         <Header />
         <main className="flex-grow flex overflow-hidden">
           <div className="w-1/2 p-4 bg-gray-800 text-white flex flex-col">
-            <PlaygroundTerminal
+            <Cli
               output={output}
               command={command}
               setCommand={setCommand}

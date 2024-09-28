@@ -1,3 +1,4 @@
+
 'use client';
 
 export default function Footer({ timeLeft, triggers }: { timeLeft: string, triggers: number }) {

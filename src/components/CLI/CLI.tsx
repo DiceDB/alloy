@@ -1,16 +1,18 @@
+
 'use client';
 
+import React from 'react';
 import { useEffect, useRef } from 'react';
 import { Dice1 } from 'lucide-react';
 
-interface PlaygroundTerminalProps {
+interface CliProps {
   output: string[];
   command: string;
-  setCommand: (value: string) => void;
-  handleCommand: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  setCommand: React.Dispatch<React.SetStateAction<string>>;
+  handleCommand: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
-export default function PlaygroundTerminal({ output, command, setCommand, handleCommand }: PlaygroundTerminalProps) {
+export default function Cli({ output, command, setCommand, handleCommand }: CliProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

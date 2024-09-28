@@ -1,9 +1,10 @@
 'use client';
 
+import React from 'react';
 import { Search } from 'lucide-react';
 interface SearchBoxProps {
   search: string;
-  setSearch: (search: string) => void;
+  setSearch: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function SearchBox({ search , setSearch}: SearchBoxProps) {
