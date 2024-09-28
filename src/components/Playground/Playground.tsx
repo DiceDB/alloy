@@ -1,25 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 import { useState, useEffect } from "react";
 import Cli from "@/components/CLI/CLI";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
 import SearchBox from "@/components/Search/SearchBox";
 
 export default function Playground() {
   const [command, setCommand] = useState("");
   const [output, setOutput] = useState<string[]>([]);
-  const [triggers, setTriggers] = useState<number>(1000);
+  const [triggers, setTriggers] = useState<number>(998);
   const [search, setSearch] = useState("");
-  const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
-  const [store, setStore] = useState<{ [key: string]: string }>({
-    hello: "world",
-  });
+  const [timeLeft, setTimeLeft] = useState<number>(14 * 60 + 40);
+  const [store, setStore] = useState<{ [key: string]: string }>({});
 
   const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const newOutput = `dice> ${command}`;
+      const newOutput = `dice > ${command}`;
       let result = "";
 
       const [cmd, ...args] = command.split(" ");
@@ -62,24 +59,46 @@ export default function Playground() {
   };
 
   return (
-    <>
-      <div className="min-h-screen flex flex-col bg-gray-900 text-gray-100 p-4">
-        <Header />
-        <main className="flex-grow flex overflow-hidden">
-          <div className="w-1/2 p-4 bg-gray-800 text-white flex flex-col">
-            <Cli
-              output={output}
-              command={command}
-              setCommand={setCommand}
-              handleCommand={(e) => handleCommand(e)}
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
+      <div className="container mx-auto flex flex-col flex-grow px-2 py-6">
+        <header className="mb-6 flex items-center justify-between">
+          <div className="flex items-center">
+            <Image
+              src="https://dicedb.io/dicedb-logo-light.png"
+              width={100}
+              height={100}
+              alt="DiceDB logo"
+              className="mr-2"
             />
-            <Footer timeLeft={formatTime(timeLeft)} triggers={triggers} />
+            <h1 className="font-ariel font-light text-xl">PlayGround</h1>
           </div>
-          <div className="w-1/2 p-4 bg-white shadow-md overflow-auto">
-            <SearchBox search={search} setSearch={setSearch} />
+        </header>
+        <main className="flex flex-grow gap-2 overflow-hidden">
+          <div className="w-1/2 flex flex-col">
+            <div className="h-80 border border-gray-300 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+              <Cli
+                output={output}
+                command={command}
+                setCommand={setCommand}
+                handleCommand={handleCommand}
+              />
+            </div>
+            <div className="flex flex-row justify-between text-gray-900 ">
+              <div className="mt-4 flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
+                <span>Cleanup in : {formatTime(timeLeft)} mins</span>
+              </div>
+              <div className="mt-4 flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
+                <span>Command left: {triggers}</span>
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2 flex flex-col">
+            <div className="flex-grow border border-gray-400 bg-gray-100 p-4 rounded-lg shadow-md mb-4">
+              <SearchBox search={search} setSearch={setSearch} />
+            </div>
           </div>
         </main>
       </div>
-    </>
+    </div>
   );
 }

@@ -34,4 +34,3 @@ jobs:
       - name: TypeScript type check
         if: always() && fileExists('tsconfig.json')
         run: npm run type-check
-g

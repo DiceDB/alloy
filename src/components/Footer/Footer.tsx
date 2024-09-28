@@ -1,13 +1,79 @@
+import React from "react";
+import { Button } from "@mui/material";
+import { Twitter } from "@mui/icons-material";
+import GitHub from "@mui/icons-material/GitHub";
+import People from "@mui/icons-material/People";
 
-'use client';
-
-export default function Footer({ timeLeft, triggers }: { timeLeft: string, triggers: number }) {
+export default function Footer() {
   return (
-    <div className="bg-gray-100 rounded-lg p-4 text-gray-900 text-sm">
-      <div className="flex justify-between items-center">
-        <span>Cleanup in: {timeLeft} mins</span>
-        <span>Command Triggers left: {triggers}</span>
+    <footer className="bg-white border-t border-gray-100 py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-gray-500 font-semibold mb-4">DiceDB</h3>
+            <Button className="w-full mb-2 bg-red-600 hover:bg-red-700 text-white">
+              Get Started →
+            </Button>
+            <Button className="w-full mb-2 border-2 border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600">
+              <GitHub className="mr-2 h-4 w-4" /> GitHub (4k+)
+            </Button>
+          </div>
+
+          <div>
+            <h3 className="text-gray-500 font-semibold mb-4">Developers</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-gray-600 hover:text-gray-900">
+                  Quickstart
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-600 hover:text-gray-900">
+                  Commands
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-600 hover:text-gray-900">
+                  Examples
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-gray-500 font-semibold mb-4">Examples</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-gray-600 hover:text-gray-900">
+                  Real-time Leaderboard
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-gray-500 font-semibold mb-4">Us and Socials</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-gray-600 hover:text-gray-900">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+            <div className="flex space-x-4 mt-4">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                <People className="h-6 w-6" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                <Twitter className="h-6 w-6" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                <GitHub className="h-6 w-6" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
   );
 }
