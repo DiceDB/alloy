@@ -3,7 +3,6 @@ import { Clipboard } from "lucide-react";
 import { DiceCmdMeta } from "@/data/command";
 
 export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
-  const [isHovered, setIsHovered] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -36,8 +35,6 @@ export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
 
       <div
         className="bg-gray-200 rounded-lg relative overflow-x-auto p-4"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <code className="font-mono text-sm whitespace-pre text-gray-700 inline-block min-w-full">
           {syntax}
