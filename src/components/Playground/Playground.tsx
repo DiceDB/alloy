@@ -8,7 +8,7 @@ import { Dice1, Dice3, Dice5 } from "lucide-react";
 
 export default function Playground() {
   const [search, setSearch] = useState("");
-  const [timeLeft, setTimeLeft] = useState<number>(14 * 60 + 40);
+  const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
   const [commandsLeft, setCommandsLeft] = useState<number>(1000);
 
   useEffect(() => {
