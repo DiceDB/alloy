@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Clipboard } from "lucide-react"; // Import the copy icon
+import { Clipboard } from "lucide-react";
 import { DiceCmdMeta } from "@/data/command";
 
 export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
@@ -9,7 +9,7 @@ export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
   const handleCopy = () => {
     navigator.clipboard.writeText(syntax);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (

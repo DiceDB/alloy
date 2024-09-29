@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CliProps {
-  decreaseCommandsLeft: () => void; // Add prop for decreasing commands left
+  decreaseCommandsLeft: () => void;
 }
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
@@ -46,7 +46,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
 
       setOutput((prevOutput) => [...prevOutput, newOutput, result]);
       setCommand("");
-      decreaseCommandsLeft(); // Decrease the command count
+      decreaseCommandsLeft();
     }
   };
 
