@@ -1,1 +1,6 @@
-// This file will contain the type definitions
+import * as React from 'react'; 
+
+export interface CommandHandler {
+    command: string;
+    setOutput: React.Dispatch<React.SetStateAction<string[]>>;
+}
