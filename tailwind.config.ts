@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'Assistant': ['Assistant'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
