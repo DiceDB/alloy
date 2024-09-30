@@ -3,16 +3,52 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CliProps {
-  output: string[];
-  command: string;
-  setCommand: React.Dispatch<React.SetStateAction<string>>;
-  handleCommand: React.KeyboardEventHandler<HTMLInputElement>;
+  decreaseCommandsLeft: () => void;
 }
 
-export default function Cli({ output, command, setCommand, handleCommand }: CliProps) {
+export default function Cli({ decreaseCommandsLeft }: CliProps) {
+  const [command, setCommand] = useState("");
+  const [output, setOutput] = useState<string[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [cursorPosition, setCursorPosition] = useState(0);
+  const [store, setStore] = useState<{ [key: string]: string }>({});
+
+  const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const newOutput = `dice ~$ ${command}`;
+      let result = "";
+      const [cmd, ...args] = command.split(" ");
+
+      switch (cmd.toUpperCase()) {
+        case "GET":
+          result = store[args[0]] || "(nil)";
+          break;
+        case "SET":
+          if (args.length === 2) {
+            const [key, value] = args;
+            setStore((prevStore) => ({ ...prevStore, [key]: value }));
+            result = "OK";
+          } else {
+            result = "Invalid command. Usage: SET key value";
+          }
+          break;
+        case "CLEAR":
+          setOutput([]);
+          setCommand("");
+          return;
+        case "":
+          setCommand("");
+          return;
+        default:
+          setCommand("");
+          return;
+      }
+
+      setOutput((prevOutput) => [...prevOutput, newOutput, result]);
+      setCommand("");
+      decreaseCommandsLeft();
+    }
+  };
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -28,48 +64,36 @@ export default function Cli({ output, command, setCommand, handleCommand }: CliP
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
-    setCursorPosition(e.target.selectionStart || 0);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleCommand(e);
-      setCursorPosition(0);
-    } else {
-      setTimeout(() => {
-        setCursorPosition(inputRef.current?.selectionStart || 0);
-      }, 0);
     }
   };
 
   return (
     <div
       ref={terminalRef}
-      className="flex flex-col h-full bg-gray-900 text-white font-mono text-sm overflow-auto p-4"
+      className="flex flex-col h-full bg-gray-900 text-white font-mono text-sm overflow-auto top-0 pl-4 pb-2"
       onClick={() => inputRef.current?.focus()}
     >
       {output.map((line, index) => (
-        <div key={index} className={line.startsWith('dice >') ? 'text-gray-300' : 'text-white'}>
+        <div key={index} className="text-white p-1">
           {line}
         </div>
       ))}
       <div className="flex items-center">
-        <span className="text-gray-200 mr-2">dice &gt; </span>
-        <div className="relative flex-grow p-1">
+        <p className="text-green-500 mr-2 p-1">dice ~$</p>
+        <div className="flex-grow">
           <input
             ref={inputRef}
             type="text"
             value={command}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            className="w-full bg-transparent border-none outline-none text-white"
+            className="w-full bg-transparent outline-none text-white"
           />
-          <div
-            className="absolute left-0 top-0 pointer-events-none whitespace-pre"
-            aria-hidden="true"
-          >
-            {command.slice(cursorPosition)}
-          </div>
         </div>
       </div>
     </div>

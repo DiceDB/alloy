@@ -1,48 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Cli from "@/components/CLI/CLI";
 import SearchBox from "@/components/Search/SearchBox";
+import { Dice1, Dice3, Dice5 } from "lucide-react";
 
 export default function Playground() {
-  const [command, setCommand] = useState("");
-  const [output, setOutput] = useState<string[]>([]);
-  const [triggers, setTriggers] = useState<number>(998);
   const [search, setSearch] = useState("");
-  const [timeLeft, setTimeLeft] = useState<number>(14 * 60 + 40);
-  const [store, setStore] = useState<{ [key: string]: string }>({});
-
-  const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      const newOutput = `dice > ${command}`;
-      let result = "";
-
-      const [cmd, ...args] = command.split(" ");
-
-      switch (cmd.toUpperCase()) {
-        case "GET":
-          result = store[args[0]] || "(nil)";
-          break;
-        case "SET":
-          if (args.length === 2) {
-            const [key, value] = args;
-            setStore((prevStore) => ({ ...prevStore, [key]: value }));
-            result = "OK";
-          } else {
-            result = "Invalid command. Usage: SET key value";
-          }
-          break;
-        default:
-          result = `Unknown command: ${cmd}`;
-      }
-
-      setOutput([...output, newOutput, result]);
-      setCommand("");
-      setTriggers((prev) => prev - 1);
-    }
-  };
+  const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
+  const [commandsLeft, setCommandsLeft] = useState<number>(1000);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,37 +25,44 @@ export default function Playground() {
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
+  const decreaseCommandsLeft = () => {
+    setCommandsLeft((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-white text-gray-900">
-      <div className="container mx-auto flex flex-col flex-grow px-2 py-6">
-        <header className="mb-6 flex items-center justify-between w-10 h-10">
+      <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900 line-height-[1.5rem]">
+        <header className="navbar flex items-center justify-between pt-5 pb-4">
           <div className="flex items-center">
             <Image
               src="https://dicedb.io/dicedb-logo-light.png"
-              width={100}
-              height={100}
+              width={110}
+              height={110}
               alt="DiceDB logo"
               className="object-contain"
             />
-            <h1 className="font-ariel font-light text-xl">PlayGround</h1>
+            <h2 className="font-light text-xl">PlayGround</h2>
           </div>
         </header>
         <main className="flex flex-grow gap-2 overflow-hidden">
-          <div className="w-1/2 flex flex-col">
-            <div className="h-80 border border-gray-300 bg-gray-100 rounded-lg overflow-hidden shadow-md">
-              <Cli
-                output={output}
-                command={command}
-                setCommand={setCommand}
-                handleCommand={handleCommand}
-              />
+          <div className="w-1/2 flex flex-col bg">
+          <div className="bg-gray-900 rounded-lg">
+            <div className="bg-gray-900 px-4 py-4 flex items-center rounded-lg">
+              <div className="flex space-x-2">
+                <Dice5 className="w-4 h-4 bg-red-500"></Dice5>
+                <Dice1 className="w-4 h-4 bg-yellow-500"></Dice1>
+                <Dice3 className="w-4 h-4 bg-green-500"></Dice3>
+              </div>
             </div>
+            <div className="h-80 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+              <Cli decreaseCommandsLeft={decreaseCommandsLeft}/>
+            </div>
+          </div>
             <div className="flex flex-row justify-between text-gray-900 ">
               <div className="mt-4 flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
                 <span>Cleanup in : {formatTime(timeLeft)} mins</span>
               </div>
               <div className="mt-4 flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
-                <span>Command left: {triggers}</span>
+                <span>Command left: {commandsLeft}</span>
               </div>
             </div>
           </div>
@@ -99,6 +73,5 @@ export default function Playground() {
           </div>
         </main>
       </div>
-    </div>
   );
 }

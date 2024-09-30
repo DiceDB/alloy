@@ -1,24 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: 'Assistant', sans-serif;
 }
 
@@ -26,4 +11,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.width-absolute {
+  width: 100%;
 }
