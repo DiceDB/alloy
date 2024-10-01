@@ -125,20 +125,13 @@ export default function Playground() {
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="border  rounded-lg p-4">
-                <SearchBox search={search} setSearch={setSearch} />
-              </div>
-              <div className="border rounded-lg p-4">
-                <h2 className="text-xl font-semibold mb-4">Recent Commands</h2>
-                <ul className="space-y-2 border">
-                  {[''].map((cmd, index) => (
-                    <li key={index} className=" border p-2 rounded">
-                      {cmd}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="space-y-4 flex flex-col">
+        
+          <div className="flex-grow border border-gray-400 bg-gray-100 p-4 rounded-lg shadow-md mb-4">
+            <SearchBox search={search} setSearch={setSearch} />
+          </div>
+   
+            
             </div>
           </main>
       </div>
