@@ -1,5 +1,3 @@
-// src/app/Playground.tsx
-
 "use client";
 
 import Image from "next/image";

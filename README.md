@@ -70,6 +70,16 @@ services:
 docker-compose up
 ```
 
+## Step-by-Step Setup for End-to-End Development with Docker
+We have added `Dockerfile.dev` which is for development purposes, ensuring your Next.js application supports hot reloading and reflects code changes without requiring image rebuilds.
+
+`docker-compose.dev.yml` configures Docker Compose to build and run your Next.js app in development mode.
+
+```shell
+docker-compose -f docker-compose.dev.yml up --build
+```
+
+
 ## Building for Production
 
 To create a production build:
