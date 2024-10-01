@@ -37,10 +37,10 @@ export default function Playground() {
               alt="DiceDB logo"
               className="object-contain"
             />
-            <h2 className="font-light text-xl">PlayGround</h2>
+            <h2 className="font-light text-2xl ml-2">PlayGround</h2>
           </div>
         </header>
-        <main className="flex flex-grow gap-2 overflow-hidden">
+        <main className="flex flex-grow gap-10 overflow-hidden">
           <div className="w-1/2 flex flex-col bg">
           <div className="bg-gray-900 rounded-lg">
             <div className="bg-gray-900 px-4 py-4 flex items-center rounded-lg">
@@ -50,7 +50,7 @@ export default function Playground() {
                 <Dice3 className="w-4 h-4 bg-green-500"></Dice3>
               </div>
             </div>
-            <div className="h-80 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+            <div className="h-96 bg-gray-100 rounded-lg overflow-hidden shadow-md">
               <Cli decreaseCommandsLeft={decreaseCommandsLeft}/>
             </div>
           </div>

@@ -1,0 +1,30 @@
+# Stage 1: Build the Go application
+FROM golang:1.23 AS go-builder
+
+# Set the working directory for Go
+WORKDIR /app
+
+# Install git to clone repositories
+RUN apt-get update && apt-get install -y git
+
+# Clone the Go repository (playground-mono)
+RUN git clone https://github.com/DiceDB/playground-mono.git playground-mono
+WORKDIR /app/playground-mono
+
+# Download Go module dependencies
+RUN go mod download
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o playground-mono .
+
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+
+# Set the working directory for the final container
+WORKDIR /app
+
+# Copy Go binary from the Go builder stage
+COPY --from=go-builder /app/playground-mono/playground-mono /app/playground-mono
+
+EXPOSE 8080
+
+CMD sh -c "./playground-mono"
