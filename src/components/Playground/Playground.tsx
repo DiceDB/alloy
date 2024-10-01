@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useState,useRef, useEffect } from "react";
 import Cli from "@/components/CLI/CLI";
 import SearchBox from "@/components/Search/SearchBox";
-import { Dice1, Dice3, Dice5, Clock, Command, Sun, Moon, Github, Download } from "lucide-react";
+import { Dice1, Dice3, Dice5, Clock, Command,Download } from "lucide-react";
 
 import { formatTime } from "@/shared/utils/commonUtils";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import Link from "next/link";
 
 
 
-const NavBar: React.FC<{ isDarkMode: boolean; toggleDarkMode: () => void }> = ({ isDarkMode, toggleDarkMode }) => (
+const NavBar = () => (
   <nav className="shadow-md">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between h-16">
@@ -27,20 +27,15 @@ const NavBar: React.FC<{ isDarkMode: boolean; toggleDarkMode: () => void }> = ({
             className="object-contain"
           />
           <div className="ml-10 flex items-baseline space-x-4">
-            <Link href="#" className=" px-3 py-2 rounded-md text-sm font-medium">Docs</Link>
-            <Link href="#" className=" px-3 py-2 rounded-md text-sm font-medium">Blogs</Link>
-            <Link href="#" className=" px-3 py-2 rounded-md text-sm font-medium">
+            <Link href="https://dicedb.io/get-started/installation/" className=" px-3 py-2 rounded-md text-sm font-medium">Docs</Link>
+            <Link href="https://dicedb.io/blog/" className=" px-3 py-2 rounded-md text-sm font-medium">Blogs</Link>
+            <Link href="https://github.com/dicedb/dice" className=" px-3 py-2 rounded-md text-sm font-medium">
               GitHub
             </Link>
           </div>
         </div>
         <div className="ml-4 flex items-center md:ml-6">
-          <button
-            onClick={toggleDarkMode}
-            className=" p-1 rounded-full  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-          >
-            {isDarkMode ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
-          </button>
+          
         </div>
       </div>
     </div>
@@ -50,7 +45,6 @@ export default function Playground() {
   const [search, setSearch] = useState("");
   const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
   const [commandsLeft, setCommandsLeft] = useState<number>(1000);
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const downloadBtnRef = useRef<HTMLButtonElement>(null);
   const cliCodeRef = useRef<HTMLDivElement>(null);
 
@@ -80,13 +74,11 @@ export default function Playground() {
   const decreaseCommandsLeft = () => {
     setCommandsLeft((prev) => (prev > 0 ? prev - 1 : 0));
   };
-  const toggleDarkMode = (): void => {
-    setIsDarkMode(!isDarkMode);
-  };
+
 
   return (
       <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900 line-height-[1.5rem]">
-          <NavBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+          <NavBar   />
           <div className="container mx-auto px-4 py-8">
         <header className="navbar flex items-center justify-between pt-5 pb-4">
           <div className="flex items-center">
