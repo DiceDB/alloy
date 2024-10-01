@@ -132,7 +132,7 @@ export default function Playground() {
               <div className="border rounded-lg p-4">
                 <h2 className="text-xl font-semibold mb-4">Recent Commands</h2>
                 <ul className="space-y-2 border">
-                  {['SELECT * FROM users', 'INSERT INTO products', 'UPDATE orders SET status = "shipped"'].map((cmd, index) => (
+                  {[''].map((cmd, index) => (
                     <li key={index} className=" border p-2 rounded">
                       {cmd}
                     </li>
