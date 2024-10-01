@@ -30,7 +30,6 @@ const NavBar: React.FC<{ isDarkMode: boolean; toggleDarkMode: () => void }> = ({
             <Link href="#" className=" px-3 py-2 rounded-md text-sm font-medium">Docs</Link>
             <Link href="#" className=" px-3 py-2 rounded-md text-sm font-medium">Blogs</Link>
             <Link href="#" className=" px-3 py-2 rounded-md text-sm font-medium">
-              <Github className="inline-block w-5 h-5 mr-1" />
               GitHub
             </Link>
           </div>
