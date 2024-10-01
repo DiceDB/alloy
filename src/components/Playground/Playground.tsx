@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useState,useRef, useEffect } from "react";
 import Cli from "@/components/CLI/CLI";
 import SearchBox from "@/components/Search/SearchBox";
-import { Dice1, Dice3, Dice5, Clock, Command,Download } from "lucide-react";
+import { Dice1, Dice3, Dice5, Clock, Command } from "lucide-react";
 
 import { formatTime } from "@/shared/utils/commonUtils";
 import Link from "next/link";
@@ -45,24 +45,9 @@ export default function Playground() {
   const [search, setSearch] = useState("");
   const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
   const [commandsLeft, setCommandsLeft] = useState<number>(1000);
-  const downloadBtnRef = useRef<HTMLButtonElement>(null);
   const cliCodeRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const downloadBtn = downloadBtnRef.current;
-    const cliCode = cliCodeRef.current;
 
-    if (downloadBtn && cliCode) {
-      downloadBtn.addEventListener('click', () => {
-        const code = cliCode.textContent || '';
-        const blob = new Blob([code], { type: 'text/plain' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'code.txt';
-        link.click();
-      });
-    }
-  }, []);
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
@@ -90,9 +75,7 @@ export default function Playground() {
               className="object-contain"
             />
             <h2 className="font-light text-2xl ml-2">PlayGround</h2>
-            <button ref={downloadBtnRef} id="download-btn" className="font-bold py-2 px-4 rounded">
-        <Download/>
-      </button>
+
           </div>
         </header>
         <main className="grid grid-cols-1 md:grid-cols-2 gap-8">
