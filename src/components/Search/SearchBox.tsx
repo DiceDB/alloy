@@ -25,7 +25,7 @@ export default function SearchBox({ search, setSearch }: SearchBoxProps) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search commands..."
-            className="bg-transparent border-none outline-none w-full py-2 text-gray-900"
+            className="bg-transparent border-none outline-none w-full py-2 text-gray-900 font-Assistant"
           />
         </div>
       </div>
