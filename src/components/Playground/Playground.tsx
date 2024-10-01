@@ -1,3 +1,5 @@
+// src/app/Playground.tsx
+
 "use client";
 
 import Image from "next/image";
@@ -5,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import Cli from "@/components/CLI/CLI";
 import SearchBox from "@/components/Search/SearchBox";
 import { Dice1, Dice3, Dice5 } from "lucide-react";
+import { formatTime } from "@/shared/utils/commonUtils";
 
 export default function Playground() {
   const [search, setSearch] = useState("");
@@ -18,12 +21,6 @@ export default function Playground() {
 
     return () => clearInterval(timer);
   }, []);
-
-  const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
-  };
 
   const decreaseCommandsLeft = () => {
     setCommandsLeft((prev) => (prev > 0 ? prev - 1 : 0));

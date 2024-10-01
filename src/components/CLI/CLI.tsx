@@ -1,6 +1,9 @@
+// src/components/CLI/CLI.tsx
+
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { handleCommand } from '@/shared/utils/cliUtils';
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
@@ -11,40 +14,10 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
   const [output, setOutput] = useState<string[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [store, setStore] = useState<{ [key: string]: string }>({});
 
-  const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleCommandWrapper = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const newOutput = `dice ~$ ${command}`;
-      let result = "";
-      const [cmd, ...args] = command.split(" ");
-
-      switch (cmd.toUpperCase()) {
-        case "GET":
-          result = store[args[0]] || "(nil)";
-          break;
-        case "SET":
-          if (args.length === 2) {
-            const [key, value] = args;
-            setStore((prevStore) => ({ ...prevStore, [key]: value }));
-            result = "OK";
-          } else {
-            result = "Invalid command. Usage: SET key value";
-          }
-          break;
-        case "CLEAR":
-          setOutput([]);
-          setCommand("");
-          return;
-        case "":
-          setCommand("");
-          return;
-        default:
-          setCommand("");
-          return;
-      }
-
-      setOutput((prevOutput) => [...prevOutput, newOutput, result]);
+      handleCommand({ command, setOutput });
       setCommand("");
       decreaseCommandsLeft();
     }
@@ -68,7 +41,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleCommand(e);
+      handleCommandWrapper(e);
     }
   };
 
