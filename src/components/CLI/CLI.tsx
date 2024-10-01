@@ -7,45 +7,45 @@ interface CliProps {
 }
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [store, setStore] = useState<{ [key: string]: string }>({});
 
   const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       const newOutput = `dice ~$ ${command}`;
-      let result = "";
-      const [cmd, ...args] = command.split(" ");
+      let result = '';
+      const [cmd, ...args] = command.split(' ');
 
       switch (cmd.toUpperCase()) {
-        case "GET":
-          result = store[args[0]] || "(nil)";
+        case 'GET':
+          result = store[args[0]] || '(nil)';
           break;
-        case "SET":
+        case 'SET':
           if (args.length === 2) {
             const [key, value] = args;
             setStore((prevStore) => ({ ...prevStore, [key]: value }));
-            result = "OK";
+            result = 'OK';
           } else {
-            result = "Invalid command. Usage: SET key value";
+            result = 'Invalid command. Usage: SET key value';
           }
           break;
-        case "CLEAR":
+        case 'CLEAR':
           setOutput([]);
-          setCommand("");
+          setCommand('');
           return;
-        case "":
-          setCommand("");
+        case '':
+          setCommand('');
           return;
         default:
-          setCommand("");
+          setCommand('');
           return;
       }
 
       setOutput((prevOutput) => [...prevOutput, newOutput, result]);
-      setCommand("");
+      setCommand('');
       decreaseCommandsLeft();
     }
   };

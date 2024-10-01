@@ -1,8 +1,8 @@
-import React from "react";
-import { Button } from "@mui/material";
-import { Twitter } from "@mui/icons-material";
-import GitHub from "@mui/icons-material/GitHub";
-import People from "@mui/icons-material/People";
+import React from 'react';
+import { Button } from '@mui/material';
+import { Twitter } from '@mui/icons-material';
+import GitHub from '@mui/icons-material/GitHub';
+import People from '@mui/icons-material/People';
 
 export default function Footer() {
   return (
