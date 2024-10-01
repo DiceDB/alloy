@@ -6,22 +6,24 @@ export const executeCLICommandOnServer = async (cmd: string, cmdOptions: object)
     const response = await fetch(`${CLI_COMMAND_URL}/${cmd}`, {
       method: 'POST',
       body: JSON.stringify(cmdOptions),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
+    // TODO: This needs to be looked at
+    const data = await response.json();
+    if (Object.prototype.hasOwnProperty.call(data, 'data')) {
+      return data.data;
+    }
+    else if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+      return data.error;
+    }
+  
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
-    if (Object.prototype.hasOwnProperty.call(data, 'value')) {
-      return data.value;
-    }
-    else if (Object.prototype.hasOwnProperty.call(data, 'result')) {
-      return data.result;
-    } 
-    else if (Object.prototype.hasOwnProperty.call(data, 'error')) {
-      return data.error;
-    }
     return data;
   } catch (error: unknown) {
     console.error('Error executing command:', error);
