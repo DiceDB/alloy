@@ -11,9 +11,14 @@ interface CliProps {
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
   const [command, setCommand] = useState("");
+  const [tempCommand, settempCommand] = useState("");
   const [output, setOutput] = useState<string[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  //Initialise the command history with sessionStorage
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
 
   const handleCommandWrapper = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -23,11 +28,25 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
     }
   };
 
+
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [output]);
+
+  //Load initial command history if present
+  useEffect(() => {
+    const savedHistory = sessionStorage.getItem('terminalHistory');
+    const commandHistory = savedHistory ? JSON.parse(savedHistory) : [];
+    setCommandHistory(commandHistory);
+  }, [])
+
+  // Save to session storage whenever commandHistory changes
+  useEffect(() => {
+    sessionStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
+  }, [commandHistory]);
+
 
   useEffect(() => {
     if (inputRef.current) {
@@ -42,6 +61,33 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleCommandWrapper(e);
+      setCommandHistory(prev => [...prev, command]);
+      setHistoryIndex(-1);
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        if (historyIndex === -1) {
+          // Save current input when starting to navigate history
+          settempCommand(command);
+        }
+        const newIndex = historyIndex + 1;
+        setHistoryIndex(newIndex);
+        setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > -1) {
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        if (newIndex === -1) {
+          // Restore the saved input when reaching the bottom
+          setCommand(tempCommand);
+        } else {
+          setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+        }
+      }
     }
   };
 
