@@ -1,110 +1,22 @@
 // src/components/CLI/CLI.tsx
-
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { handleCommand } from '@/shared/utils/cliUtils';
-import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
+// hooks
+import { useCli } from "./hooks/useCli";
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
 }
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
-  const [command, setCommand] = useState("");
-  const [tempCommand, setTempCommand] = useState("");
-  const [output, setOutput] = useState<string[]>([]);
-  const terminalRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  //Initialise the command history with sessionStorage
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState<number>(-1);
-
-  const handleCommandWrapper = () => {
-      const commandName = command.trim().split(' ')[0].toUpperCase(); // Extract the command
-
-      if (blacklistedCommands.includes(commandName)) {
-        setOutput((prevOutput) => [
-          ...prevOutput,
-          `(error) ERR unknown command '${commandName}'`,
-        ]);
-      } else {
-        handleCommand({ command, setOutput }); // Execute if not blacklisted
-      }
-
-      setCommand(""); // Clear input
-      decreaseCommandsLeft(); // Call to update remaining commands
-  };
-
-
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [output]);
-
-  //Load initial command history if present
-  useEffect(() => {
-    const savedHistory = sessionStorage.getItem('terminalHistory');
-    const commandHistory = savedHistory ? JSON.parse(savedHistory) : [];
-    setCommandHistory(commandHistory);
-  }, [])
-
-  // Save to session storage whenever commandHistory changes
-  useEffect(() => {
-    sessionStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
-  }, [commandHistory]);
-
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommand(e.target.value);
-    // Save current input when starting to navigate history
-    setTempCommand(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleCommandWrapper();
-      if (command.trim().length !== 0) {
-        setCommandHistory(prev => [...prev, command]);
-        setHistoryIndex(-1);
-      }
-      return;
-    }
-
-    const filteredCommandHistory = commandHistory.filter(cmd => {
-      return cmd.startsWith(tempCommand);
-    });
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (historyIndex < filteredCommandHistory.length - 1) {
-        const newIndex = historyIndex + 1;
-        setHistoryIndex(newIndex);
-        setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
-      }
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (historyIndex > -1) {
-        const newIndex = historyIndex - 1;
-        setHistoryIndex(newIndex);
-        if (newIndex === -1) {
-          // Restore the saved input when reaching the bottom
-          setCommand(tempCommand);
-        } else {
-          setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
-        }
-      }
-    }
-  };
-
+  const {
+    handleInputChange,
+    handleKeyDown,
+    terminalRef,
+    inputRef,
+    output,
+    command,
+  } = useCli(decreaseCommandsLeft);
   return (
     <div
       ref={terminalRef}

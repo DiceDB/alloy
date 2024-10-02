@@ -1,12 +1,11 @@
+"use client";
 
-'use client';
-
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
   children: React.ReactNode;
   className?: string;
-  variant?: 'outline';
+  variant?: "outline";
 }
 
 export function Button({ children, className }: ButtonProps) {
