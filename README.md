@@ -29,13 +29,21 @@ cd playground-web
 npm install
 ```
 
+## Environment Variables
+
+Before running the project, make sure to set up the necessary environment variables. Create a `.env.local` file in the root directory of the project and add the following variables:
+
+````bash
+# .env.local
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080/
+
 ## Development
 
 To start the development server, run:
 
 ```bash
 npm run dev
-```
+````
 
 This will launch the app on [http://localhost:3000](http://localhost:3000). The app will automatically reload if you make changes to the code.
 
@@ -71,6 +79,7 @@ docker-compose up
 ```
 
 ## Step-by-Step Setup for End-to-End Development with Docker
+
 We have added `Dockerfile.dev` which is for development purposes, ensuring your Next.js application supports hot reloading and reflects code changes without requiring image rebuilds.
 
 `docker-compose.dev.yml` configures Docker Compose to build and run your Next.js app in development mode.
@@ -78,7 +87,6 @@ We have added `Dockerfile.dev` which is for development purposes, ensuring your 
 ```shell
 docker-compose -f docker-compose.dev.yml up --build
 ```
-
 
 ## Building for Production
 
