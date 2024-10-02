@@ -11,7 +11,7 @@ interface CliProps {
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
   const [command, setCommand] = useState("");
-  const [tempCommand, settempCommand] = useState("");
+  const [tempCommand, setTempCommand] = useState("");
   const [output, setOutput] = useState<string[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,8 +61,10 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleCommandWrapper(e);
-      setCommandHistory(prev => [...prev, command]);
-      setHistoryIndex(-1);
+      if (command.trim().length !== 0) {
+        setCommandHistory(prev => [...prev, command]);
+        setHistoryIndex(-1);
+      }
     }
 
     if (e.key === 'ArrowUp') {
@@ -70,7 +72,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
       if (historyIndex < commandHistory.length - 1) {
         if (historyIndex === -1) {
           // Save current input when starting to navigate history
-          settempCommand(command);
+          setTempCommand(command);
         }
         const newIndex = historyIndex + 1;
         setHistoryIndex(newIndex);
