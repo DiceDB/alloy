@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ROOT_URL } from "@/shared/constants/apiEndpoints";
+const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL;
 
 export const WebService = axios.create({
   baseURL: ROOT_URL,
