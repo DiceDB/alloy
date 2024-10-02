@@ -1,49 +1,21 @@
 // src/components/CLI/CLI.tsx
 
-'use client';
-
-import React, { useEffect, useRef, useState } from 'react';
-import { handleCommand } from '@/shared/utils/cliUtils';
+"use client";
+import { useCli } from "./hooks/useCli";
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
 }
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
-  const [command, setCommand] = useState("");
-  const [output, setOutput] = useState<string[]>([]);
-  const terminalRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleCommandWrapper = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleCommand({ command, setOutput });
-      setCommand("");
-      decreaseCommandsLeft();
-    }
-  };
-
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [output]);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommand(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleCommandWrapper(e);
-    }
-  };
+  const {
+    handleInputChange,
+    handleKeyDown,
+    terminalRef,
+    inputRef,
+    output,
+    command,
+  } = useCli(decreaseCommandsLeft);
 
   return (
     <div
