@@ -1,6 +1,7 @@
 // src/components/CLI/CLI.tsx
-
 "use client";
+
+// hooks
 import { useCli } from "./hooks/useCli";
 
 interface CliProps {

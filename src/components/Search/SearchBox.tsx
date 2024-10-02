@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import {SetStateAction, Dispatch} from "react";
 import { Search } from "lucide-react";
 import { DiceCmds, DiceCmdMeta } from "@/data/command";
 import CommandPage from "./command";
 
 interface SearchBoxProps {
   search: string;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
 export default function SearchBox({ search, setSearch }: SearchBoxProps) {
