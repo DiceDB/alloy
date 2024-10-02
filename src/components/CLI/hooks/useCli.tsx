@@ -2,8 +2,8 @@
 import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from "react";
 
 // utils
-import { handleCommand } from '@/shared/utils/cliUtils';
-import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
+import { handleCommand } from "@/shared/utils/cliUtils";
+import blacklistedCommands from "@/shared/utils/blacklist"; // Assuming you added blacklist here
 
 export const useCli = (decreaseCommandsLeft: () => void) => {
   // states
@@ -20,7 +20,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
 
   const handleCommandWrapper = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const commandName = command.trim().split(' ')[0].toUpperCase(); // Extract the command
+      const commandName = command.trim().split(" ")[0].toUpperCase(); // Extract the command
 
       if (blacklistedCommands.includes(commandName)) {
         setOutput((prevOutput) => [
@@ -36,7 +36,6 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
     }
   };
 
-
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -45,16 +44,15 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
 
   //Load initial command history if present
   useEffect(() => {
-    const savedHistory = sessionStorage.getItem('terminalHistory');
+    const savedHistory = sessionStorage.getItem("terminalHistory");
     const commandHistory = savedHistory ? JSON.parse(savedHistory) : [];
     setCommandHistory(commandHistory);
-  }, [])
+  }, []);
 
   // Save to session storage whenever commandHistory changes
   useEffect(() => {
-    sessionStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
+    sessionStorage.setItem("terminalHistory", JSON.stringify(commandHistory));
   }, [commandHistory]);
-
 
   useEffect(() => {
     if (inputRef.current) {
@@ -67,15 +65,15 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleCommandWrapper(e);
       if (command.trim().length !== 0) {
-        setCommandHistory(prev => [...prev, command]);
+        setCommandHistory((prev) => [...prev, command]);
         setHistoryIndex(-1);
       }
     }
 
-    if (e.key === 'ArrowUp') {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
       if (historyIndex < commandHistory.length - 1) {
         if (historyIndex === -1) {
@@ -86,7 +84,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
         setHistoryIndex(newIndex);
         setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
       }
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === "ArrowDown") {
       e.preventDefault();
       if (historyIndex > -1) {
         const newIndex = historyIndex - 1;
@@ -109,6 +107,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
     output,
     setOutput,
     command,
-    tempCommand, setTempCommand
+    tempCommand,
+    setTempCommand,
   };
 };
