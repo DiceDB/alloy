@@ -17,7 +17,6 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
     output,
     command,
   } = useCli(decreaseCommandsLeft);
-
   return (
     <div
       ref={terminalRef}
