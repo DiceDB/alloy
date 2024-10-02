@@ -11,7 +11,6 @@ import Link from "next/link";
 
 
 
-
 const NavBar = () => (
   <nav className="shadow-md">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,21 +23,18 @@ const NavBar = () => (
             alt="DiceDB logo"
             className="object-contain"
           />
-          <div className="ml-10 flex items-baseline space-x-4">
-            <Link href="https://dicedb.io/get-started/installation/" className=" px-3 py-2 rounded-md text-sm font-medium">Docs</Link>
-            <Link href="https://dicedb.io/blog/" className=" px-3 py-2 rounded-md text-sm font-medium">Blogs</Link>
-            <Link href="https://github.com/dicedb/dice" className=" px-3 py-2 rounded-md text-sm font-medium">
-              GitHub
-            </Link>
-          </div>
+          <h2 className="font-light text-2xl ml-2">PlayGround</h2>
         </div>
-        <div className="ml-4 flex items-center md:ml-6">
-          
+        <div className="flex items-center space-x-4">
+          <Link href="https://dicedb.io/get-started/installation/" className="px-3 py-2 rounded-md text-sm font-medium">Docs</Link>
+          <Link href="https://dicedb.io/blog/" className="px-3 py-2 rounded-md text-sm font-medium">Blogs</Link>
+          <Link href="https://github.com/dicedb/dice" className="px-3 py-2 rounded-md text-sm font-medium">GitHub</Link>
         </div>
       </div>
     </div>
   </nav>
 );
+
 export default function Playground() {
   const [search, setSearch] = useState("");
   const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
@@ -62,20 +58,7 @@ export default function Playground() {
   return (
       <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900 line-height-[1.5rem]">
           <NavBar   />
-          <div className="container mx-auto px-4 py-8">
-        <header className="navbar flex items-center justify-between pt-5 pb-4">
-          <div className="flex items-center">
-            <Image
-              src="https://dicedb.io/dicedb-logo-light.png"
-              width={110}
-              height={110}
-              alt="DiceDB logo"
-              className="object-contain"
-            />
-            <h2 className="font-light text-2xl ml-2">PlayGround</h2>
-
-          </div>
-        </header>
+          <div className="container mx-auto px-4 py-8"> 
         <main className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
             <div className="space-y-4">
