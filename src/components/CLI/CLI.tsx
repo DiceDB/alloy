@@ -1,9 +1,10 @@
 // src/components/CLI/CLI.tsx
 
-'use client';
+"use client";
 
 import React, { useEffect, useRef, useState } from 'react';
 import { handleCommand } from '@/shared/utils/cliUtils';
+import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
@@ -22,9 +23,19 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
 
   const handleCommandWrapper = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleCommand({ command, setOutput });
-      setCommand("");
-      decreaseCommandsLeft();
+      const commandName = command.trim().split(' ')[0].toUpperCase(); // Extract the command
+
+      if (blacklistedCommands.includes(commandName)) {
+        setOutput((prevOutput) => [
+          ...prevOutput,
+          `(error) ERR unknown command '${commandName}'`,
+        ]);
+      } else {
+        handleCommand({ command, setOutput }); // Execute if not blacklisted
+      }
+
+      setCommand(""); // Clear input
+      decreaseCommandsLeft(); // Call to update remaining commands
     }
   };
 
