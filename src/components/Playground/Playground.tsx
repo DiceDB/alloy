@@ -1,30 +1,20 @@
 "use client";
 
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
-
-import { Dice1, Dice3, Dice5 } from "lucide-react";
-
+// Components
 import Cli from "@/components/CLI/CLI";
 import SearchBox from "@/components/Search/SearchBox";
+import { Dice1, Dice3, Dice5 } from "lucide-react";
+
+// utils
 import { formatTime } from "@/shared/utils/commonUtils";
 
+// images and icons
+import Image from "next/image";
+import { usePlayground } from "./hooks/usePlayground";
+
 export default function Playground() {
-  const [search, setSearch] = useState("");
-  const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
-  const [commandsLeft, setCommandsLeft] = useState<number>(1000);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const decreaseCommandsLeft = () => {
-    setCommandsLeft((prev) => (prev > 0 ? prev - 1 : 0));
-  };
+  const { decreaseCommandsLeft, search, timeLeft, commandsLeft, setSearch } =
+    usePlayground();
 
   return (
     <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900">

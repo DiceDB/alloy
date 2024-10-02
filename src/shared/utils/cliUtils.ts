@@ -3,10 +3,7 @@
 import { executeCLICommandOnServer } from "@/lib/api";
 import { CommandHandler } from "@/types";
 
-export const handleCommand = async ({
-  command,
-  setOutput,
-}: CommandHandler) => {
+export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
   const newOutput = `dice > ${command}`;
   let result: string;
 
@@ -18,7 +15,7 @@ export const handleCommand = async ({
         result = "Invalid command. Usage: GET key";
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         return;
-      }  
+      }
 
       try {
         const [key] = args;
@@ -26,8 +23,8 @@ export const handleCommand = async ({
         result = await executeCLICommandOnServer(cmd, cmdOptions);
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
       } catch (error: unknown) {
-        console.error('Error executing command:', error);
-        result = 'Error executing command';
+        console.error("Error executing command:", error);
+        result = "Error executing command";
         return `Error: ${String(error)}`;
       }
       break;
@@ -40,8 +37,8 @@ export const handleCommand = async ({
           result = await executeCLICommandOnServer(cmd, cmdOptions);
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         } catch (error: unknown) {
-          console.error('Error executing command:', error);
-          result = 'Error executing command';
+          console.error("Error executing command:", error);
+          result = "Error executing command";
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
           return `Error: ${String((error as Error).message || error)}`;
         }
@@ -55,12 +52,12 @@ export const handleCommand = async ({
       if (args.length <= 1) {
         const [keys] = args;
         try {
-          const cmdOptions = { keys: [keys]};
+          const cmdOptions = { keys: [keys] };
           result = await executeCLICommandOnServer(cmd, cmdOptions);
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         } catch (error: unknown) {
-          console.error('Error executing command:', error);
-          result = 'Error executing command';
+          console.error("Error executing command:", error);
+          result = "Error executing command";
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
           return `Error: ${String((error as Error).message || error)}`;
         }
