@@ -1,4 +1,4 @@
-import React from "react";
+// icons
 import { Button } from "@mui/material";
 import { Twitter } from "@mui/icons-material";
 import GitHub from "@mui/icons-material/GitHub";
