@@ -18,22 +18,20 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCommandWrapper = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      const commandName = command.trim().split(" ")[0].toUpperCase(); // Extract the command
+  const handleCommandWrapper = () => {
+    const commandName = command.trim().split(" ")[0].toUpperCase(); // Extract the command
 
-      if (blacklistedCommands.includes(commandName)) {
-        setOutput((prevOutput) => [
-          ...prevOutput,
-          `(error) ERR unknown command '${commandName}'`,
-        ]);
-      } else {
-        handleCommand({ command, setOutput }); // Execute if not blacklisted
-      }
-
-      setCommand(""); // Clear input
-      decreaseCommandsLeft(); // Call to update remaining commands
+    if (blacklistedCommands.includes(commandName)) {
+      setOutput((prevOutput) => [
+        ...prevOutput,
+        `(error) ERR unknown command '${commandName}'`,
+      ]);
+    } else {
+      handleCommand({ command, setOutput }); // Execute if not blacklisted
     }
+
+    setCommand(""); // Clear input
+    decreaseCommandsLeft(); // Call to update remaining commands
   };
 
   useEffect(() => {
@@ -62,27 +60,34 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
+    // Save current input when starting to navigate history
+    setTempCommand(e.target.value);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleCommandWrapper(e);
+      handleCommandWrapper();
       if (command.trim().length !== 0) {
         setCommandHistory((prev) => [...prev, command]);
         setHistoryIndex(-1);
       }
+      return;
     }
+
+    const filteredCommandHistory = commandHistory.filter(cmd => {
+      return cmd.startsWith(tempCommand);
+    });
 
     if (e.key === "ArrowUp") {
       e.preventDefault();
-      if (historyIndex < commandHistory.length - 1) {
+      if (historyIndex < filteredCommandHistory.length - 1) {
         if (historyIndex === -1) {
           // Save current input when starting to navigate history
           setTempCommand(command);
         }
         const newIndex = historyIndex + 1;
         setHistoryIndex(newIndex);
-        setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+        setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
       }
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -93,7 +98,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
           // Restore the saved input when reaching the bottom
           setCommand(tempCommand);
         } else {
-          setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+          setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
         }
       }
     }
