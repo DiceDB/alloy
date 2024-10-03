@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import {SetStateAction, Dispatch} from "react";
-import { Search } from "lucide-react";
-import { DiceCmds, DiceCmdMeta } from "@/data/command";
-import CommandPage from "./command";
+import { SetStateAction, Dispatch } from 'react';
+import { Search } from 'lucide-react';
+import { DiceCmds, DiceCmdMeta } from '@/data/command';
+import CommandPage from './command';
 
 interface SearchBoxProps {
   search: string;
@@ -12,7 +12,7 @@ interface SearchBoxProps {
 
 export default function SearchBox({ search, setSearch }: SearchBoxProps) {
   const filteredCommands = Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
-    cmd.title.toLowerCase().includes(search.toLowerCase())
+    cmd.title.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
