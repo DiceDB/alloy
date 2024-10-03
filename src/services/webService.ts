@@ -1,14 +1,14 @@
 import axios from "axios";
-let BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+let PLAYGROUND_MONO_URL = process.env.NEXT_PUBLIC_PLAYGROUND_MONO_URL;
 
-if (!BACKEND_URL) {
+if (!PLAYGROUND_MONO_URL) {
   console.warn(
     "Warning: NEXT_PUBLIC_BACKEND_URL is not defined. Defaulting to http://localhost:3000"
   );
-  BACKEND_URL = "http://localhost:8080";
+  PLAYGROUND_MONO_URL = "http://localhost:8080";
 }
 export const WebService = axios.create({
-  baseURL: BACKEND_URL,
+  baseURL: PLAYGROUND_MONO_URL,
   headers: {
     "Content-Type": "application/json",
   },

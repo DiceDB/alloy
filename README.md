@@ -35,7 +35,7 @@ Before running the project, make sure to set up the necessary environment variab
 
 ````bash
 # .env.local
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8080/
+NEXT_PUBLIC_PLAYGROUND_MONO_URL=http://localhost:8080/
 
 ## Development
 
