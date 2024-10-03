@@ -21,8 +21,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
 
-  const handleCommandWrapper = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+  const handleCommandWrapper = () => {
       const commandName = command.trim().split(' ')[0].toUpperCase(); // Extract the command
 
       if (blacklistedCommands.includes(commandName)) {
@@ -36,7 +35,6 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
 
       setCommand(""); // Clear input
       decreaseCommandsLeft(); // Call to update remaining commands
-    }
   };
 
 
@@ -71,7 +69,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleCommandWrapper(e);
+      handleCommandWrapper();
       if (command.trim().length !== 0) {
         setCommandHistory(prev => [...prev, command]);
         setHistoryIndex(-1);
