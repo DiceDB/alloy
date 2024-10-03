@@ -1,18 +1,18 @@
 // src/shared/utils/cliUtils.ts
 
-import { executeCLICommandOnServer } from "@/lib/api";
-import { CommandHandler } from "@/types";
+import { executeCLICommandOnServer } from '@/lib/api';
+import { CommandHandler } from '@/types';
 
 export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
   const newOutput = `dice > ${command}`;
   let result: string;
 
-  const [cmd, ...args] = command.split(" ");
+  const [cmd, ...args] = command.split(' ');
 
   switch (cmd.toUpperCase()) {
-    case "GET":
+    case 'GET':
       if (args.length < 1) {
-        result = "Invalid command. Usage: GET key";
+        result = 'Invalid command. Usage: GET key';
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         return;
       }
@@ -23,13 +23,13 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
         result = await executeCLICommandOnServer(cmd, cmdOptions);
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
       } catch (error: unknown) {
-        console.error("Error executing command:", error);
-        result = "Error executing command";
+        console.error('Error executing command:', error);
+        result = 'Error executing command';
         return `Error: ${String(error)}`;
       }
       break;
 
-    case "SET":
+    case 'SET':
       if (args.length === 2) {
         const [key, value] = args;
         try {
@@ -37,18 +37,18 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
           result = await executeCLICommandOnServer(cmd, cmdOptions);
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         } catch (error: unknown) {
-          console.error("Error executing command:", error);
-          result = "Error executing command";
+          console.error('Error executing command:', error);
+          result = 'Error executing command';
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
           return `Error: ${String((error as Error).message || error)}`;
         }
       } else {
-        result = "Invalid command. Usage: SET key value";
+        result = 'Invalid command. Usage: SET key value';
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
       }
       break;
 
-    case "DEL":
+    case 'DEL':
       if (args.length <= 1) {
         const [keys] = args;
         try {
@@ -56,13 +56,13 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
           result = await executeCLICommandOnServer(cmd, cmdOptions);
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         } catch (error: unknown) {
-          console.error("Error executing command:", error);
-          result = "Error executing command";
+          console.error('Error executing command:', error);
+          result = 'Error executing command';
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
           return `Error: ${String((error as Error).message || error)}`;
         }
       } else {
-        result = "Invalid command. Usage: DEL key1 key2 ....";
+        result = 'Invalid command. Usage: DEL key1 key2 ....';
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
       }
       break;

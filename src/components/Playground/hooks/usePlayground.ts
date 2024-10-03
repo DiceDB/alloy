@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const usePlayground = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
   const [commandsLeft, setCommandsLeft] = useState<number>(1000);
 

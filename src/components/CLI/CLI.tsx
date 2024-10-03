@@ -1,8 +1,8 @@
 // src/components/CLI/CLI.tsx
-"use client";
+'use client';
 
 // hooks
-import { useCli } from "./hooks/useCli";
+import { useCli } from './hooks/useCli';
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
