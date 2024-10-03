@@ -1,3 +1,6 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript", "eslint:recommended"]
+  "extends": ["next/core-web-vitals", "next/typescript", "eslint:recommended"],
+  "env": {
+    "jest": true
+  }
 }
