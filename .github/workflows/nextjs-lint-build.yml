@@ -19,14 +19,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-          cache: 'npm'  # Cache npm dependencies
+          node-version: "20.x"
+          cache: "npm" # Cache npm dependencies
 
       - name: Install dependencies
         run: npm install
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: Run Format check
+        run: npm run format
 
       - name: Build the project
         run: npm run build
