@@ -57,7 +57,7 @@ export default function Playground() {
           </div>
         </div>
 
-        <div className="w-full lg:w-1/2 flex flex-col">
+        <div className="w-full lg:w-1/2 flex flex-col ">
           <div className="flex-grow border border-gray-400 bg-gray-100 p-4 rounded-lg shadow-md mb-4">
             <SearchBox search={search} setSearch={setSearch} />
           </div>
