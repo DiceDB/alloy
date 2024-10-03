@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
 import CommandPage from './command';
 
 interface SearchBoxProps {
   search: string;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
 export default function SearchBox({ search, setSearch }: SearchBoxProps) {
@@ -25,7 +25,7 @@ export default function SearchBox({ search, setSearch }: SearchBoxProps) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search commands..."
-            className="bg-transparent border-none outline-none w-full py-2 text-gray-900"
+            className="bg-transparent border-none outline-none w-full py-2 text-gray-900 font-Assistant"
           />
         </div>
       </div>

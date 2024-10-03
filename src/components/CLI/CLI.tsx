@@ -1,77 +1,22 @@
+// src/components/CLI/CLI.tsx
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+// hooks
+import { useCli } from './hooks/useCli';
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
 }
 
 export default function Cli({ decreaseCommandsLeft }: CliProps) {
-  const [command, setCommand] = useState('');
-  const [output, setOutput] = useState<string[]>([]);
-  const terminalRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [store, setStore] = useState<{ [key: string]: string }>({});
-
-  const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const newOutput = `dice ~$ ${command}`;
-      let result = '';
-      const [cmd, ...args] = command.split(' ');
-
-      switch (cmd.toUpperCase()) {
-        case 'GET':
-          result = store[args[0]] || '(nil)';
-          break;
-        case 'SET':
-          if (args.length === 2) {
-            const [key, value] = args;
-            setStore((prevStore) => ({ ...prevStore, [key]: value }));
-            result = 'OK';
-          } else {
-            result = 'Invalid command. Usage: SET key value';
-          }
-          break;
-        case 'CLEAR':
-          setOutput([]);
-          setCommand('');
-          return;
-        case '':
-          setCommand('');
-          return;
-        default:
-          setCommand('');
-          return;
-      }
-
-      setOutput((prevOutput) => [...prevOutput, newOutput, result]);
-      setCommand('');
-      decreaseCommandsLeft();
-    }
-  };
-
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [output]);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommand(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleCommand(e);
-    }
-  };
-
+  const {
+    handleInputChange,
+    handleKeyDown,
+    terminalRef,
+    inputRef,
+    output,
+    command,
+  } = useCli(decreaseCommandsLeft);
   return (
     <div
       ref={terminalRef}
