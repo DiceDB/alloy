@@ -65,6 +65,8 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
+    // Save current input when starting to navigate history
+    setTempCommand(e.target.value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -74,18 +76,19 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
         setCommandHistory(prev => [...prev, command]);
         setHistoryIndex(-1);
       }
+      return;
     }
+
+    const filteredCommandHistory = commandHistory.filter(cmd => {
+      return cmd.startsWith(tempCommand);
+    });
 
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (historyIndex < commandHistory.length - 1) {
-        if (historyIndex === -1) {
-          // Save current input when starting to navigate history
-          setTempCommand(command);
-        }
+      if (historyIndex < filteredCommandHistory.length - 1) {
         const newIndex = historyIndex + 1;
         setHistoryIndex(newIndex);
-        setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+        setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
@@ -96,7 +99,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
           // Restore the saved input when reaching the bottom
           setCommand(tempCommand);
         } else {
-          setCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+          setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
         }
       }
     }
