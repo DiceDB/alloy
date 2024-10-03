@@ -81,10 +81,6 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
     if (e.key === "ArrowUp") {
       e.preventDefault();
       if (historyIndex < filteredCommandHistory.length - 1) {
-        if (historyIndex === -1) {
-          // Save current input when starting to navigate history
-          setTempCommand(command);
-        }
         const newIndex = historyIndex + 1;
         setHistoryIndex(newIndex);
         setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
