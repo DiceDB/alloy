@@ -3,7 +3,7 @@ import { CLI_COMMAND_URL } from "@/shared/constants/apiEndpoints";
 
 export const executeCLICommandOnServer = async (
   cmd: string,
-  cmdOptions: object
+  cmdOptions: object,
 ): Promise<string> => {
   try {
     const response = await fetch(`${CLI_COMMAND_URL}/${cmd}`, {
