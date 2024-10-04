@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Clipboard } from "lucide-react";
-import { DiceCmdMeta } from "@/data/command";
+import { useState } from 'react';
+import { Clipboard } from 'lucide-react';
+import { DiceCmdMeta } from '@/data/command';
 
 export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
   const [copied, setCopied] = useState(false);
