@@ -1,15 +1,15 @@
 // react
-import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from "react";
+import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
-import { handleCommand } from "@/shared/utils/cliUtils";
-import blacklistedCommands from "@/shared/utils/blacklist"; // Assuming you added blacklist here
+import { handleCommand } from '@/shared/utils/cliUtils';
+import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
 
 export const useCli = (decreaseCommandsLeft: () => void) => {
   // states
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);
-  const [tempCommand, setTempCommand] = useState("");
+  const [tempCommand, setTempCommand] = useState('');
   //Initialise the command history with sessionStorage
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
@@ -19,7 +19,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCommandWrapper = () => {
-    const commandName = command.trim().split(" ")[0].toUpperCase(); // Extract the command
+    const commandName = command.trim().split(' ')[0].toUpperCase(); // Extract the command
 
     if (blacklistedCommands.includes(commandName)) {
       setOutput((prevOutput) => [
@@ -30,7 +30,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
       handleCommand({ command, setOutput }); // Execute if not blacklisted
     }
 
-    setCommand(""); // Clear input
+    setCommand(''); // Clear input
     decreaseCommandsLeft(); // Call to update remaining commands
   };
 
@@ -42,14 +42,14 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
 
   //Load initial command history if present
   useEffect(() => {
-    const savedHistory = sessionStorage.getItem("terminalHistory");
+    const savedHistory = sessionStorage.getItem('terminalHistory');
     const commandHistory = savedHistory ? JSON.parse(savedHistory) : [];
     setCommandHistory(commandHistory);
   }, []);
 
   // Save to session storage whenever commandHistory changes
   useEffect(() => {
-    sessionStorage.setItem("terminalHistory", JSON.stringify(commandHistory));
+    sessionStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
   }, [commandHistory]);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleCommandWrapper();
       if (command.trim().length !== 0) {
         setCommandHistory((prev) => [...prev, command]);
@@ -74,18 +74,20 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
       return;
     }
 
-    const filteredCommandHistory = commandHistory.filter(cmd => {
+    const filteredCommandHistory = commandHistory.filter((cmd) => {
       return cmd.startsWith(tempCommand);
     });
 
-    if (e.key === "ArrowUp") {
+    if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (historyIndex < filteredCommandHistory.length - 1) {
         const newIndex = historyIndex + 1;
         setHistoryIndex(newIndex);
-        setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
+        setCommand(
+          filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex],
+        );
       }
-    } else if (e.key === "ArrowDown") {
+    } else if (e.key === 'ArrowDown') {
       e.preventDefault();
       if (historyIndex > -1) {
         const newIndex = historyIndex - 1;
@@ -94,7 +96,11 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
           // Restore the saved input when reaching the bottom
           setCommand(tempCommand);
         } else {
-          setCommand(filteredCommandHistory[filteredCommandHistory.length - 1 - newIndex]);
+          setCommand(
+            filteredCommandHistory[
+              filteredCommandHistory.length - 1 - newIndex
+            ],
+          );
         }
       }
     }

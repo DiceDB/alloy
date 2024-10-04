@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
 // Components
-import Cli from "@/components/CLI/CLI";
-import SearchBox from "@/components/Search/SearchBox";
-import { Dice1, Dice3, Dice5 } from "lucide-react";
+import Cli from '@/components/CLI/CLI';
+import SearchBox from '@/components/Search/SearchBox';
+import { Dice1, Dice3, Dice5 } from 'lucide-react';
 
 // utils
-import { formatTime } from "@/shared/utils/commonUtils";
+import { formatTime } from '@/shared/utils/commonUtils';
 
 // images and icons
-import Image from "next/image";
-import { usePlayground } from "./hooks/usePlayground";
+import Image from 'next/image';
+import { usePlayground } from './hooks/usePlayground';
 
 export default function Playground() {
   const { decreaseCommandsLeft, search, timeLeft, commandsLeft, setSearch } =

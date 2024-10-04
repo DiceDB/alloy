@@ -94,6 +94,23 @@ After the build is complete, you can start the production server with:
 npm run start
 ```
 
+## Running the test cases
+
+To run the test cases, execute following command:
+```bash
+npm run test
+```
+
+To execute the test cases simultaneously as you make changes to the files, execute following command:
+```bash
+npm run test:watch
+```
+
+To get the test coverage of the project, execute following command:
+```bash
+npm run test:coverage
+```
+
 ## Project Structure
 
 The main components of the DiceDB Playground include:
