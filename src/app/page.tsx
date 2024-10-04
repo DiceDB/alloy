@@ -4,7 +4,7 @@ import Footer from '@/components/Footer/Footer'; // comment this to hide footer
 
 export default function Home() {
   return (
-    <main>
+    <main data-testid="main-content">
       <Playground />
       <Footer />
     </main>

@@ -36,3 +36,6 @@ jobs:
 
       - name: TypeScript type check
         run: npm run type-check
+
+      - name: Run Jest tests
+        run: npm run test

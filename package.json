@@ -11,7 +11,10 @@
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,html,css}'",
     "prepare": "husky install",
     "type-check": "tsc --noEmit",
-    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css}\""
+    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -28,6 +31,11 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -37,9 +45,12 @@
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.10",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "husky": {

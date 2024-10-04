@@ -9,5 +9,8 @@
   "rules": {
     "prettier/prettier": "error",
     "no-console": [2, { "allow": ["error"] }]
+  },
+  "env": {
+    "jest": true
   }
 }
