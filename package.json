@@ -8,10 +8,10 @@
     "start": "next start",
     "lint": "eslint . --ext js,jsx,ts,tsx",
     "type-check": "tsc --noEmit",
+    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css}\""
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
