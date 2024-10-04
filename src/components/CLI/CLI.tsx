@@ -21,10 +21,15 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
     <div
       ref={terminalRef}
       className="flex flex-col h-full bg-gray-900 text-white font-mono text-sm overflow-auto top-0 pl-4 pb-2"
+      data-testid="terminal"
       onClick={() => inputRef.current?.focus()}
     >
       {output.map((line, index) => (
-        <div key={index} className="text-white p-1">
+        <div
+          key={index}
+          data-testid="terminal-output"
+          className="text-white p-1"
+        >
           {line}
         </div>
       ))}
@@ -37,6 +42,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
             value={command}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
+            data-testid="cli-input"
             className="w-full bg-transparent outline-none text-white"
           />
         </div>
