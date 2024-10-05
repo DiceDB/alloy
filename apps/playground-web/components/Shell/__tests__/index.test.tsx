@@ -109,4 +109,52 @@ describe('Shell Component', () => {
     await user.keyboard('[ArrowDown]');
     expect(cliInputElement.value).toBe(newCommand);
   });
+
+  it('should show syntax usage hint for SET', async () => {
+    const { cliInputElement, user, getByTestId } = setupTest();
+
+    const newCommand = 'set';
+    await user.type(cliInputElement, newCommand);
+
+    const inlineHint = getByTestId('inline-hint');
+    expect(inlineHint.childElementCount).toBe(4);
+
+    const inlineHintChild = inlineHint.childNodes;
+
+    expect(inlineHintChild[0]).toHaveTextContent('Key');
+    expect(inlineHintChild[1]).toHaveTextContent('Value');
+    expect(inlineHintChild[2]).toHaveTextContent('[NX | XX]');
+    expect(inlineHintChild[3]).toHaveTextContent(
+      '[EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]',
+    );
+  });
+
+  it('should show syntax usage hint for GET', async () => {
+    const { cliInputElement, user, getByTestId } = setupTest();
+
+    const newCommand = 'get';
+    await user.type(cliInputElement, newCommand);
+
+    const inlineHint = getByTestId('inline-hint');
+    expect(inlineHint.childElementCount).toBe(1);
+
+    const inlineHintChild = inlineHint.childNodes;
+
+    expect(inlineHintChild[0]).toHaveTextContent('Key');
+  });
+
+  it('should show syntax usage hint for DEL', async () => {
+    const { cliInputElement, user, getByTestId } = setupTest();
+
+    const newCommand = 'del';
+    await user.type(cliInputElement, newCommand);
+
+    const inlineHint = getByTestId('inline-hint');
+    expect(inlineHint.childElementCount).toBe(2);
+
+    const inlineHintChild = inlineHint.childNodes;
+
+    expect(inlineHintChild[0]).toHaveTextContent('Key');
+    expect(inlineHintChild[1]).toHaveTextContent('[Key ...]');
+  });
 });
