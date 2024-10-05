@@ -5,7 +5,8 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 import { handleCommand } from '@/shared/utils/shellUtils'; // Changed from cliUtils to shellUtils
 import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
 
-export const useShell = (decreaseCommandsLeft: () => void) => { // Renamed from useCli to useShell
+export const useShell = (decreaseCommandsLeft: () => void) => {
+  // Renamed from useCli to useShell
   // states
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);

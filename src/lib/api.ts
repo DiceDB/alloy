@@ -1,12 +1,14 @@
 // src/lib/api.ts
-import { CLI_COMMAND_URL } from '@/shared/constants/apiEndpoints';
+import { SHELL_COMMAND_URL } from '@/shared/constants/apiEndpoints'; // Updated constant name
 
-export const executeCLICommandOnServer = async (
+export const executeShellCommandOnServer = async (
+  // Updated function name
   cmd: string,
   cmdOptions: object,
 ): Promise<string> => {
   try {
-    const response = await fetch(`${CLI_COMMAND_URL}/${cmd}`, {
+    const response = await fetch(`${SHELL_COMMAND_URL}/${cmd}`, {
+      // Updated constant name
       method: 'POST',
       body: JSON.stringify(cmdOptions),
       headers: {

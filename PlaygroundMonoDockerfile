@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y git
 
 # Clone the Go repository (playground-mono)
-RUN git clone https://github.com/DiceDB/playground-mono.git playground-mono
+RUN git clone https:// github.com/DiceDB/playground-mono.git playground-mono
 WORKDIR /app/playground-mono
 
 # Download Go module dependencies

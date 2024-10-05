@@ -16,7 +16,9 @@ const dummyCommands = [
 
 const setupTest = () => {
   const user = userEvent.setup();
-  const utils = render(<Shell decreaseCommandsLeft={decreaseCommandsLeftMock} />);
+  const utils = render(
+    <Shell decreaseCommandsLeft={decreaseCommandsLeftMock} />,
+  );
 
   const terminalElement = screen.getByTestId('terminal');
   const cliInputElement = screen.getByTestId<HTMLInputElement>('cli-input');
