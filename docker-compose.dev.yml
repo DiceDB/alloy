@@ -9,7 +9,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: PlaygroundMonoDockerfile  # Updated Dockerfile name
+      dockerfile: PlaygroundMonoDockerfile  
     ports:
       - "8080:8080"
     depends_on:

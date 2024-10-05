@@ -1,6 +1,6 @@
-// src/shared/utils/shellUtils.ts // Updated filename
+// src/shared/utils/shellUtils.ts 
 
-import { executeShellCommandOnServer } from '@/lib/api'; // Updated function name
+import { executeShellCommandOnServer } from '@/lib/api';
 import { CommandHandler } from '@/types';
 
 export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
@@ -20,7 +20,7 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
       try {
         const [key] = args;
         const cmdOptions = { key: key };
-        result = await executeShellCommandOnServer(cmd, cmdOptions); // Updated function name
+        result = await executeShellCommandOnServer(cmd, cmdOptions); 
         setOutput((prevOutput) => [...prevOutput, newOutput, result]);
       } catch (error: unknown) {
         console.error('Error executing command:', error);
@@ -34,7 +34,7 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
         const [key, value] = args;
         try {
           const cmdOptions = { key: key, value: value };
-          result = await executeShellCommandOnServer(cmd, cmdOptions); // Updated function name
+          result = await executeShellCommandOnServer(cmd, cmdOptions); 
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         } catch (error: unknown) {
           console.error('Error executing command:', error);
@@ -53,7 +53,7 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
         const [keys] = args;
         try {
           const cmdOptions = { keys: [keys] };
-          result = await executeShellCommandOnServer(cmd, cmdOptions); // Updated function name
+          result = await executeShellCommandOnServer(cmd, cmdOptions);
           setOutput((prevOutput) => [...prevOutput, newOutput, result]);
         } catch (error: unknown) {
           console.error('Error executing command:', error);

@@ -21,7 +21,7 @@ const setupTest = () => {
   );
 
   const terminalElement = screen.getByTestId('terminal');
-  const cliInputElement = screen.getByTestId<HTMLInputElement>('cli-input');
+  const cliInputElement = screen.getByTestId<HTMLInputElement>('shell-input');
 
   const typeMultipleCommands = async () => {
     for (const command of dummyCommands) {

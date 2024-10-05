@@ -1,14 +1,14 @@
 // src/lib/api.ts
-import { SHELL_COMMAND_URL } from '@/shared/constants/apiEndpoints'; // Updated constant name
+import { SHELL_COMMAND_URL } from '@/shared/constants/apiEndpoints'; 
 
 export const executeShellCommandOnServer = async (
-  // Updated function name
+  
   cmd: string,
   cmdOptions: object,
 ): Promise<string> => {
   try {
     const response = await fetch(`${SHELL_COMMAND_URL}/${cmd}`, {
-      // Updated constant name
+     
       method: 'POST',
       body: JSON.stringify(cmdOptions),
       headers: {
@@ -16,7 +16,7 @@ export const executeShellCommandOnServer = async (
       },
     });
 
-    // TODO: This needs to be looked at
+   
     const data = await response.json();
     if (Object.prototype.hasOwnProperty.call(data, 'data')) {
       return data.data;
