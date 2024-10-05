@@ -1,14 +1,18 @@
-import { useState } from 'react';
 import { Clipboard } from 'lucide-react';
 import { DiceCmdMeta } from '@/data/command';
 
-export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
-  const [copied, setCopied] = useState(false);
+interface CommandPageProps extends DiceCmdMeta {
+  onCopy?: () => void;
+}
 
+export default function CommandPage({ title, syntax, body, url, onCopy }: CommandPageProps) {
+  
   const handleCopy = () => {
-    navigator.clipboard.writeText(syntax);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard.writeText(syntax).then(() => {
+      if (onCopy) {
+        onCopy();
+      }
+    });
   };
 
   return (
@@ -17,16 +21,13 @@ export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
 
       <div className="flex items-center justify-between mb-4 pt-4">
         <h3 className="text-gray-700 text-2xl font-semibold">Syntax</h3>
-        <div className="flex flex-row">
-          {copied && <div className="text-green-500 text-sm">Copied!</div>}
-          <button
-            onClick={handleCopy}
-            className="text-gray-500 hover:text-gray-700 flex items-center ml-4"
-            title="Copy to clipboard"
-          >
-            <Clipboard className="w-5 h-5" />
-          </button>
-        </div>
+        <button
+          onClick={handleCopy}
+          className="text-gray-500 hover:text-gray-700 flex items-center ml-4"
+          title="Copy to clipboard"
+        >
+          <Clipboard className="w-5 h-5" />
+        </button>
       </div>
 
       <div className="bg-gray-200 rounded-lg relative overflow-x-auto p-4">
@@ -35,9 +36,7 @@ export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
         </code>
       </div>
 
-      <h2 className="text-gray-700 text-2xl font-semibold pt-4 mb-4">
-        Description
-      </h2>
+      <h2 className="text-gray-700 text-2xl font-semibold pt-4 mb-4">Description</h2>
       <div className="bg-gray-200 p-4 rounded-lg mb-4">
         <p className="text-md text-gray-900">{body}</p>
       </div>

@@ -88,6 +88,28 @@ To create a production build:
 npm run build
 ```
 
+## Creating a Static Production Build
+
+To generate a static production build of your Next.js application, follow these steps:
+
+1. **Configure Output Setting:**  
+   Ensure that you have the following line in your `next.config.mjs` file:
+
+   ```javascript
+   output: 'export'
+   ```
+2. **Build the Project:**
+   
+   Run the following command in your terminal:
+
+   ```bash
+   npm run build
+   ```
+3. **Testing static build locally:**
+   ```bash
+   npx serve@latest out
+   ```
+
 After the build is complete, you can start the production server with:
 
 ```bash

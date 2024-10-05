@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button } from '@/shared/components/Button';
 import { Twitter } from '@mui/icons-material';
 import GitHub from '@mui/icons-material/GitHub';
 import People from '@mui/icons-material/People';
-// icons
 
 export default function Footer() {
   return (
@@ -12,10 +13,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-gray-500 font-semibold mb-4">DiceDB</h3>
-            <Button className="w-full mb-2 bg-red-600 hover:bg-red-700 text-white">
-              Get Started →
-            </Button>
-            <Button className="w-full mb-2 border-2 border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600">
+            <Button className="!bg-red-600 hover:!bg-red-700 !text-white">Get Started →</Button>
+            <Button variant="outline" className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600">
               <GitHub className="mr-2 h-4 w-4" /> GitHub (4k+)
             </Button>
           </div>
@@ -62,13 +61,13 @@ export default function Footer() {
               </li>
             </ul>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-400 hover:text-gray-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600" aria-label="People">
                 <People className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-gray-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600" aria-label="Twitter">
                 <Twitter className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-gray-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600" aria-label="GitHub">
                 <GitHub className="h-6 w-6" />
               </a>
             </div>
