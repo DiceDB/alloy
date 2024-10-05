@@ -14,7 +14,8 @@ type HeadersType = {
 type RequestOptions = {
   method: string;
   headers: Record<string, string>;
-  body?: string; // Optional because not all requests will have a body
+  // Optional because not all requests will have a body
+  body?: string;
 };
 
 export const WebService = {
