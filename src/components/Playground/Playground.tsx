@@ -1,7 +1,7 @@
 'use client';
 
 // Components
-import Cli from '@/components/CLI/CLI';
+import Cli from '@/components/Shell/Shell';
 import SearchBox from '@/components/Search/SearchBox';
 import { Dice1, Dice3, Dice5 } from 'lucide-react';
 

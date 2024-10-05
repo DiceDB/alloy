@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import CLI from '../CLI';
+import Shell from '../Shell';
 
 const decreaseCommandsLeftMock = jest.fn();
 
@@ -16,7 +16,7 @@ const dummyCommands = [
 
 const setupTest = () => {
   const user = userEvent.setup();
-  const utils = render(<CLI decreaseCommandsLeft={decreaseCommandsLeftMock} />);
+  const utils = render(<Shell decreaseCommandsLeft={decreaseCommandsLeftMock} />);
 
   const terminalElement = screen.getByTestId('terminal');
   const cliInputElement = screen.getByTestId<HTMLInputElement>('cli-input');
@@ -36,7 +36,7 @@ const setupTest = () => {
   };
 };
 
-describe('CLI Component', () => {
+describe('Shell Component', () => {
   it('should focus on terminal element click', async () => {
     const { terminalElement, cliInputElement, user } = setupTest();
     await user.click(terminalElement);

@@ -2,15 +2,15 @@
 import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
-import { handleCommand } from '@/shared/utils/cliUtils';
+import { handleCommand } from '@/shared/utils/shellUtils'; // Changed from cliUtils to shellUtils
 import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
 
-export const useCli = (decreaseCommandsLeft: () => void) => {
+export const useShell = (decreaseCommandsLeft: () => void) => { // Renamed from useCli to useShell
   // states
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);
   const [tempCommand, setTempCommand] = useState('');
-  //Initialise the command history with sessionStorage
+  // Initialise the command history with sessionStorage
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
 
@@ -40,7 +40,7 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
     }
   }, [output]);
 
-  //Load initial command history if present
+  // Load initial command history if present
   useEffect(() => {
     const savedHistory = sessionStorage.getItem('terminalHistory');
     const commandHistory = savedHistory ? JSON.parse(savedHistory) : [];

@@ -1,14 +1,14 @@
-// src/components/CLI/CLI.tsx
+// src/components/Shell/Shell.tsx
 'use client';
 
 // hooks
-import { useCli } from './hooks/useCli';
+import { useShell } from './hooks/useShell';
 
 interface CliProps {
   decreaseCommandsLeft: () => void;
 }
 
-export default function Cli({ decreaseCommandsLeft }: CliProps) {
+export default function Shell({ decreaseCommandsLeft }: CliProps) {
   const {
     handleInputChange,
     handleKeyDown,
@@ -16,7 +16,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
     inputRef,
     output,
     command,
-  } = useCli(decreaseCommandsLeft);
+  } = useShell(decreaseCommandsLeft);
   return (
     <div
       ref={terminalRef}
