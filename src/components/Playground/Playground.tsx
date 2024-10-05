@@ -1,7 +1,7 @@
 'use client';
 
 // Components
-import Shell from '@/components/Shell/Shell'; 
+import Shell from '@/components/Shell/Shell';
 import SearchBox from '@/components/Search/SearchBox';
 import { Dice1, Dice3, Dice5, Info } from 'lucide-react';
 
@@ -43,11 +43,7 @@ export default function Playground() {
               </div>
             </div>
             <div className="h-64 md:h-[30rem] bg-gray-100 rounded-lg overflow-hidden shadow-md">
-<<<<<<< HEAD
-            <Shell decreaseCommandsLeft={decreaseCommandsLeft} />
-=======
-              <Cli decreaseCommandsLeft={decreaseCommandsLeft} />
->>>>>>> origin/master
+              <Shell decreaseCommandsLeft={decreaseCommandsLeft} />
             </div>
           </div>
 

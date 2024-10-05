@@ -2,11 +2,10 @@
 import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
-import { handleCommand } from '@/shared/utils/shellUtils'; 
+import { handleCommand } from '@/shared/utils/shellUtils';
 import blacklistedCommands from '@/shared/utils/blacklist';
 
 export const useShell = (decreaseCommandsLeft: () => void) => {
-
   // states
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);

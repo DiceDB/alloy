@@ -5,12 +5,10 @@
 import { useShell } from './hooks/useShell';
 
 interface ShellProps {
-  
   decreaseCommandsLeft: () => void;
 }
 
 export default function Shell({ decreaseCommandsLeft }: ShellProps) {
-
   const {
     handleInputChange,
     handleKeyDown,
@@ -44,7 +42,7 @@ export default function Shell({ decreaseCommandsLeft }: ShellProps) {
             value={command}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            data-testid="shell-input" 
+            data-testid="shell-input"
             className="w-full bg-transparent outline-none text-white"
           />
         </div>
