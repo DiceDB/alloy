@@ -1,20 +1,19 @@
 // src/lib/api.ts
-import { CLI_COMMAND_URL } from '@/shared/constants/apiEndpoints';
+import { SHELL_COMMAND_URL } from '@/shared/constants/apiEndpoints';
 
-export const executeCLICommandOnServer = async (
+export const executeShellCommandOnServer = async (
   cmd: string,
-  cmdOptions: object,
+  cmdArgs: object,
 ): Promise<string> => {
   try {
-    const response = await fetch(`${CLI_COMMAND_URL}/${cmd}`, {
+    const response = await fetch(`${SHELL_COMMAND_URL}/${cmd}`, {
       method: 'POST',
-      body: JSON.stringify(cmdOptions),
+      body: JSON.stringify(cmdArgs),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    // TODO: This needs to be looked at
     const data = await response.json();
     if (Object.prototype.hasOwnProperty.call(data, 'data')) {
       return data.data;
