@@ -5,8 +5,13 @@ interface CommandPageProps extends DiceCmdMeta {
   onCopy?: () => void;
 }
 
-export default function CommandPage({ title, syntax, body, url, onCopy }: CommandPageProps) {
-  
+export default function CommandPage({
+  title,
+  syntax,
+  body,
+  url,
+  onCopy,
+}: CommandPageProps) {
   const handleCopy = () => {
     navigator.clipboard.writeText(syntax).then(() => {
       if (onCopy) {
@@ -36,7 +41,9 @@ export default function CommandPage({ title, syntax, body, url, onCopy }: Comman
         </code>
       </div>
 
-      <h2 className="text-gray-700 text-2xl font-semibold pt-4 mb-4">Description</h2>
+      <h2 className="text-gray-700 text-2xl font-semibold pt-4 mb-4">
+        Description
+      </h2>
       <div className="bg-gray-200 p-4 rounded-lg mb-4">
         <p className="text-md text-gray-900">{body}</p>
       </div>
