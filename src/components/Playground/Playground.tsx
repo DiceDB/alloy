@@ -53,7 +53,7 @@ export default function Playground() {
                 <span>Cleanup in : {formatTime(timeLeft)} mins</span>
               </div>
               <div className="flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
-                <span>Command left: {commandsLeft}</span>
+                <span>Commands left: {commandsLeft}</span>
               </div>
             </div>
             <div className="flex flex-row items-start mt-5">
