@@ -3,12 +3,12 @@ import { SHELL_COMMAND_URL } from '@/shared/constants/apiEndpoints';
 
 export const executeShellCommandOnServer = async (
   cmd: string,
-  cmdOptions: object,
+  cmdArgs: object,
 ): Promise<string> => {
   try {
     const response = await fetch(`${SHELL_COMMAND_URL}/${cmd}`, {
       method: 'POST',
-      body: JSON.stringify(cmdOptions),
+      body: JSON.stringify(cmdArgs),
       headers: {
         'Content-Type': 'application/json',
       },
