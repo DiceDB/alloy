@@ -17,7 +17,7 @@ type RequestOptions = {
   body?: string; // Optional because not all requests will have a body
 };
 
-export const webService = {
+export const WebService = {
   request: async (
     url: string,
     method: string,
@@ -39,7 +39,7 @@ export const webService = {
     }
 
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(`${PLAYGROUND_MONO_URL}/${url}`, options);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -53,11 +53,11 @@ export const webService = {
   },
 
   get: (url: string, headers: HeadersType = {}) => {
-    return webService.request(url, 'GET', null, headers);
+    return WebService.request(url, 'GET', null, headers);
   },
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: (url: string, data: any, headers: HeadersType = {}) => {
-    return webService.request(url, 'POST', data, headers);
+    return WebService.request(url, 'POST', data, headers);
   },
 };

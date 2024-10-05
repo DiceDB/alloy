@@ -6,7 +6,7 @@ export const executeCLICommandOnServer = async (
   cmdOptions: object,
 ) => {
   try {
-    const response = await WebService.post(`/cli/${cmd}`, cmdOptions);
+    const response = await WebService.post(`shell/exec`, cmdOptions);
     // TODO: This needs to be looked at
     if (response?.data) {
       return response.data;
