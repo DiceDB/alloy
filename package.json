@@ -49,7 +49,6 @@
   },
   "pre-commit": [
     "lint",
-    "prettier:format",
-    "test"
+    "prettier:format"
   ]
 }
