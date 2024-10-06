@@ -37,6 +37,11 @@ cd playground-web
 npm install
 ```
 
+## Environment Variables
+
+Before running the project, make sure to set up the necessary environment variables. Create a `.env.local` file in the root directory of the project and add the following variables:
+NEXT_PUBLIC_PLAYGROUND_MONO_URL=http://localhost:8080/
+
 ## Development
 
 To start the development server, run:
@@ -52,20 +57,20 @@ This will launch the app on [http://localhost:3000](http://localhost:3000). The 
 1. Update `docker-compose.yml` file with the following code:
 
 ```yaml
-version: "3.8"
+version: '3.8'
 
 services:
   dicedb:
     image: dicedb/dicedb:latest
     ports:
-      - "7379:7379"
+      - '7379:7379'
 
   backend:
     build:
       context: .
       dockerfile: Dockerfile_Backend
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - dicedb
     environment:
@@ -110,14 +115,6 @@ To check for any formatting issues without fixing them:
 npm run prettier:check
 ```
 
-## Building for Production
-
-To create a production build:
-
-```bash
-npm run build
-```
-
 ## Creating a Static Production Build
 
 To generate a static production build of your Next.js application, follow these steps:
@@ -129,7 +126,7 @@ To generate a static production build of your Next.js application, follow these 
    output: 'export'
    ```
 2. **Build the Project:**
-   
+
    Run the following command in your terminal:
 
    ```bash
@@ -139,6 +136,14 @@ To generate a static production build of your Next.js application, follow these 
    ```bash
    npx serve@latest out
    ```
+
+## Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
 
 After the build is complete, you can start the production server with:
 
@@ -180,3 +185,9 @@ Feel free to extend or modify the components to suit your needs.
 The Code Contribution Guidelines are published at [CONTRIBUTING.md](CONTRIBUTING.md); please read them before you start making any changes. This will ensure a consistent standard of coding practices and developer experience.
 
 Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for quick collaboration.
+
+## Contributors
+
+<a href = "https://github.com/dicedb/dice/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=dicedb/dice"/>
+</a>
