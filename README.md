@@ -115,6 +115,28 @@ To check for any formatting issues without fixing them:
 npm run prettier:check
 ```
 
+## Creating a Static Production Build
+
+To generate a static production build of your Next.js application, follow these steps:
+
+1. **Configure Output Setting:**  
+   Ensure that you have the following line in your `next.config.mjs` file:
+
+   ```javascript
+   output: 'export'
+   ```
+2. **Build the Project:**
+
+   Run the following command in your terminal:
+
+   ```bash
+   npm run build
+   ```
+3. **Testing static build locally:**
+   ```bash
+   npx serve@latest out
+   ```
+
 ## Building for Production
 
 To create a production build:
@@ -164,6 +186,8 @@ The Code Contribution Guidelines are published at [CONTRIBUTING.md](CONTRIBUTING
 
 Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for quick collaboration.
 
-```
+## Contributors
 
-```
+<a href = "https://github.com/dicedb/dice/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=dicedb/dice"/>
+</a>
