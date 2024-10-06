@@ -4,6 +4,7 @@
 import Shell from '@/components/Shell/Shell';
 import SearchBox from '@/components/Search/SearchBox';
 import { Dice1, Dice3, Dice5, Info } from 'lucide-react';
+import { useMemo } from 'react';
 
 // utils
 import { formatTime } from '@/shared/utils/commonUtils';
@@ -13,9 +14,11 @@ import Image from 'next/image';
 import { usePlayground } from './hooks/usePlayground';
 
 export default function Playground() {
-  const { decreaseCommandsLeft, search, timeLeft, commandsLeft, setSearch } =
+  const { decreaseCommandsLeft, timeLeft, commandsLeft } =
     usePlayground();
 
+  const MemoizedSearchBox = useMemo(() => <SearchBox />, []);
+  
   return (
     <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900">
       <header className="navbar flex items-center justify-between py-5">
@@ -67,7 +70,7 @@ export default function Playground() {
 
         <div className="w-full lg:w-5/12 flex flex-col">
           <div className="flex-grow border border-gray-400 bg-gray-100 p-4 rounded-lg shadow-md mb-4">
-            <SearchBox search={search} setSearch={setSearch} />
+            {MemoizedSearchBox}
           </div>
         </div>
       </main>
