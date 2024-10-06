@@ -37,6 +37,11 @@ cd playground-web
 npm install
 ```
 
+## Environment Variables
+
+Before running the project, make sure to set up the necessary environment variables. Create a `.env.local` file in the root directory of the project and add the following variables:
+NEXT_PUBLIC_PLAYGROUND_MONO_URL=http://localhost:8080/
+
 ## Development
 
 To start the development server, run:
@@ -52,20 +57,20 @@ This will launch the app on [http://localhost:3000](http://localhost:3000). The 
 1. Update `docker-compose.yml` file with the following code:
 
 ```yaml
-version: "3.8"
+version: '3.8'
 
 services:
   dicedb:
     image: dicedb/dicedb:latest
     ports:
-      - "7379:7379"
+      - '7379:7379'
 
   backend:
     build:
       context: .
       dockerfile: Dockerfile_Backend
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - dicedb
     environment:
@@ -118,28 +123,6 @@ To create a production build:
 npm run build
 ```
 
-## Creating a Static Production Build
-
-To generate a static production build of your Next.js application, follow these steps:
-
-1. **Configure Output Setting:**  
-   Ensure that you have the following line in your `next.config.mjs` file:
-
-   ```javascript
-   output: 'export'
-   ```
-2. **Build the Project:**
-   
-   Run the following command in your terminal:
-
-   ```bash
-   npm run build
-   ```
-3. **Testing static build locally:**
-   ```bash
-   npx serve@latest out
-   ```
-
 After the build is complete, you can start the production server with:
 
 ```bash
@@ -180,3 +163,7 @@ Feel free to extend or modify the components to suit your needs.
 The Code Contribution Guidelines are published at [CONTRIBUTING.md](CONTRIBUTING.md); please read them before you start making any changes. This will ensure a consistent standard of coding practices and developer experience.
 
 Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for quick collaboration.
+
+```
+
+```
