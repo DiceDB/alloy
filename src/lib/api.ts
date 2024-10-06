@@ -1,7 +1,7 @@
 // src/lib/api.ts
 import { WebService } from '@/services/webService';
 
-export const executeCLICommandOnServer = async (
+export const executeShellCommandOnServer = async (
   cmd: string,
   cmdOptions: object,
 ) => {
