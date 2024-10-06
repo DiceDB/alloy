@@ -51,7 +51,7 @@ To start the development server, run:
 
 ```bash
 npm run dev
-````
+```
 
 This will launch the app on [http://localhost:3000](http://localhost:3000). The app will automatically reload if you make changes to the code.
 
@@ -166,3 +166,4 @@ Feel free to extend or modify the components to suit your needs.
 The Code Contribution Guidelines are published at [CONTRIBUTING.md](CONTRIBUTING.md); please read them before you start making any changes. This will ensure a consistent standard of coding practices and developer experience.
 
 Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for quick collaboration.
+````
