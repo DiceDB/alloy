@@ -1,16 +1,12 @@
 'use client';
 
-import { SetStateAction, Dispatch } from 'react';
+import { useState } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
 import CommandPage from './command';
 
-interface SearchBoxProps {
-  search: string;
-  setSearch: Dispatch<SetStateAction<string>>;
-}
-
-export default function SearchBox({ search, setSearch }: SearchBoxProps) {
+export default function SearchBox() {
+  const [search, setSearch] = useState('');
   const filteredCommands = Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
     cmd.title.toLowerCase().includes(search.toLowerCase()),
   );
@@ -24,22 +20,21 @@ export default function SearchBox({ search, setSearch }: SearchBoxProps) {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search commands..."
+            placeholder="Search commands (e.g., GET, SET, LPUSH, HSET)..."
             className="bg-transparent border-none outline-none w-full py-2 text-gray-900 font-assistant"
           />
         </div>
       </div>
       <div className="mt-4 space-y-4 max-h-[500px] lg:max-h-[870px] xl:max-h-[890px] overflow-y-auto">
-        {search.length > 1 &&
-          filteredCommands.map((cmdMeta) => (
-            <CommandPage
-              key={cmdMeta.title}
-              title={cmdMeta.title}
-              syntax={cmdMeta.syntax}
-              body={cmdMeta.body}
-              url={cmdMeta.url}
-            />
-          ))}
+        {filteredCommands.map((cmdMeta) => (
+          <CommandPage
+            key={cmdMeta.title}
+            title={cmdMeta.title}
+            syntax={cmdMeta.syntax}
+            body={cmdMeta.body}
+            url={cmdMeta.url}
+          />
+        ))}
       </div>
     </div>
   );

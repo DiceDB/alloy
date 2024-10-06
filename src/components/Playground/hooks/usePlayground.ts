@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 export const usePlayground = () => {
-  const [search, setSearch] = useState('');
   const [timeLeft, setTimeLeft] = useState<number>(15 * 60);
   const [commandsLeft, setCommandsLeft] = useState<number>(1000);
 
@@ -19,10 +18,8 @@ export const usePlayground = () => {
 
   return {
     decreaseCommandsLeft,
-    search,
     timeLeft,
     commandsLeft,
-    setSearch,
     setTimeLeft,
     setCommandsLeft,
   };
