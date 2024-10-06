@@ -40,7 +40,7 @@ export const WebService = {
     }
 
     try {
-      const response = await fetch(`${PLAYGROUND_MONO_URL}/${url}`, options);
+      const response = await fetch(`${PLAYGROUND_MONO_URL}${url}`, options);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
