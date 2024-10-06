@@ -35,4 +35,4 @@ jobs:
         run: npm run type-check
 
       - name: Run Jest tests
-        run: npx jest --runInBand
+        run: npm run test
