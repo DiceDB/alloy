@@ -1,14 +1,29 @@
-import { useState } from 'react';
 import { Clipboard } from 'lucide-react';
 import { DiceCmdMeta } from '@/data/command';
+import { useState } from 'react';
 
-export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
-  const [copied, setCopied] = useState(false);
+interface CommandPageProps extends DiceCmdMeta {
+  onCopy?: () => void;
+}
 
+export default function CommandPage({
+  title,
+  syntax,
+  body,
+  url,
+  onCopy,
+}: CommandPageProps) {
+  const [isCopied, setIsCopied] = useState(false);
+  setIsCopied(true);
+  setTimeout(() => {
+    setIsCopied(false);
+  }, 1000);
   const handleCopy = () => {
-    navigator.clipboard.writeText(syntax);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard.writeText(syntax).then(() => {
+      if (onCopy) {
+        onCopy();
+      }
+    });
   };
 
   return (
@@ -18,7 +33,7 @@ export default function CommandPage({ title, syntax, body, url }: DiceCmdMeta) {
       <div className="flex items-center justify-between mb-4 pt-4">
         <h3 className="text-gray-700 text-2xl font-semibold">Syntax</h3>
         <div className="flex flex-row">
-          {copied && <div className="text-green-500 text-sm">Copied!</div>}
+          {isCopied && <div className="text-green-500 text-sm">Copied!</div>}
           <button
             onClick={handleCopy}
             className="text-gray-500 hover:text-gray-700 flex items-center ml-4"

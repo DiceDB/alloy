@@ -1,15 +1,14 @@
 'use client';
 
+import Image from 'next/image';
+import { Dice1, Dice3, Dice5, Info } from 'lucide-react';
+
 // Components
 import Shell from '@/components/Shell/Shell';
 import SearchBox from '@/components/Search/SearchBox';
-import { Dice1, Dice3, Dice5, Info } from 'lucide-react';
 
 // utils
 import { formatTime } from '@/shared/utils/commonUtils';
-
-// images and icons
-import Image from 'next/image';
 import { usePlayground } from './hooks/usePlayground';
 
 export default function Playground() {
@@ -21,12 +20,13 @@ export default function Playground() {
       <header className="navbar flex items-center justify-between py-5">
         <div className="flex items-center">
           <Image
-            src="https://dicedb.io/dicedb-logo-light.png"
+            src="/images/dicedb-logo-light.png"
             width={110}
             height={110}
             priority={true}
             alt="DiceDB logo"
             className="object-contain"
+            unoptimized
           />
           <h2 className="font-light text-2xl ml-2">PlayGround</h2>
         </div>
