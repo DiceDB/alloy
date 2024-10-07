@@ -52,20 +52,20 @@ This will launch the app on [http://localhost:3000](http://localhost:3000). The 
 1. Update `docker-compose.yml` file with the following code:
 
 ```yaml
-version: "3.8"
+version: '3.8'
 
 services:
   dicedb:
     image: dicedb/dicedb:latest
     ports:
-      - "7379:7379"
+      - '7379:7379'
 
   backend:
     build:
       context: .
       dockerfile: Dockerfile_Backend
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - dicedb
     environment:
@@ -142,6 +142,24 @@ To get the test coverage of the project, execute the following command:
 
 ```bash
 npm run test:coverage
+```
+
+To run the E2E test cases, execute the following command:
+
+```bash
+npm run test:e2e
+```
+
+To get the test report, execute the following command:
+
+```bash
+npm run test:e2e-report
+```
+
+To run E2E test in interactive mode, execute the following command:
+
+```bash
+npm run test:e2e -- --ui
 ```
 
 ## Project Structure
