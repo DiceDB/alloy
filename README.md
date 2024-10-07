@@ -68,13 +68,13 @@ services:
   backend:
     build:
       context: .
-      dockerfile: Dockerfile_Backend
+      dockerfile: PlaygroundMonoDockerfile
     ports:
       - '8080:8080'
     depends_on:
       - dicedb
     environment:
-      - DICE_ADDR=dicedb:7379
+      - DICEDB_ADDR=dicedb:7379
 ```
 
 2. Run the following command to start the backend server and DiceDB:
@@ -123,8 +123,9 @@ To generate a static production build of your Next.js application, follow these 
    Ensure that you have the following line in your `next.config.mjs` file:
 
    ```javascript
-   output: 'export'
+   output: 'export';
    ```
+
 2. **Build the Project:**
 
    Run the following command in your terminal:
@@ -132,6 +133,7 @@ To generate a static production build of your Next.js application, follow these 
    ```bash
    npm run build
    ```
+
 3. **Testing static build locally:**
    ```bash
    npx serve@latest out
@@ -188,6 +190,6 @@ Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for qu
 
 ## Contributors
 
-<a href = "https://github.com/dicedb/dice/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=dicedb/dice"/>
+<a href = "https://github.com/dicedb/playground-web/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=dicedb/playground-web"/>
 </a>

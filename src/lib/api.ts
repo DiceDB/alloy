@@ -5,8 +5,10 @@ export const executeShellCommandOnServer = async (
   cmd: string,
   cmdOptions: object,
 ) => {
+  const cmdExecURL = `/shell/exec/${cmd}`;
+
   try {
-    const response = await WebService.post(`/shell/exec`, cmdOptions);
+    const response = await WebService.post(cmdExecURL, cmdOptions);
     if (response?.data) {
       return response.data;
     } else {
