@@ -1,19 +1,19 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
 import CommandPage from './command';
 import NotFoundPage from './NotFoundPage';
 
-export default function SearchBox() {
-  const [search, setSearch] = useState('');
-  const filteredCommands = useMemo(
-    () =>
-      Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
-        cmd.title.toLowerCase().includes(search.toLowerCase()),
-      ),
-    [search],
+interface SearchBoxProps {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export default function SearchBox({ search, setSearch }: SearchBoxProps) {
+  const filteredCommands = Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
+    cmd.title.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
