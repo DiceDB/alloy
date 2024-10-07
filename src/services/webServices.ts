@@ -2,7 +2,7 @@ let PLAYGROUND_MONO_URL = process.env.NEXT_PUBLIC_PLAYGROUND_MONO_URL;
 
 if (!PLAYGROUND_MONO_URL) {
   console.warn(
-    'Warning: NEXT_PUBLIC_PLAYGROUND_MONO_URL is not defined. Defaulting to http://localhost:8080',
+    'Warning: NEXT_PUBLIC_BACKEND_URL is not defined. Defaulting to http://localhost:8080',
   );
   PLAYGROUND_MONO_URL = 'http://localhost:8080';
 }
@@ -14,8 +14,7 @@ type HeadersType = {
 type RequestOptions = {
   method: string;
   headers: Record<string, string>;
-  // Optional because not all requests will have a body
-  body?: string;
+  body?: string; // Optional body, because not all requests will have one
 };
 
 export const WebService = {
@@ -41,20 +40,24 @@ export const WebService = {
 
     try {
       const response = await fetch(`${PLAYGROUND_MONO_URL}${url}`, options);
-      if (!response) {
-        throw new Error('No response received from the server.');
-      }
 
+      // If the response is not OK, check if the response contains error information
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorResponse = await response.json();
+        if (errorResponse?.error) {
+          throw errorResponse.error;
+        } else {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
       }
 
+      // Parse the result as JSON
       const result = await response.json();
-
       return result;
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         console.error(`Error with ${method} request: ${error.message}`);
+      }
       throw error;
     }
   },
