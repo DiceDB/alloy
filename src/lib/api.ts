@@ -9,13 +9,18 @@ export const executeShellCommandOnServer = async (
 
   try {
     const response = await WebService.post(cmdExecURL, cmdOptions);
+
+    // Check if the response contains data or if it's an error response
     if (response?.data) {
       return response.data;
+    } else if (response?.error) {
+      return response.error;
     } else {
       throw new Error('Unexpected response structure');
     }
-  } catch (error: unknown) {
+  } catch (error) {
+    // Propagate the error from the backend exactly as it is
     console.error('Error executing command:', error);
-    return `Error: ${error}`;
+    return `${error}`; // Just return the error message directly
   }
 };
