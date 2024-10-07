@@ -42,7 +42,7 @@ describe('executeShellCommandOnServer', () => {
 
     const result = await executeShellCommandOnServer(mockCmd, mockCmdOptions);
 
-    expect(result).toBe('Error: Error: Unexpected response structure');
+    expect(result).toBe('Error: Unexpected response structure');
     expect(WebService.post).toHaveBeenCalledWith(
       mockCmdExecURL,
       mockCmdOptions,
@@ -58,7 +58,7 @@ describe('executeShellCommandOnServer', () => {
       mockCmdExecURL,
       mockCmdOptions,
     );
-    expect(result).toBe(`Error: ${mockError}`);
+    expect(result).toBe(`${mockError}`);
     consoleErrorSpy.mockRestore();
   });
 
