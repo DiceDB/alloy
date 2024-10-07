@@ -2,7 +2,7 @@ let PLAYGROUND_MONO_URL = process.env.NEXT_PUBLIC_PLAYGROUND_MONO_URL;
 
 if (!PLAYGROUND_MONO_URL) {
   console.warn(
-    'Warning: NEXT_PUBLIC_BACKEND_URL is not defined. Defaulting to http://localhost:3000',
+    'Warning: NEXT_PUBLIC_PLAYGROUND_MONO_URL is not defined. Defaulting to http://localhost:8080',
   );
   PLAYGROUND_MONO_URL = 'http://localhost:8080';
 }
@@ -41,10 +41,16 @@ export const WebService = {
 
     try {
       const response = await fetch(`${PLAYGROUND_MONO_URL}${url}`, options);
+      if (!response) {
+        throw new Error('No response received from the server.');
+      }
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
+
       const result = await response.json();
+
       return result;
     } catch (error) {
       if (error instanceof Error)
