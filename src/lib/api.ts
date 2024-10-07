@@ -21,6 +21,6 @@ export const executeShellCommandOnServer = async (
   } catch (error) {
     // Propagate the error from the backend exactly as it is
     console.error('Error executing command:', error);
-    return `${error}`;  // Just return the error message directly
+    return `${error}`; // Just return the error message directly
   }
 };
