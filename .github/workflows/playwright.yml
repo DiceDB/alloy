@@ -1,6 +1,6 @@
 # workflow to check if E2E testing is working properly
 
-name: Playwright Tests
+name: UI Integration Tests
 on:
   pull_request:
     branches: 
