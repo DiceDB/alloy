@@ -1,5 +1,3 @@
-'use client';
-
 import { Clipboard } from 'lucide-react';
 import { DiceCmdMeta } from '@/data/command';
 import { useState } from 'react';
@@ -16,11 +14,11 @@ export default function CommandPage({
   onCopy,
 }: CommandPageProps) {
   const [isCopied, setIsCopied] = useState(false);
+  setIsCopied(true);
+  setTimeout(() => {
+    setIsCopied(false);
+  }, 1000);
   const handleCopy = () => {
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
     navigator.clipboard.writeText(syntax).then(() => {
       if (onCopy) {
         onCopy();

@@ -1,18 +1,19 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
 import CommandPage from './command';
+import NotFoundPage from './NotFoundPage';
 
-export default function SearchBox() {
-  const [search, setSearch] = useState('');
-  const filteredCommands = useMemo(
-    () =>
-      Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
-        cmd.title.toLowerCase().includes(search.toLowerCase()),
-      ),
-    [search],
+interface SearchBoxProps {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export default function SearchBox({ search, setSearch }: SearchBoxProps) {
+  const filteredCommands = Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
+    cmd.title.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -30,7 +31,8 @@ export default function SearchBox() {
         </div>
       </div>
       <div className="mt-4 space-y-4 max-h-[500px] lg:max-h-[870px] xl:max-h-[890px] overflow-y-auto">
-        {search.length > 1 &&
+        {search.length > 1 ? (
+          filteredCommands.length > 0 &&
           filteredCommands.map((cmdMeta) => (
             <CommandPage
               key={cmdMeta.title}
@@ -39,7 +41,15 @@ export default function SearchBox() {
               body={cmdMeta.body}
               url={cmdMeta.url}
             />
-          ))}
+          ))
+        ) : (
+          <p className="text-lg font-semibold text-gray-500 mb-2">
+            Please enter a command with more than one word.
+          </p>
+        )}
+        {search.length > 1 && filteredCommands.length === 0 && (
+          <NotFoundPage url="https://dicedb.io/commands/auth/" />
+        )}
       </div>
     </div>
   );
