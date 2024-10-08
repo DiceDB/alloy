@@ -1,186 +1,152 @@
-# DiceDB Playground Web
+# Alloy
 
-DiceDB Playground is an interactive platform designed to let users experiment with [DiceDB](https://github.com/dicedb/dice/) commands in a live environment, similar to the Go Playground. It allows users to search and play with various DiceDB commands in real-time.
+This is a [monorepo](https://monorepo.tools/) that contains all dicedb related tools and applications that make it fun and easy to use in the real world.
 
-This repository hosts the frontend service implementation of the Playground.
+## Why a Monorepo?
 
-## Setup Using Docker
+A monorepo is a single repository that contains multiple projects. This allows us to manage all the projects in a single repository, making it easier to share code and manage dependencies across projects.
 
-To start the playground using Docker, run:
+## Why Alloy?
 
-```bash
-docker-compose up
-```
+This repository is an amalgamation of all the tools and applications that make DiceDB fun and easy to use in the real world. The name is a nod to this amalgamation, and inspired by the [alloy](https://en.wikipedia.org/wiki/Alloy).
 
-## Prerequisites
+
+## What's inside?
+
+This monorepo includes the following packages/apps:
+
+### Apps and Packages
+
+- `@dicedb/playground-web` @ [./apps/playground-web](./apps/playground-web): an interactive platform designed to let users experiment with [DiceDB](https://github.com/dicedb/dice/) commands in a live environment, similar to the Go Playground
+- `@dicedb/ui` @ [./packages/ui](./packages/ui): common UI components for alloy apps packaged into a [internal package](https://turbo.build/repo/docs/core-concepts/internal-packages)
+
+### Configurations
+
+- `@dicedb/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@dicedb/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@dicedb/tailwind-config`: `tailwind.config.js`s used throughout the monorepo
+
+### Prerequisites
 
 Ensure you have the following installed:
-
-- **Node.js** (v16.13.0 or later)
-- **Yarn** (or npm)
-- **Next.js** (v14.2.13 or later)
-
-To ensure you're using the correct Node.js version, you can check or set up the required version using NVM:
+- node.js (v18.17.0 or later)
+- pnpm (v9.10.0 or later)
 
 ```bash
-nvm install 16.13.0
-nvm use 16.13.0
+nvm install 18.17.0
+nvm use 18.17.0
 ```
 
-## Installation
+```bash
+npm install -g pnpm@9.10.0
+```
+
+> If you're unfamiliar with pnpm, it’s an alternative package manager that is faster and more efficient than npm. Learn more about pnpm [here](https://pnpm.io/).
+
+
+
+### Installation
 
 Clone the repository and install the dependencies:
 
 ```bash
 git clone <repository-url>
-cd playground-web
-npm install
+cd alloy
+pnpm install
 ```
 
-## Environment Variables
+> [!NOTE]
+> Please go through the README of each package/app to understand how to run and develop them. The READMEs are located in the respective package/app directories. The information below is a quick reference to get you started common for all packages/apps.
 
-Before running the project, make sure to set up the necessary environment variables. Create a `.env.local` file in the root directory of the project and add the following variables:
-NEXT_PUBLIC_PLAYGROUND_MONO_URL=http://localhost:8080/
+### Build
 
-## Development
+To build all apps and packages, run the following command:
 
-To start the development server, run:
-
-```bash
-npm run dev
+```
+cd alloy
+pnpm build
 ```
 
-This will launch the app on [http://localhost:3000](http://localhost:3000). The app will automatically reload if you make changes to the code.
+#### Build a specific package/app
 
-### Setting Up Backend and DiceDB for Local Development
+To build a specific package/app, run the following command:
 
-1. Update `docker-compose.yml` file with the following code:
-
-```yaml
-version: '3.8'
-
-services:
-  dicedb:
-    image: dicedb/dicedb:latest
-    ports:
-      - '7379:7379'
-
-  backend:
-    build:
-      context: .
-      dockerfile: PlaygroundMonoDockerfile
-    ports:
-      - '8080:8080'
-    depends_on:
-      - dicedb
-    environment:
-      - DICEDB_ADDR=dicedb:7379
+```
+cd alloy
+pnpm build --filter @dicedb/playground-web
 ```
 
-2. Run the following command to start the backend server and DiceDB:
+These commands will not only build the package requested but also build all the dependencies of the package requested.
 
-```bash
-docker-compose up
+> We also have a `pnpm build:playground` alias that does the same thing as `pnpm build --filter @dicedb/playground-web` for convenience.
+
+### Develop
+
+To develop all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm dev
 ```
 
-## Step-by-Step Setup for End-to-End Development with Docker
+#### Develop a specific package/app
 
-We have added `Dockerfile.dev`, which is for development purposes, ensuring your Next.js application supports hot reloading and reflects code changes without requiring image rebuilds.
+To develop a specific package/app, run the following command:
 
-`docker-compose.dev.yml` configures Docker Compose to build and run your Next.js app in development mode.
-
-To build and run the development mode:
-
-```bash
-docker-compose -f docker-compose.dev.yml up --build
+```
+cd alloy
+pnpm dev --filter @dicedb/playground-web
 ```
 
-## Prettier Scripts
+These commands will not only start the development server for the package requested but also start the development server for all the dependencies of the package requested.
 
-To ensure consistent code formatting, we use Prettier. It runs automatically as part of the GitHub workflow, but in case of a workflow failure, you can run Prettier manually.
+> We also have a `pnpm dev:playground` alias that does the same thing as `pnpm dev --filter @dicedb/playground-web` for convenience.
 
-### Running Prettier Locally
 
-To run Prettier and fix formatting issues locally:
+### Testing
 
-```bash
-npm run prettier:format
+To run tests for all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm test
 ```
 
-This command will format all `.js`, `.jsx`, `.ts`, `.tsx`, `.json`, and `.css` files.
+#### Test in Watch Mode
 
-To check for any formatting issues without fixing them:
+To run tests in watch mode for all apps and packages, run the following command:
 
-```bash
-npm run prettier:check
+```
+cd alloy
+pnpm test:watch
 ```
 
-## Creating a Static Production Build
 
-To generate a static production build of your Next.js application, follow these steps:
 
-1. **Configure Output Setting:**  
-   Ensure that you have the following line in your `next.config.mjs` file:
+### Formatting
 
-   ```javascript
-   output: 'export';
-   ```
+To format all apps and packages, run the following command:
 
-2. **Build the Project:**
-
-   Run the following command in your terminal:
-
-   ```bash
-   npm run build
-   ```
-
-3. **Testing static build locally:**
-   ```bash
-   npx serve@latest out
-   ```
-
-## Building for Production
-
-To create a production build:
-
-```bash
-npm run build
+```
+cd alloy
+pnpm format
 ```
 
-After the build is complete, you can start the production server with:
+### Linting
 
-```bash
-npm run start
+To lint all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm lint
 ```
 
-## Running the Test Cases
+## The Monorepo Structure
 
-To run the test cases, execute the following command:
-
-```bash
-npm run test
-```
-
-To execute the test cases simultaneously as you make changes to the files, execute the following command:
-
-```bash
-npm run test:watch
-```
-
-To get the test coverage of the project, execute the following command:
-
-```bash
-npm run test:coverage
-```
-
-## Project Structure
-
-The main components of the DiceDB Playground include:
-
-- **Terminal Component**: A basic terminal interface for interacting with DiceDB commands.
-- **Search Component**: Allows searching through mock commands or documentation.
-
-Feel free to extend or modify the components to suit your needs.
+The monorepo is divided into 3 main directories:
+- `apps`: contains all the applications i.e. deployable units
+- `packages`: contains all the packages i.e. reusable code across the apps
+- `tooling`: contains all the configurations and tooling used across the monorepo
 
 ## How to Contribute
 

@@ -8,7 +8,7 @@ To maintain the project's quality and consistency, please follow these guideline
 ## Create a branch for your change
 
 ```text
-$ cd playground-web
+$ cd alloy
 #
 # ensure you are starting from the latest code base
 # the following steps, ensure your fork's (origin's) master is up-to-date
