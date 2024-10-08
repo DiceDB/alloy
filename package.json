@@ -1,52 +1,23 @@
 {
-  "name": "playground-web",
-  "version": "0.1.0",
+  "name": "dice-dev-ex",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint . --ext js,jsx,ts,tsx",
-    "type-check": "tsc --noEmit",
-    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:e2e": "npx playwright test",
-    "test:e2e-report": "npx playwright show-report"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.1",
-    "@mui/material": "^6.1.1",
-    "autoprefixer": "^10.4.20",
-    "lucide-react": "^0.446.0",
-    "next": "14.2.13",
-    "package.json": "^2.0.1",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-terminal-ui": "^1.3.0",
-    "sharp": "^0.33.5"
+    "build": "turbo build",
+    "build:playground": "turbo build --filter=@dicedb/playground-web --ui stream",
+    "dev": "turbo dev",
+    "dev:playground": "turbo dev --filter=@dicedb/playground-web --ui stream",
+    "lint": "turbo lint",
+    "format": "prettier -c ./.prettierrc --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
+    "check:format": "prettier -c ./.prettierrc \"**/*.{js,jsx,ts,tsx,json,css}\"",
+    "test": "turbo test"
   },
   "devDependencies": {
-    "@playwright/test": "^1.47.2",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.13",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.13",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "postcss": "^8",
-    "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "prettier": "^3.2.5",
+    "turbo": "^2.1.3",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
   }
 }
