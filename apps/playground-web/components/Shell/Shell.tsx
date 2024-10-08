@@ -1,7 +1,6 @@
 // src/components/Shell/Shell.tsx
 'use client';
 
-import React from 'react';
 // hooks
 import { useShell } from './hooks/useShell';
 
