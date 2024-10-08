@@ -156,6 +156,6 @@ Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for qu
 
 ## Contributors
 
-<a href = "https://github.com/dicedb/dice/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=dicedb/dice"/>
+<a href = "https://github.com/dicedb/playground-web/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=dicedb/playground-web"/>
 </a>
