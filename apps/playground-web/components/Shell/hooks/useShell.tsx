@@ -20,7 +20,7 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
 
   const handleCommandWrapper = () => {
     const commandName = command.trim().split(' ')[0]?.toUpperCase(); // Extract the command
-    
+
     if (!commandName) {
       setOutput((prevOutput) => [...prevOutput, '']); // Add empty line
       return;
