@@ -14,7 +14,9 @@
     "prettier:format": "prettier  -c ../../.prettierrc --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "npx playwright test",
+    "test:e2e-report": "npx playwright show-report"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -32,6 +34,7 @@
     "@dicedb/ui": "workspace:*"
   },
   "devDependencies": {
+    "@playwright/test": "^1.47.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
