@@ -8,6 +8,7 @@
     "dev:playground": "turbo dev --filter=@dicedb/playground-web --ui stream",
     "lint": "turbo lint",
     "format": "prettier -c ./.prettierrc --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
+    "check:format": "prettier -c ./.prettierrc \"**/*.{js,jsx,ts,tsx,json,css}\"",
     "test": "turbo test"
   },
   "devDependencies": {
