@@ -12,7 +12,7 @@
     "lint": "eslint . --ext js,jsx,ts,tsx",
     "type-check": "tsc --noEmit",
     "prettier:format": "prettier  -c ../../.prettierrc --write \"**/*.{js,jsx,ts,tsx,json,css}\"",
-    "test": "jest",
+    "test": "jest --testPathIgnorePatterns=\"/tests/\"",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e": "npx playwright test",

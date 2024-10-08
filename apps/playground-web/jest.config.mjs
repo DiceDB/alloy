@@ -10,7 +10,6 @@ const createJestConfig = nextJest({
  * @type {import('@jest').Config}
  */
 const config = {
-  roots: ['<rootDir>/src'],
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
