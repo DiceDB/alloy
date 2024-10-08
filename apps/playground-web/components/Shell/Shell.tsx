@@ -1,6 +1,7 @@
 // src/components/Shell/Shell.tsx
 'use client';
 
+import React from 'react';
 // hooks
 import { useShell } from './hooks/useShell';
 
@@ -30,7 +31,12 @@ export default function Shell({ decreaseCommandsLeft }: ShellProps) {
           data-testid="terminal-output"
           className="text-white p-1"
         >
-          {line}
+          {line.split('\n').map((subLine, subIndex, arr) => (
+            <div key={subIndex}>
+              {subLine}
+              {subIndex < arr.length - 1 && <br />}
+            </div>
+          ))}
         </div>
       ))}
       <div className="flex items-center">
