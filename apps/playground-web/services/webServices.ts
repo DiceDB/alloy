@@ -4,7 +4,7 @@ if (!PLAYGROUND_MONO_URL) {
   console.warn(
     'Warning: NEXT_PUBLIC_PLAYGROUND_MONO_URL is not defined. Defaulting to http://localhost:8080',
   );
-  PLAYGROUND_MONO_URL = "http://localhost:8080";
+  PLAYGROUND_MONO_URL = 'http://localhost:8080';
 }
 
 type HeadersType = {
@@ -28,13 +28,13 @@ export const WebService = {
     const options: RequestOptions = {
       method,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...headers,
       },
     };
 
     // Only add 'body' if the method is not GET and if data is present
-    if (data && method !== "GET") {
+    if (data && method !== 'GET') {
       options.body = JSON.stringify(data);
     }
 
@@ -63,11 +63,11 @@ export const WebService = {
   },
 
   get: (url: string, headers: HeadersType = {}) => {
-    return WebService.request(url, "GET", null, headers);
+    return WebService.request(url, 'GET', null, headers);
   },
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: (url: string, data: any, headers: HeadersType = {}) => {
-    return WebService.request(url, "POST", data, headers);
+    return WebService.request(url, 'POST', data, headers);
   },
 };

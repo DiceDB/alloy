@@ -11,7 +11,13 @@
       "env": ["NEXT_PUBLIC_*"],
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "./dist/**", "./out/**", "./build/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "./dist/**",
+        "./out/**",
+        "./build/**"
+      ]
     },
     "dev": {
       "env": ["NEXT_PUBLIC_*"],
