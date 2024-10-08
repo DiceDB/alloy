@@ -1,0 +1,26 @@
+services:
+  dicedb:
+    image: dicedb/dicedb:latest
+    ports:
+      - "7379:7379"
+
+  backend:
+    build:
+      context: .
+      dockerfile: PlaygroundMonoDockerfile 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dicedb
+    environment:
+      - DICEDB_ADDR=dicedb:7379
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  # Specify the correct Dockerfile for the frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - dicedb
+      - backend
