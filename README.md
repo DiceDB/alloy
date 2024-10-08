@@ -118,6 +118,14 @@ cd alloy
 pnpm test:watch
 ```
 
+### Integration Test
+
+To run E2E test, run the following command:
+
+```
+pnpm test:e2e
+```
+
 ### Formatting
 
 To format all apps and packages, run the following command:
