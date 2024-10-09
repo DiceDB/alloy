@@ -30,7 +30,12 @@ export default function Shell({ decreaseCommandsLeft }: ShellProps) {
           data-testid="terminal-output"
           className="text-white p-1"
         >
-          {line}
+          {line.split('\n').map((subLine, subIndex, arr) => (
+            <span key={subIndex}>
+              {subLine}
+              {subIndex < arr.length - 1 && <br />}
+            </span>
+          ))}
         </div>
       ))}
       <div className="flex items-center">
