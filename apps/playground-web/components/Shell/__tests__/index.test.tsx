@@ -56,7 +56,7 @@ describe('Shell Component', () => {
     expect(cliInputElement.value).toBe('');
   });
 
-  it('should throw error when user types blacklisted command', async () => {
+  it('should throw error when user types blocklisted command', async () => {
     const { cliInputElement, user, getByTestId } = setupTest();
 
     await user.type(cliInputElement, 'EXEC{enter}');

@@ -3,7 +3,7 @@ import Shell from '../Shell/Shell';
 import { formatTime } from '@/shared/utils/commonUtils';
 import { useTimer } from '@/shared/hooks/useTimer';
 import { useState } from 'react';
-
+import Tooltip from '../Overlays/Tooltip';
 export function TerminalUI() {
   const [commandsLeft, setCommandsLeft] = useState(1000);
   const decreaseCommandsLeft = () => {
@@ -33,11 +33,19 @@ function TerminalCounter({ commandsLeft }: { commandsLeft: number }) {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-between text-gray-900 mt-4">
-        <div className="flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
-          <span>Cleanup in : {formatTime(timeLeft)} mins</span>
+        <div className="flex flex-row items-center space-x-2">
+          <div className="flex items-center justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
+            <span>Cleanup in: {formatTime(timeLeft)} mins</span>
+          </div>
+          <Tooltip message="The time remaining until cleanup is initiated." />
         </div>
-        <div className="flex justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
-          <span>Commands left: {commandsLeft}</span>
+
+        <div className="flex flex-row items-center space-x-2">
+          <div className="flex items-center justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
+            <span>Commands left: {commandsLeft}</span>
+          </div>
+          <Tooltip message="The number of commands you can execute before cleanup." />{' '}
+          {/* Tooltip next to text */}
         </div>
       </div>
       <div className="flex flex-row items-start mt-5">

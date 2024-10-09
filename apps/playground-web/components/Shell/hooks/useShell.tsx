@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
 import { handleCommand } from '@/shared/utils/shellUtils';
-import blacklistedCommands from '@/shared/utils/blacklist';
+import blocklistedCommands from '@/shared/utils/blocklist';
 
 export const useShell = (decreaseCommandsLeft: () => void) => {
   // states
@@ -26,13 +26,13 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
       return;
     }
 
-    if (blacklistedCommands.includes(commandName)) {
+    if (blocklistedCommands.includes(commandName)) {
       setOutput((prevOutput) => [
         ...prevOutput,
         `(error) ERR unknown command '${commandName}'`,
       ]);
     } else {
-      handleCommand({ command, setOutput }); // Execute if not blacklisted
+      handleCommand({ command, setOutput }); // Execute if not blocklisted
     }
 
     setCommand(''); // Clear input
