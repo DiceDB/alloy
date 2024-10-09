@@ -31,10 +31,10 @@ export default function Shell({ decreaseCommandsLeft }: ShellProps) {
           className="text-white p-1"
         >
           {line.split('\n').map((subLine, subIndex, arr) => (
-            <div key={subIndex}>
+            <span key={subIndex}>
               {subLine}
               {subIndex < arr.length - 1 && <br />}
-            </div>
+            </span>
           ))}
         </div>
       ))}
