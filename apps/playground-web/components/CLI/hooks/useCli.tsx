@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
 import { handleCommand } from '@/shared/utils/cliUtils';
-import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
+import blocklistedCommands from '@/shared/utils/blocklist'; // Assuming you added blocklist here
 
 export const useCli = (decreaseCommandsLeft: () => void) => {
   // states
@@ -21,13 +21,13 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
   const handleCommandWrapper = () => {
     const commandName = command.trim().split(' ')[0]?.toUpperCase() ?? ''; // Extract the command
 
-    if (blacklistedCommands.includes(commandName)) {
+    if (blocklistedCommands.includes(commandName)) {
       setOutput((prevOutput) => [
         ...prevOutput,
         `(error) ERR unknown command '${commandName}'`,
       ]);
     } else {
-      handleCommand({ command, setOutput }); // Execute if not blacklisted
+      handleCommand({ command, setOutput }); // Execute if not blocklisted
     }
 
     setCommand(''); // Clear input

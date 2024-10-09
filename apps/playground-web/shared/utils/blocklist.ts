@@ -1,4 +1,4 @@
-const blacklistedCommands = [
+const blocklistedCommands = [
   'FLUSHALL',
   'FLUSHDB',
   'DUMP',
@@ -20,4 +20,4 @@ const blacklistedCommands = [
   'PERSIST',
 ];
 
-export default blacklistedCommands;
+export default blocklistedCommands;
