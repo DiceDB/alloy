@@ -3,7 +3,8 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
 import { handleCommand } from '@/shared/utils/shellUtils';
-import blacklistedCommands from '@/shared/utils/blacklist';
+import blacklistedCommands from '@/shared/utils/blacklist'; // Assuming you added blacklist here
+import { syntaxMap, SyntaxPart } from '@/data/commandSyntaxMap';
 
 export const useShell = (decreaseCommandsLeft: () => void) => {
   // states
@@ -13,6 +14,7 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
   // Initialise the command history with sessionStorage
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [remainingSyntax, setRemainingSyntax] = useState<SyntaxPart[]>([]);
 
   // useRefs
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -37,6 +39,24 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
 
     setCommand(''); // Clear input
     decreaseCommandsLeft(); // Call to update remaining commands
+  };
+
+  const updateSyntax = (value: string) => {
+    const inputParts = value.trim().split(' ');
+    const command = inputParts[0].toUpperCase();
+    if (syntaxMap[command]) {
+      const parts = syntaxMap[command].parts;
+      if (inputParts.length === 1) {
+        // Only command typed, show all parts
+        setRemainingSyntax(parts);
+      } else {
+        // Show remaining parts based on what's already typed
+        const remainingParts = parts.slice(inputParts.length - 1);
+        setRemainingSyntax(remainingParts);
+      }
+    } else {
+      setRemainingSyntax([]);
+    }
   };
 
   useEffect(() => {
@@ -64,9 +84,10 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
   }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCommand(e.target.value);
-    // Save current input when starting to navigate history
+    const value = e.target.value;
+    setCommand(value);
     setTempCommand(e.target.value);
+    updateSyntax(value);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -76,6 +97,7 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
         setCommandHistory((prev) => [...prev, command]);
         setHistoryIndex(-1);
       }
+      setRemainingSyntax([]);
       return;
     }
 
@@ -125,5 +147,6 @@ export const useShell = (decreaseCommandsLeft: () => void) => {
     command,
     tempCommand,
     setTempCommand,
+    remainingSyntax,
   };
 };
