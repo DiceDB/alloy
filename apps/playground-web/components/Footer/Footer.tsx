@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-gray-500 font-semibold mb-4">DiceDB</h3>
-            <Button className="!bg-red-600 hover:!bg-red-700 !text-white">
+            <Button className="w-full !bg-red-600 hover:!bg-red-700 !text-white">
               Get Started →
             </Button>
             <Button
