@@ -6,7 +6,6 @@ import GitHub from '@mui/icons-material/GitHub';
 import People from '@mui/icons-material/People';
 import { Button } from '@dicedb/ui/button';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
 export default function Footer() {
   return (
