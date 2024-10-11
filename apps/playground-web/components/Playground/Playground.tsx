@@ -9,8 +9,6 @@ import { TerminalUI } from './TerminalUI';
 export default function Playground() {
   return (
     <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900">
-      <Header />
-
       <main className="flex flex-col lg:flex-row gap-10 flex-grow overflow-hidden px-4">
         <div className="w-full lg:w-7/12 flex flex-col">
           <TerminalUI />

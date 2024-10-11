@@ -1,10 +1,6 @@
-import { useState } from "react";
-import { Clipboard } from "lucide-react";
-import { DiceCmdMeta } from "@/data/command";
-
+import { useState } from 'react';
 import { Clipboard } from 'lucide-react';
 import { DiceCmdMeta } from '@/data/command';
-import { useState } from 'react';
 
 interface CommandPageProps extends DiceCmdMeta {
   onCopy?: () => void;

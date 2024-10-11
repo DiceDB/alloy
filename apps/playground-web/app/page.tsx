@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <main data-testid="main-content">
       <Playground />
-      <Footer />
     </main>
   );
 }

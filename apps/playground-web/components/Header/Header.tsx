@@ -1,25 +1,25 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Github } from "lucide-react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, Github } from 'lucide-react';
 
 async function fetchStars(): Promise<string> {
   const formatNumber = (num: number): string =>
     num >= 1000
-      ? (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k"
+      ? (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + 'k'
       : num.toString();
 
   try {
-    const response = await fetch("https://api.github.com/repos/dicedb/dice", {
+    const response = await fetch('https://api.github.com/repos/dicedb/dice', {
       next: { revalidate: 3600 },
     });
     if (!response.ok) {
-      throw new Error("Failed to fetch repository data");
+      throw new Error('Failed to fetch repository data');
     }
     const data = await response.json();
     return formatNumber(data.stargazers_count);
   } catch (err) {
-    console.error("Error fetching GitHub stars:", err);
-    return "0";
+    console.error('Error fetching GitHub stars:', err);
+    return '0';
   }
 }
 
