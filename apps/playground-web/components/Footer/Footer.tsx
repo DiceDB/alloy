@@ -1,52 +1,124 @@
-import { Button } from "@mui/material";
-import { Twitter } from "@mui/icons-material";
-import GitHub from "@mui/icons-material/GitHub";
-import People from "@mui/icons-material/People";
-import Link from "next/link";
+import React from 'react';
+import { Twitter } from '@mui/icons-material';
+import GitHub from '@mui/icons-material/GitHub';
+import People from '@mui/icons-material/People';
+import { Button } from '@dicedb/ui/button';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
-          <p className="text-gray-600 mb-8 max-w-md">
-            Have questions or need support? We&apos;re here to help. Reach out
-            to us through any of the following channels.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-gray-500 font-semibold mb-4 text-center">
+              DiceDB
+            </h3>
             <Link
-              href="https://discord.com/invite/6r8uXWtXh7"
-              passHref
-              legacyBehavior
+              href="https://dicedb.io/get-started/installation/"
+              target="_blank"
             >
+              <Button className="w-full !bg-red-600 hover:!bg-red-700 !text-white">
+                Get Started →
+              </Button>
+            </Link>
+            <Link href="https://github.com/dicedb/dice" target="_blank">
               <Button
-                variant="contained"
-                startIcon={<People />}
-                sx={{ backgroundColor: "#e60001" }}
+                variant="outline"
+                className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600"
               >
-                Community Forum
+                <GitHub className="mr-2 h-4 w-4" /> GitHub (4k+)
               </Button>
             </Link>
           </div>
-          <div className="flex space-x-6">
-            <Link
-              href="https://x.com/thedicedb"
-              className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
-            >
-              <Twitter className="h-6 w-6" />
-              <span className="sr-only">Twitter</span>
-            </Link>
-            <Link
-              href="https://github.com/dicedb/dice"
-              className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
-            >
-              <GitHub className="h-6 w-6" />
-              <span className="sr-only">GitHub</span>
-            </Link>
+
+          <div className="text-center">
+            <h3 className="text-gray-500 font-semibold mb-4">Developers</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="https://dicedb.io/get-started/installation"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Quickstart
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://dicedb.io/commands/get"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Commands
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://github.com/DiceDB/dice/tree/master/examples/leaderboard-go"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Examples
+                </Link>
+              </li>
+            </ul>
           </div>
-          <div className="mt-8 text-sm text-gray-500">
-            © 2024 DiceDB. All rights reserved.
+
+          <div className="text-center">
+            <h3 className="text-gray-500 font-semibold mb-4">Examples</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="https://github.com/DiceDB/dice/tree/master/examples/leaderboard-go"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Real-time Leaderboard
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="text-center">
+            <h3 className="text-gray-500 font-semibold mb-4">Us and Socials</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="mailto:arpit@dicedb.io"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+            <div className="space-x-4 mt-4 items-center justify-items-center">
+              <Link
+                href="https://discord.gg/6r8uXWtXh7"
+                target="_blank"
+                className="text-gray-400 hover:text-gray-600"
+                aria-label="People"
+              >
+                <People className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://twitter.com/thedicedb"
+                target="_blank"
+                className="text-gray-400 hover:text-gray-600"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://github.com/dicedb/dice"
+                target="_blank"
+                className="text-gray-400 hover:text-gray-600"
+                aria-label="GitHub"
+              >
+                <GitHub className="h-6 w-6" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
