@@ -1,110 +1,161 @@
-# DiceDB Playground Web
+# Alloy
 
-DiceDB Playground is an interactive platform designed to let users experiment with [DiceDB](https://github.com/dicedb/dice/) commands in a live environment, similar to the Go Playground.
-Allows users to search and play with various DiceDB commands in real-time.
+This is a [monorepo](https://monorepo.tools/) that contains all dicedb related tools and applications that make it fun and easy to use in the real world.
 
-This repository hosts frontend service implementation of the Playground.
+## Why a Monorepo?
 
-## Setup Using Docker
+A monorepo is a single repository that contains multiple projects. This allows us to manage all the projects in a single repository, making it easier to share code and manage dependencies across projects.
 
-```
-docker-compose up
-```
+## Why Alloy?
 
-## Prerequisites
+This repository is an amalgamation of all the tools and applications that make DiceDB fun and easy to use in the real world. The name is a nod to this amalgamation, and inspired by the [alloy](https://en.wikipedia.org/wiki/Alloy).
+
+
+## What's inside?
+
+This monorepo includes the following packages/apps:
+
+### Apps and Packages
+
+- `@dicedb/playground-web` @ [./apps/playground-web](./apps/playground-web): an interactive platform designed to let users experiment with [DiceDB](https://github.com/dicedb/dice/) commands in a live environment, similar to the Go Playground
+- `@dicedb/ui` @ [./packages/ui](./packages/ui): common UI components for alloy apps packaged into a [internal package](https://turbo.build/repo/docs/core-concepts/internal-packages)
+
+### Configurations
+
+- `@dicedb/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@dicedb/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@dicedb/tailwind-config`: `tailwind.config.js`s used throughout the monorepo
+
+### Prerequisites
 
 Ensure you have the following installed:
+- node.js (v18.17.0 or later)
+- pnpm (v9.10.0 or later)
 
-- **Node.js** (v16.x or later)
-- **Yarn** (or npm)
-- **Next.js** (v13.x or later)
+```bash
+nvm install 18.17.0
+nvm use 18.17.0
+```
 
-## Installation
+```bash
+npm install -g pnpm@9.10.0
+```
+
+> If you're unfamiliar with pnpm, it’s an alternative package manager that is faster and more efficient than npm. Learn more about pnpm [here](https://pnpm.io/).
+
+
+
+### Installation
 
 Clone the repository and install the dependencies:
 
 ```bash
 git clone <repository-url>
-cd playground-web
-npm install
+cd alloy
+pnpm install
 ```
 
-## Development
+> [!NOTE]
+> Please go through the README of each package/app to understand how to run and develop them. The READMEs are located in the respective package/app directories. The information below is a quick reference to get you started common for all packages/apps.
 
-To start the development server, run:
+### Build
 
-```bash
-npm run dev
+To build all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm build
 ```
 
-This will launch the app on [http://localhost:3000](http://localhost:3000). The app will automatically reload if you make changes to the code.
+#### Build a specific package/app
 
-If you want to bring up backend and DiceDB for local end to end development, follow below steps:
+To build a specific package/app, run the following command:
 
-1. Update `docker-compose.yml` file with below code:
-
-```yml
-version: "3.8"
-
-services:
-  dicedb:
-    image: dicedb/dicedb:latest
-    ports:
-      - "7379:7379"
-
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile_Backend
-    ports:
-      - "8080:8080"
-    depends_on:
-      - dicedb
-    environment:
-      - DICE_ADDR=dicedb:7379
+```
+cd alloy
+pnpm build --filter @dicedb/playground-web
 ```
 
-2. Run below command to start backend server and DiceDB
+These commands will not only build the package requested but also build all the dependencies of the package requested.
 
-```shell
-docker-compose up
+> We also have a `pnpm build:playground` alias that does the same thing as `pnpm build --filter @dicedb/playground-web` for convenience.
+
+### Develop
+
+To develop all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm dev
 ```
 
-## Step-by-Step Setup for End-to-End Development with Docker
-We have added `Dockerfile.dev` which is for development purposes, ensuring your Next.js application supports hot reloading and reflects code changes without requiring image rebuilds.
+#### Develop a specific package/app
 
-`docker-compose.dev.yml` configures Docker Compose to build and run your Next.js app in development mode.
+To develop a specific package/app, run the following command:
 
-```shell
-docker-compose -f docker-compose.dev.yml up --build
+```
+cd alloy
+pnpm dev --filter @dicedb/playground-web
+```
+
+These commands will not only start the development server for the package requested but also start the development server for all the dependencies of the package requested.
+
+> We also have a `pnpm dev:playground` alias that does the same thing as `pnpm dev --filter @dicedb/playground-web` for convenience.
+
+
+### Testing
+
+To run tests for all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm test
+```
+
+#### Test in Watch Mode
+
+To run tests in watch mode for all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm test:watch
 ```
 
 
-## Building for Production
 
-To create a production build:
+### Formatting
 
-```bash
-npm run build
+To format all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm format
 ```
 
-After the build is complete, you can start the production server with:
+### Linting
 
-```bash
-npm run start
+To lint all apps and packages, run the following command:
+
+```
+cd alloy
+pnpm lint
 ```
 
-## Project Structure
+## The Monorepo Structure
 
-The main components of the DiceDB Playground include:
+The monorepo is divided into 3 main directories:
+- `apps`: contains all the applications i.e. deployable units
+- `packages`: contains all the packages i.e. reusable code across the apps
+- `tooling`: contains all the configurations and tooling used across the monorepo
 
-- **Terminal Component**: A basic terminal interface for interacting with DiceDB commands.
-- **Search Component**: Allows searching through mock commands or documentation.
+## How to Contribute
 
-Feel free to extend or modify the components to suit your needs.
-
-## How to contribute
-
-The Code Contribution Guidelines are published at [CONTRIBUTING.md](CONTRIBUTING.md); please read them before you start making any changes. This would allow us to have a consistent standard of coding practices and developer experience.
+The Code Contribution Guidelines are published at [CONTRIBUTING.md](CONTRIBUTING.md); please read them before you start making any changes. This will ensure a consistent standard of coding practices and developer experience.
 
 Contributors can join the [Discord Server](https://discord.gg/6r8uXWtXh7) for quick collaboration.
+
+## Contributors
+
+<a href = "https://github.com/dicedb/playground-web/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=dicedb/playground-web"/>
+</a>
