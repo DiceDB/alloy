@@ -4,17 +4,17 @@ import Image from 'next/image';
 import SearchBox from '@/components/Search/SearchBox';
 import { TerminalUI } from './TerminalUI';
 
-// utils
-
 export default function Playground() {
   return (
     <div className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900">
-      <main className="flex flex-col lg:flex-row gap-10 flex-grow overflow-hidden px-4">
-        <div className="w-full lg:w-7/12 flex flex-col">
-          <TerminalUI />
+      <main className="flex flex-col lg:flex-row gap-10 flex-grow overflow-hidden px-4 h-full">
+        <div className="w-full lg:w-7/12 flex flex-col h-full">
+          <div className="flex-grow">
+            <TerminalUI />
+          </div>
         </div>
-        <div className="w-full lg:w-5/12 flex flex-col">
-          <div className="flex-grow border border-gray-400 bg-gray-100 p-4 rounded-lg shadow-md mb-4">
+        <div className="w-full lg:w-5/12 flex flex-col h-full">
+          <div className="flex-grow border border-gray-400 bg-gray-100 rounded-lg shadow-md">
             <SearchBox />
           </div>
         </div>
@@ -22,7 +22,6 @@ export default function Playground() {
     </div>
   );
 }
-
 function Header() {
   return (
     <header className="navbar flex items-center justify-between py-5">
