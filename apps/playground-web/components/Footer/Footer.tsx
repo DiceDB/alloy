@@ -14,8 +14,13 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-gray-500 font-semibold mb-4 text-center">DiceDB</h3>
-            <Link href="https://dicedb.io/get-started/installation/" target="_blank">
+            <h3 className="text-gray-500 font-semibold mb-4 text-center">
+              DiceDB
+            </h3>
+            <Link
+              href="https://dicedb.io/get-started/installation/"
+              target="_blank"
+            >
               <Button className="w-full !bg-red-600 hover:!bg-red-700 !text-white">
                 Get Started →
               </Button>
@@ -34,17 +39,29 @@ export default function Footer() {
             <h3 className="text-gray-500 font-semibold mb-4">Developers</h3>
             <ul className="space-y-2">
               <li>
-                <a href="https://dicedb.io/get-started/installation" target="_blank" className="text-gray-600 hover:text-gray-900">
+                <a
+                  href="https://dicedb.io/get-started/installation"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Quickstart
                 </a>
               </li>
               <li>
-                <a href="https://dicedb.io/commands/get" target="_blank" className="text-gray-600 hover:text-gray-900">
+                <a
+                  href="https://dicedb.io/commands/get"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Commands
                 </a>
               </li>
               <li>
-                <a href="https://github.com/DiceDB/dice/tree/master/examples/leaderboard-go" target="_blank" className="text-gray-600 hover:text-gray-900">
+                <a
+                  href="https://github.com/DiceDB/dice/tree/master/examples/leaderboard-go"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Examples
                 </a>
               </li>
@@ -55,7 +72,11 @@ export default function Footer() {
             <h3 className="text-gray-500 font-semibold mb-4">Examples</h3>
             <ul className="space-y-2">
               <li>
-                <a href="https://github.com/DiceDB/dice/tree/master/examples/leaderboard-go" target="_blank" className="text-gray-600 hover:text-gray-900">
+                <a
+                  href="https://github.com/DiceDB/dice/tree/master/examples/leaderboard-go"
+                  target="_blank"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Real-time Leaderboard
                 </a>
               </li>
@@ -66,7 +87,8 @@ export default function Footer() {
             <h3 className="text-gray-500 font-semibold mb-4">Us and Socials</h3>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:arpit@dicedb.io"
+                <a
+                  href="mailto:arpit@dicedb.io"
                   target="_blank"
                   className="text-gray-600 hover:text-gray-900"
                 >
