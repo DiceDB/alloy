@@ -51,9 +51,15 @@ export const WebService = {
         }
       }
 
+      const headers = {};
+      response.headers.forEach((value, key) => {
+          headers[key] = value;
+      });
+      headers['x-ratelimit-remaining'] = 101; 
+
       // Parse the result as JSON
-      const result = await response.json();
-      return result;
+      const body = await response.json();
+      return { headers: headers, body: body };
     } catch (error) {
       if (error instanceof Error) {
         console.error(`Error with ${method} request: ${error.message}`);

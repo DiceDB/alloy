@@ -6,9 +6,12 @@ import { useState } from 'react';
 import Tooltip from '../Overlays/Tooltip';
 export function TerminalUI() {
   const [commandsLeft, setCommandsLeft] = useState(1000);
-  const decreaseCommandsLeft = () => {
-    setCommandsLeft((prev) => (prev > 0 ? prev - 1 : 0));
+  const [cleanupTimeLeft, setCleanupTimeLeft] = useState(15*60);
+  const handleCommandExecuted = (commands: number, cleanup: number) => {
+    setCommandsLeft(commands);
+    setCleanupTimeLeft(cleanup);
   };
+
   return (
     <>
       <div className="bg-gray-900 rounded-lg">
@@ -20,22 +23,21 @@ export function TerminalUI() {
           </div>
         </div>
         <div className="h-64 md:h-[30rem] bg-gray-100 rounded-lg overflow-hidden shadow-md">
-          <Shell decreaseCommandsLeft={decreaseCommandsLeft} />
+          <Shell onCommandExecuted={handleCommandExecuted} />
         </div>
       </div>
-      <TerminalCounter commandsLeft={commandsLeft} />
+      <TerminalCounter commandsLeft={commandsLeft} cleanupTimeLeft={cleanupTimeLeft} />
     </>
   );
 }
 
-function TerminalCounter({ commandsLeft }: { commandsLeft: number }) {
-  const { timeLeft } = useTimer(15 * 60);
+function TerminalCounter({ commandsLeft, cleanupTimeLeft }: { commandsLeft: number; cleanupTimeLeft: number }) {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-between text-gray-900 mt-4">
         <div className="flex flex-row items-center space-x-2">
           <div className="flex items-center justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg">
-            <span>Cleanup in: {formatTime(timeLeft)} mins</span>
+            <span>Cleanup in: {formatTime(cleanupTimeLeft)} mins</span>
           </div>
           <Tooltip message="The time remaining until cleanup is initiated." />
         </div>

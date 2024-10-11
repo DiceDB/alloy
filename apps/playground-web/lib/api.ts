@@ -11,10 +11,10 @@ export const executeShellCommandOnServer = async (
     const response = await WebService.post(cmdExecURL, cmdOptions);
 
     // Check if the response contains data or if it's an error response
-    if (response?.data) {
-      return response.data;
-    } else if (response?.error) {
-      return response.error;
+    if (response?.body?.data) {
+      return response;
+    } else if (response?.body.error) {
+      return response;
     } else {
       throw new Error('Unexpected response structure');
     }

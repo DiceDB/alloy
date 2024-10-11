@@ -5,10 +5,10 @@
 import { useCli } from './hooks/useCli';
 
 interface CliProps {
-  decreaseCommandsLeft: () => void;
+  onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void;
 }
 
-export default function Cli({ decreaseCommandsLeft }: CliProps) {
+export default function Cli({ onCommandExecuted }: CliProps) {
   const {
     handleInputChange,
     handleKeyDown,
@@ -16,7 +16,7 @@ export default function Cli({ decreaseCommandsLeft }: CliProps) {
     inputRef,
     output,
     command,
-  } = useCli(decreaseCommandsLeft);
+  } = useCli(onCommandExecuted);
   return (
     <div
       ref={terminalRef}

@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 import { handleCommand } from '@/shared/utils/cliUtils';
 import blocklistedCommands from '@/shared/utils/blocklist'; // Assuming you added blocklist here
 
-export const useCli = (decreaseCommandsLeft: () => void) => {
+export const useCli = (onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void) => {
   // states
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);
@@ -27,11 +27,10 @@ export const useCli = (decreaseCommandsLeft: () => void) => {
         `(error) ERR unknown command '${commandName}'`,
       ]);
     } else {
-      handleCommand({ command, setOutput }); // Execute if not blocklisted
+      handleCommand({ command, setOutput, onCommandExecuted }); // Execute if not blocklisted
     }
 
     setCommand(''); // Clear input
-    decreaseCommandsLeft(); // Call to update remaining commands
   };
 
   useEffect(() => {

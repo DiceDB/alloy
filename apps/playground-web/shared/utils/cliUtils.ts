@@ -3,9 +3,9 @@
 import { executeShellCommandOnServer } from '@/lib/api';
 import { CommandHandler } from '@/types';
 
-export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
+export const handleCommand = async ({ command, setOutput, onCommandExecuted }: CommandHandler) => {
   const newOutput = `dice > ${command}`;
-  let result: string;
+  let result: any;
 
   const [cmd, ...args] = command.split(' ');
   if (!cmd) {
@@ -26,7 +26,10 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
         const [key] = args;
         const cmdOptions = { key: key };
         result = await executeShellCommandOnServer(cmd, cmdOptions);
-        setOutput((prevOutput) => [...prevOutput, newOutput, result]);
+        setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+        const commandsLeft = result.headers['x-ratelimit-remaining'];
+        const cleanupTimeLeft = 10;
+        onCommandExecuted(commandsLeft, cleanupTimeLeft);
       } catch (error: unknown) {
         console.error('Error executing command:', error);
         result = 'Error executing command';
@@ -40,7 +43,10 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
         try {
           const cmdOptions = { key: key, value: value };
           result = await executeShellCommandOnServer(cmd, cmdOptions);
-          setOutput((prevOutput) => [...prevOutput, newOutput, result]);
+          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+          const commandsLeft = result.headers['x-ratelimit-remaining'];
+          const cleanupTimeLeft = 10;
+          onCommandExecuted(commandsLeft, cleanupTimeLeft);
         } catch (error: unknown) {
           console.error('Error executing command:', error);
           result = 'Error executing command';
@@ -59,7 +65,10 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
         try {
           const cmdOptions = { keys: [keys] };
           result = await executeShellCommandOnServer(cmd, cmdOptions);
-          setOutput((prevOutput) => [...prevOutput, newOutput, result]);
+          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+          const commandsLeft = result.headers['x-ratelimit-remaining'];
+          const cleanupTimeLeft = 10;
+          onCommandExecuted(commandsLeft, cleanupTimeLeft);
         } catch (error: unknown) {
           console.error('Error executing command:', error);
           result = 'Error executing command';
