@@ -26,8 +26,12 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
         const [key] = args;
         const cmdOptions = { key: key };
         result = await executeShellCommandOnServer(cmd, cmdOptions);
-        setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-        const commandsLeft = result.headers['x-ratelimit-remaining'];
+        if (result?.body?.data) {
+          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+        } else if (result?.body?.error) {
+          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
+        } 
+        const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
         const cleanupTimeLeft = 10;
         onCommandExecuted(commandsLeft, cleanupTimeLeft);
       } catch (error: unknown) {
@@ -43,8 +47,12 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
         try {
           const cmdOptions = { key: key, value: value };
           result = await executeShellCommandOnServer(cmd, cmdOptions);
-          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-          const commandsLeft = result.headers['x-ratelimit-remaining'];
+          if (result?.body?.data) {
+            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+          } else if (result?.body?.error) {
+            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
+          } 
+          const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
           const cleanupTimeLeft = 10;
           onCommandExecuted(commandsLeft, cleanupTimeLeft);
         } catch (error: unknown) {
@@ -65,8 +73,12 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
         try {
           const cmdOptions = { keys: [keys] };
           result = await executeShellCommandOnServer(cmd, cmdOptions);
-          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-          const commandsLeft = result.headers['x-ratelimit-remaining'];
+          if (result?.body?.data) {
+            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+          } else if (result?.body?.error) {
+            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
+          } 
+          const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
           const cleanupTimeLeft = 10;
           onCommandExecuted(commandsLeft, cleanupTimeLeft);
         } catch (error: unknown) {

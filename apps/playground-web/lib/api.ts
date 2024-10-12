@@ -13,7 +13,7 @@ export const executeShellCommandOnServer = async (
     // Check if the response contains data or if it's an error response
     if (response?.body?.data) {
       return response;
-    } else if (response?.body.error) {
+    } else if (response?.body?.error) {
       return response;
     } else {
       throw new Error('Unexpected response structure');

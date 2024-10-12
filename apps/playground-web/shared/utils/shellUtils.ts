@@ -14,8 +14,12 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
   }
   try {
     result = await executeShellCommandOnServer(cmd, args);
-    setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-    const commandsLeft = result.headers['x-ratelimit-remaining'];
+    if (result?.body?.data) {
+      setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
+    } else if (result?.body?.error) {
+      setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
+    } 
+    const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
     const cleanupTimeLeft = 10;
     onCommandExecuted(commandsLeft, cleanupTimeLeft);
   } catch (error: unknown) {

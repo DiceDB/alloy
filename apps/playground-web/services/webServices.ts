@@ -41,16 +41,6 @@ export const WebService = {
     try {
       const response = await fetch(`${PLAYGROUND_MONO_URL}${url}`, options);
 
-      // If the response is not OK, check if the response contains error information
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        if (errorResponse?.error) {
-          throw errorResponse.error;
-        } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-      }
-
       const headers = {};
       response.headers.forEach((value, key) => {
           headers[key] = value;
