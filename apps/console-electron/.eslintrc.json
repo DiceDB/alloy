@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": ["@dicedb/eslint-config/next.js", "next/typescript"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": true
+  },
+  "ignorePatterns": ["out"]
+}

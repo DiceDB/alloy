@@ -1,6 +1,14 @@
 {
   "extends": "@dicedb/typescript-config/nextjs.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next.config.mjs",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mjs",
+    "**/*.js"
+  ],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
