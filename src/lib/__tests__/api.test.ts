@@ -92,7 +92,7 @@ describe('executeShellCommandOnServer', () => {
     expect(result).toEqual('Some Response');
   });
 
-  it('should call onCommandExecuted with (any, 1000) for GET command', async () => {
+  it('should call onCommandExecuted with (1000, any) for GET command', async () => {
     const command = 'GET testKey';
     const mockResult = { body: { data: 'mockData' }, headers: { 'x-ratelimit-remaining': 1000 } }; // Updated mock result
     (executeShellCommandOnServer as jest.Mock).mockResolvedValueOnce(mockResult); // Mock the API response
