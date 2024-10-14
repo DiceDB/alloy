@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Shell from '../Shell';
 
-const decreaseCommandsLeftMock = jest.fn();
+const onCommandExecutedMock = jest.fn();
 
 const dummyCommands = [
   'set abc 100',
@@ -17,7 +17,7 @@ const dummyCommands = [
 const setupTest = () => {
   const user = userEvent.setup();
   const utils = render(
-    <Shell decreaseCommandsLeft={decreaseCommandsLeftMock} />,
+    <Shell onCommandExecuted={onCommandExecutedMock} />,
   );
 
   const terminalElement = screen.getByTestId('terminal');
