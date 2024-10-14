@@ -1,13 +1,16 @@
 {
   "extends": "@dicedb/typescript-config/nextjs.json",
   "compilerOptions": {
+    "jsx": "react",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -17,5 +20,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
