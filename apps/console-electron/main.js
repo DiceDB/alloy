@@ -8,8 +8,8 @@ function createWindow() {
   });
 
   win.once('ready-to-show', () => {
-    win.show()
-  })
+    win.show();
+  });
 
   if (app.isPackaged === false) {
     win.loadURL('http://localhost:4000');
