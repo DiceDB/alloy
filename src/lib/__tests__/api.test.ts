@@ -102,7 +102,7 @@ describe('executeShellCommandOnServer', () => {
 
     await handleCommand({ command, setOutput: setOutputMock, onCommandExecuted: onCommandExecutedMock });
 
-    expect(onCommandExecutedMock).toHaveBeenCalledWith(1000, expect.any(Number)); // Assuming cleanup time is 10
+    expect(onCommandExecutedMock).toHaveBeenCalledWith(1000, expect.any(Number));
   });
 
 });
