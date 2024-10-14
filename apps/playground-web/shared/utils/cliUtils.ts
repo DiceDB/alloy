@@ -2,6 +2,7 @@
 
 import { executeShellCommandOnServer } from '@/lib/api';
 import { CommandHandler } from '@/types';
+import { handleResult } from '@/shared/utils/commonUtils';
 
 export const handleCommand = async ({ command, setOutput, onCommandExecuted }: CommandHandler) => {
   const newOutput = `dice > ${command}`;
@@ -26,14 +27,7 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
         const [key] = args;
         const cmdOptions = { key: key };
         result = await executeShellCommandOnServer(cmd, cmdOptions);
-        if (result?.body?.data) {
-          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-        } else if (result?.body?.error) {
-          setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
-        } 
-        const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
-        const cleanupTimeLeft = 10;
-        onCommandExecuted(commandsLeft, cleanupTimeLeft);
+        handleResult(result, newOutput, setOutput, onCommandExecuted);
       } catch (error: unknown) {
         console.error('Error executing command:', error);
         result = 'Error executing command';
@@ -47,14 +41,7 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
         try {
           const cmdOptions = { key: key, value: value };
           result = await executeShellCommandOnServer(cmd, cmdOptions);
-          if (result?.body?.data) {
-            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-          } else if (result?.body?.error) {
-            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
-          } 
-          const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
-          const cleanupTimeLeft = 10;
-          onCommandExecuted(commandsLeft, cleanupTimeLeft);
+          handleResult(result, newOutput, setOutput, onCommandExecuted);
         } catch (error: unknown) {
           console.error('Error executing command:', error);
           result = 'Error executing command';
@@ -73,14 +60,7 @@ export const handleCommand = async ({ command, setOutput, onCommandExecuted }: C
         try {
           const cmdOptions = { keys: [keys] };
           result = await executeShellCommandOnServer(cmd, cmdOptions);
-          if (result?.body?.data) {
-            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.data]);
-          } else if (result?.body?.error) {
-            setOutput((prevOutput) => [...prevOutput, newOutput, result?.body?.error]);
-          } 
-          const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
-          const cleanupTimeLeft = 10;
-          onCommandExecuted(commandsLeft, cleanupTimeLeft);
+          handleResult(result, newOutput, setOutput, onCommandExecuted);
         } catch (error: unknown) {
           console.error('Error executing command:', error);
           result = 'Error executing command';
