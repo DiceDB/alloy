@@ -45,7 +45,6 @@ export const WebService = {
       response.headers.forEach((value, key) => {
           headers[key] = value;
       });
-      headers['x-ratelimit-remaining'] = 101; 
 
       // Parse the result as JSON
       const body = await response.json();
