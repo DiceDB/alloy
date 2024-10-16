@@ -19,8 +19,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.dev
+      context: ../../
+      dockerfile: ./apps/playground-web/Dockerfile.dev  
     ports:
       - "3000:3000"               
     volumes:
