@@ -94,15 +94,26 @@ describe('executeShellCommandOnServer', () => {
 
   it('should call onCommandExecuted with (1000, any) for GET command', async () => {
     const command = 'GET testKey';
-    const mockResult = { body: { data: 'mockData' }, headers: { 'x-ratelimit-remaining': 1000 } }; // Updated mock result
-    (executeShellCommandOnServer as jest.Mock).mockResolvedValueOnce(mockResult); // Mock the API response
+    const mockResult = {
+      body: { data: 'mockData' },
+      headers: { 'x-ratelimit-remaining': 1000 },
+    }; // Updated mock result
+    (executeShellCommandOnServer as jest.Mock).mockResolvedValueOnce(
+      mockResult,
+    ); // Mock the API response
 
     const setOutputMock = jest.fn();
     const onCommandExecutedMock = jest.fn();
 
-    await handleCommand({ command, setOutput: setOutputMock, onCommandExecuted: onCommandExecutedMock });
+    await handleCommand({
+      command,
+      setOutput: setOutputMock,
+      onCommandExecuted: onCommandExecutedMock,
+    });
 
-    expect(onCommandExecutedMock).toHaveBeenCalledWith(1000, expect.any(Number));
+    expect(onCommandExecutedMock).toHaveBeenCalledWith(
+      1000,
+      expect.any(Number),
+    );
   });
-
 });
