@@ -41,8 +41,8 @@ export const WebService = {
     try {
       const response = await fetch(`${PLAYGROUND_MONO_URL}${url}`, options);
 
-      const headers = {};
-      response?.headers?.forEach((value, key) => {
+      const headers: { [key: string]: string } = {};
+      response?.headers?.forEach((value: string, key: string) => {
         headers[key] = value;
       });
 
