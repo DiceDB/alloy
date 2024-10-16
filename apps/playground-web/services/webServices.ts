@@ -1,3 +1,7 @@
+import { MonoSchema } from '@/lib/monoSchema';
+
+import { MonoResponseType } from '@/lib/monoResponseType';
+
 let PLAYGROUND_MONO_URL = process.env.NEXT_PUBLIC_PLAYGROUND_MONO_URL;
 
 if (!PLAYGROUND_MONO_URL) {
@@ -24,7 +28,10 @@ export const WebService = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any = null,
     headers: HeadersType,
-  ) => {
+  ): Promise<{
+    headers: { [key: string]: string };
+    body: MonoResponseType;
+  }> => {
     const options: RequestOptions = {
       method,
       headers: {
@@ -48,7 +55,13 @@ export const WebService = {
 
       // Parse the result as JSON
       const body = await response.json();
-      return { headers: headers, body: body };
+      const parsedBody = MonoSchema.safeParse(body);
+      if (!parsedBody.success) {
+        console.error('Invalid response data:', parsedBody.error);
+        return { headers: headers, body: { error: parsedBody.error } };
+      }
+
+      return { headers: headers, body: parsedBody.data };
     } catch (error) {
       if (error instanceof Error) {
         console.error(`Error with ${method} request: ${error.message}`);

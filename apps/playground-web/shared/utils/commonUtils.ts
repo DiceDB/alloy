@@ -1,15 +1,27 @@
+import { MonoResponseType } from '@/lib/monoResponseType';
+
 export const formatTime = (seconds: number): string => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
   return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 };
 
-export const handleResult = (
-  result: any,
-  newOutput: string,
-  setOutput: any,
-  onCommandExecuted: any,
-) => {
+interface HandleResultProps {
+  result: {
+    headers: { [key: string]: string }; // Correctly defined headers type
+    body: MonoResponseType; // MonoResponseType for body
+  };
+  newOutput: string;
+  setOutput: (prevOutput: any) => any; // Adjust type as necessary
+  onCommandExecuted: (commandsLeft: number) => void; // Allow undefined
+}
+
+export const handleResult = ({
+  result,
+  newOutput,
+  setOutput,
+  onCommandExecuted,
+}: HandleResultProps) => {
   if (result?.body?.data) {
     setOutput((prevOutput: any) => [
       ...prevOutput,
@@ -24,6 +36,6 @@ export const handleResult = (
     ]);
   }
 
-  const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
+  const commandsLeft = Number(result.headers['x-ratelimit-remaining']);
   onCommandExecuted(commandsLeft);
 };

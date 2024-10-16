@@ -1,10 +1,12 @@
 // src/lib/api.ts
 import { WebService } from '@/services/webServices';
 
+import { MonoResponseType } from './monoResponseType';
+
 export const executeShellCommandOnServer = async (
   cmd: string,
   cmdOptions: object,
-) => {
+): Promise<{ headers: { [key: string]: string }; body: MonoResponseType }> => {
   const cmdExecURL = `/shell/exec/${cmd}`;
 
   try {
@@ -21,6 +23,6 @@ export const executeShellCommandOnServer = async (
   } catch (error) {
     // Propagate the error from the backend exactly as it is
     console.error('Error executing command:', error);
-    return `${error}`; // Just return the error message directly
+    throw new Error(`${error}`);
   }
 };

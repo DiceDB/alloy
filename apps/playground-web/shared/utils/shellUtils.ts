@@ -19,7 +19,7 @@ export const handleCommand = async ({
   }
   try {
     result = await executeShellCommandOnServer(cmd, args);
-    handleResult(result, newOutput, setOutput, onCommandExecuted);
+    handleResult({ result, newOutput, setOutput, onCommandExecuted });
   } catch (error: unknown) {
     console.error('Error executing command:', error);
     result = 'Error executing command';
