@@ -1,7 +1,6 @@
 {
   "extends": "@dicedb/typescript-config/nextjs.json",
   "compilerOptions": {
-    "jsx": "react",
     "plugins": [
       {
         "name": "next"
