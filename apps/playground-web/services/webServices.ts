@@ -66,7 +66,7 @@ export const WebService = {
       if (error instanceof Error) {
         console.error(`Error with ${method} request: ${error.message}`);
       }
-      throw error;
+      return { headers: headers, body: { error: `${error.message}` } };
     }
   },
 
