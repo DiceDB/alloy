@@ -6,7 +6,7 @@ const BodySchema = z.object({
 
 // Define the schema for an error response
 const ErrorSchema = z.object({
-  error: z.string().nullable(),
+  error: z.string(),
 });
 
 // Combine the schemas
