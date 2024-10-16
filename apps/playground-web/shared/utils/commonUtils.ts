@@ -25,6 +25,5 @@ export const handleResult = (
   }
 
   const commandsLeft = result?.headers?.['x-ratelimit-remaining'];
-  const cleanupTimeLeft = 10;
-  onCommandExecuted(commandsLeft, cleanupTimeLeft);
+  onCommandExecuted(commandsLeft);
 };

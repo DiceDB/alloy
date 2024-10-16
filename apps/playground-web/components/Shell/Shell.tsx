@@ -5,7 +5,7 @@
 import { useShell } from './hooks/useShell';
 
 interface ShellProps {
-  onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void;
+  onCommandExecuted: (commandsLeft: number) => void;
 }
 
 export default function Shell({ onCommandExecuted }: ShellProps) {

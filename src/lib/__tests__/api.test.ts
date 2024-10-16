@@ -92,7 +92,7 @@ describe('executeShellCommandOnServer', () => {
     expect(result).toEqual('Some Response');
   });
 
-  it('should call onCommandExecuted with (1000, any) for GET command', async () => {
+  it('should call onCommandExecuted with (1000) for GET command', async () => {
     const command = 'GET testKey';
     const mockResult = {
       body: { data: 'mockData' },
@@ -111,9 +111,6 @@ describe('executeShellCommandOnServer', () => {
       onCommandExecuted: onCommandExecutedMock,
     });
 
-    expect(onCommandExecutedMock).toHaveBeenCalledWith(
-      1000,
-      expect.any(Number),
-    );
+    expect(onCommandExecutedMock).toHaveBeenCalledWith(1000);
   });
 });

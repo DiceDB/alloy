@@ -5,7 +5,7 @@
 import { useCli } from './hooks/useCli';
 
 interface CliProps {
-  onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void;
+  onCommandExecuted: (commandsLeft: number) => void;
 }
 
 export default function Cli({ onCommandExecuted }: CliProps) {

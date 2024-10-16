@@ -5,9 +5,7 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 import { handleCommand } from '@/shared/utils/cliUtils';
 import blocklistedCommands from '@/shared/utils/blocklist'; // Assuming you added blocklist here
 
-export const useCli = (
-  onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void,
-) => {
+export const useCli = (onCommandExecuted: (commandsLeft: number) => void) => {
   // states
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);

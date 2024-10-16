@@ -5,9 +5,7 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 import { handleCommand } from '@/shared/utils/shellUtils';
 import blocklistedCommands from '@/shared/utils/blocklist';
 
-export const useShell = (
-  onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void,
-) => {
+export const useShell = (onCommandExecuted: (commandsLeft: number) => void) => {
   // states
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState<string[]>([]);

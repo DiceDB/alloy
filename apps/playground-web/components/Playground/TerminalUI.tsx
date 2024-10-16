@@ -6,10 +6,8 @@ import { useState } from 'react';
 import Tooltip from '../Overlays/Tooltip';
 export function TerminalUI() {
   const [commandsLeft, setCommandsLeft] = useState(1000);
-  const [cleanupTimeLeft, setCleanupTimeLeft] = useState(15 * 60);
-  const handleCommandExecuted = (commands: number, cleanup: number) => {
+  const handleCommandExecuted = (commands: number) => {
     setCommandsLeft(commands);
-    setCleanupTimeLeft(cleanup);
   };
 
   return (
@@ -29,21 +27,13 @@ export function TerminalUI() {
           <Shell onCommandExecuted={handleCommandExecuted} />
         </div>
       </div>
-      <TerminalCounter
-        commandsLeft={commandsLeft}
-        cleanupTimeLeft={cleanupTimeLeft}
-      />
+      <TerminalCounter commandsLeft={commandsLeft} />
     </>
   );
 }
 
-function TerminalCounter({
-  commandsLeft,
-  cleanupTimeLeft,
-}: {
-  commandsLeft: number;
-  cleanupTimeLeft: number;
-}) {
+function TerminalCounter({ commandsLeft }: { commandsLeft: number }) {
+  const { timeLeft } = useTimer(15 * 60);
   return (
     <div className="flex flex-col" data-testid="terminal-counter">
       <div className="flex flex-row justify-between text-gray-900 mt-4">
@@ -52,7 +42,7 @@ function TerminalCounter({
             className="flex items-center justify-between border border-gray-400 text-sm bg-transparent p-3 rounded-lg"
             data-testid="cleanup-timer"
           >
-            <span>Cleanup in: {formatTime(cleanupTimeLeft)} mins</span>
+            <span>Cleanup in: {formatTime(timeLeft)} mins</span>
           </div>
           <Tooltip message="The time remaining until cleanup is initiated." />
         </div>
