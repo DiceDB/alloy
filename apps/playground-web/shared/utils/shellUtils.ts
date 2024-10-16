@@ -4,7 +4,11 @@ import { executeShellCommandOnServer } from '@/lib/api';
 import { CommandHandler } from '@/types';
 import { handleResult } from '@/shared/utils/commonUtils';
 
-export const handleCommand = async ({ command, setOutput, onCommandExecuted }: CommandHandler) => {
+export const handleCommand = async ({
+  command,
+  setOutput,
+  onCommandExecuted,
+}: CommandHandler) => {
   const newOutput = `dice > ${command}`;
   let result: any;
 

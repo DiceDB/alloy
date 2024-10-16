@@ -43,7 +43,7 @@ export const WebService = {
 
       const headers = {};
       response?.headers?.forEach((value, key) => {
-          headers[key] = value;
+        headers[key] = value;
       });
 
       // Parse the result as JSON

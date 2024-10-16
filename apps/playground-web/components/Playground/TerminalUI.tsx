@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Tooltip from '../Overlays/Tooltip';
 export function TerminalUI() {
   const [commandsLeft, setCommandsLeft] = useState(1000);
-  const [cleanupTimeLeft, setCleanupTimeLeft] = useState(15*60);
+  const [cleanupTimeLeft, setCleanupTimeLeft] = useState(15 * 60);
   const handleCommandExecuted = (commands: number, cleanup: number) => {
     setCommandsLeft(commands);
     setCleanupTimeLeft(cleanup);
@@ -26,12 +26,21 @@ export function TerminalUI() {
           <Shell onCommandExecuted={handleCommandExecuted} />
         </div>
       </div>
-      <TerminalCounter commandsLeft={commandsLeft} cleanupTimeLeft={cleanupTimeLeft} />
+      <TerminalCounter
+        commandsLeft={commandsLeft}
+        cleanupTimeLeft={cleanupTimeLeft}
+      />
     </>
   );
 }
 
-function TerminalCounter({ commandsLeft, cleanupTimeLeft }: { commandsLeft: number; cleanupTimeLeft: number }) {
+function TerminalCounter({
+  commandsLeft,
+  cleanupTimeLeft,
+}: {
+  commandsLeft: number;
+  cleanupTimeLeft: number;
+}) {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-between text-gray-900 mt-4">

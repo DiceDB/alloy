@@ -16,9 +16,7 @@ const dummyCommands = [
 
 const setupTest = () => {
   const user = userEvent.setup();
-  const utils = render(
-    <Shell onCommandExecuted={onCommandExecutedMock} />,
-  );
+  const utils = render(<Shell onCommandExecuted={onCommandExecutedMock} />);
 
   const terminalElement = screen.getByTestId('terminal');
   const cliInputElement = screen.getByTestId<HTMLInputElement>('shell-input');
