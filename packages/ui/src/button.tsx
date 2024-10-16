@@ -6,6 +6,7 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   variant?: 'default' | 'outline';
+  'data-testid'?: string;
 }
 
 const baseClasses =
@@ -20,9 +21,11 @@ export function Button({
   children,
   className = '',
   variant = 'default',
+  ...props
 }: ButtonProps) {
   return (
     <button
+      data-testid={props['data-testid']}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`} // Combine all classes
     >
       {children}
