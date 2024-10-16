@@ -1,6 +1,6 @@
 import { MonoSchema } from '@/lib/monoSchema';
 
-import { MonoResponseType } from '@/lib/monoResponseType';
+import { MonoResponse } from '@/lib/monoResponse';
 
 let PLAYGROUND_MONO_URL = process.env.NEXT_PUBLIC_PLAYGROUND_MONO_URL;
 
@@ -30,7 +30,7 @@ export const WebService = {
     headers: HeadersType,
   ): Promise<{
     headers: { [key: string]: string };
-    body: MonoResponseType;
+    body: MonoResponse;
   }> => {
     const options: RequestOptions = {
       method,

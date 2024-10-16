@@ -1,12 +1,12 @@
 // src/lib/api.ts
 import { WebService } from '@/services/webServices';
 
-import { MonoResponseType } from './monoResponseType';
+import { MonoResponse } from './monoResponse';
 
 export const executeShellCommandOnServer = async (
   cmd: string,
   cmdOptions: object,
-): Promise<{ headers: { [key: string]: string }; body: MonoResponseType }> => {
+): Promise<{ headers: { [key: string]: string }; body: MonoResponse }> => {
   const cmdExecURL = `/shell/exec/${cmd}`;
 
   try {

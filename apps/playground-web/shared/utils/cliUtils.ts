@@ -1,6 +1,7 @@
 // src/shared/utils/cliUtils.ts
 
 import { executeShellCommandOnServer } from '@/lib/api';
+import { MonoResponse } from '@/lib/monoResponse';
 import { CommandHandler } from '@/types';
 import { handleResult } from '@/shared/utils/commonUtils';
 
@@ -10,7 +11,10 @@ export const handleCommand = async ({
   onCommandExecuted,
 }: CommandHandler) => {
   const newOutput = `dice > ${command}`;
-  let result: any;
+  let result: {
+    headers: { [key: string]: string }; // Correctly defined headers type
+    body: MonoResponse; // MonoResponse for body
+  };
 
   const [cmd, ...args] = command.split(' ');
   if (!cmd) {

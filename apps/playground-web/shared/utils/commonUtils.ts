@@ -1,4 +1,4 @@
-import { MonoResponseType } from '@/lib/monoResponseType';
+import { MonoResponse } from '@/lib/monoResponse';
 
 export const formatTime = (seconds: number): string => {
   const minutes = Math.floor(seconds / 60);
@@ -9,7 +9,7 @@ export const formatTime = (seconds: number): string => {
 interface HandleResultProps {
   result: {
     headers: { [key: string]: string }; // Correctly defined headers type
-    body: MonoResponseType; // MonoResponseType for body
+    body: MonoResponse; // MonoResponse for body
   };
   newOutput: string;
   setOutput: (prevOutput: any) => any; // Adjust type as necessary
