@@ -7,7 +7,7 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
   const newOutput = `dice > ${command}`;
   let result: string;
 
-  const [cmd, ...args] = command.split(' ');
+  const { cmd, args } = parseCommand(command);
 
   if (!cmd) {
     return;
@@ -21,3 +21,33 @@ export const handleCommand = async ({ command, setOutput }: CommandHandler) => {
     return `Error: ${String(error)}`;
   }
 };
+
+function parseCommand(command: string) {
+  const [cmd, ...args] = command.split(' ');
+
+  // Check if the command is a JSON.* command
+  if (cmd && cmd.startsWith('JSON.')) {
+    const jsonArgIndex = args.findIndex(
+      (arg) => arg.startsWith('{') || arg.startsWith("'"),
+    );
+
+    if (jsonArgIndex !== -1) {
+      // Extract the JSON part and remove wrapping single quotes if present
+      let jsonArg = args.slice(jsonArgIndex).join(' '); // Combine JSON parts into a single string
+      const nonJsonArgs = args.slice(0, jsonArgIndex); // Non-JSON arguments before the JSON object
+
+      // Remove the wrapping single quotes if they exist
+      if (jsonArg.startsWith("'") && jsonArg.endsWith("'")) {
+        jsonArg = jsonArg.slice(1, -1); // Remove single quotes
+      }
+
+      return {
+        cmd,
+        args: [...nonJsonArgs, jsonArg], // Ensure JSON argument is a single element in the args array
+      };
+    }
+  }
+
+  // Default return for non-JSON commands
+  return { cmd, args };
+}
