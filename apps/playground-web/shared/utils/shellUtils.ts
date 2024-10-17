@@ -27,7 +27,9 @@ function parseCommand(command: string) {
 
   // Check if the command is a JSON.* command
   if (cmd && cmd.startsWith('JSON.')) {
-    const jsonArgIndex = args.findIndex((arg) => arg.startsWith('{') || arg.startsWith("'"));
+    const jsonArgIndex = args.findIndex(
+      (arg) => arg.startsWith('{') || arg.startsWith("'"),
+    );
 
     if (jsonArgIndex !== -1) {
       // Extract the JSON part and remove wrapping single quotes if present
