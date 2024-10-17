@@ -4,8 +4,8 @@ import { formatTime } from '@/shared/utils/commonUtils';
 import { useTimer } from '@/shared/hooks/useTimer';
 import { useState } from 'react';
 import Tooltip from '../Overlays/Tooltip';
-export function TerminalUI() {
-  const [commandsLeft, setCommandsLeft] = useState(1000);
+export function TerminalUI({ initialCommandsLeft = 1000 }) {
+  const [commandsLeft, setCommandsLeft] = useState(initialCommandsLeft);
   const handleCommandExecuted = (commands: number) => {
     setCommandsLeft(commands);
   };
