@@ -1,4 +1,4 @@
 export interface MonoResponse {
-  data: string;
-  error: string;
+  data: string | null;
+  error: string | null;
 }

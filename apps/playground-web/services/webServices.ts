@@ -58,15 +58,35 @@ export const WebService = {
       const parsedBody = MonoSchema.safeParse(body);
       if (!parsedBody.success) {
         console.error('Invalid response data:', parsedBody.error);
-        return { headers: headers, body: { error: parsedBody.error } };
+        return {
+          headers: headers,
+          body: { data: null, error: parsedBody?.error?.message },
+        };
       }
 
-      return { headers: headers, body: parsedBody.data };
+      if ('data' in parsedBody.data) {
+        return {
+          headers: headers,
+          body: { data: parsedBody?.data?.data, error: null },
+        };
+      } else {
+        return {
+          headers: headers,
+          body: { data: null, error: parsedBody.data.error },
+        };
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error(`Error with ${method} request: ${error.message}`);
+        return {
+          headers: headers,
+          body: { error: `${error.message}`, data: null },
+        };
       }
-      return { headers: headers, body: { error: `${error.message}` } };
+      return {
+        headers: headers,
+        body: { error: 'Unknown error occurred', data: null },
+      };
     }
   },
 
