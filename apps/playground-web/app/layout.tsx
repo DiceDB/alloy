@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 
 // styles
-import "@/styles/globals.css";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import '@/styles/globals.css';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata: Metadata = {
   title: 'DiceDB Playground',

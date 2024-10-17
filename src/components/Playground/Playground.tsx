@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
 // Components
-import Cli from "@/components/CLI/CLI";
-import SearchBox from "@/components/Search/SearchBox";
-import { Dice1, Dice3, Dice5 } from "lucide-react";
+import Cli from '@/components/CLI/CLI';
+import SearchBox from '@/components/Search/SearchBox';
+import { Dice1, Dice3, Dice5 } from 'lucide-react';
 
 // utils
-import { formatTime } from "@/shared/utils/commonUtils";
+import { formatTime } from '@/shared/utils/commonUtils';
 
 // images and icons
-import { usePlayground } from "./hooks/usePlayground";
+import { usePlayground } from './hooks/usePlayground';
 
 export default function Playground() {
   const { decreaseCommandsLeft, search, timeLeft, commandsLeft, setSearch } =
@@ -35,7 +35,7 @@ export default function Playground() {
           <div className="flex flex-row justify-between text-gray-900 space-x-4">
             <div className="flex-1 flex justify-center items-center border border-gray-300 bg-white text-sm p-3 rounded-lg shadow-sm transition-all hover:shadow-md">
               <span className="font-medium">
-                Cleanup in:{" "}
+                Cleanup in:{' '}
                 <span className="text-blue-600">
                   {formatTime(timeLeft)} mins
                 </span>
@@ -43,7 +43,7 @@ export default function Playground() {
             </div>
             <div className="flex-1 flex justify-center items-center border border-gray-300 bg-white text-sm p-3 rounded-lg shadow-sm transition-all hover:shadow-md">
               <span className="font-medium">
-                Commands left:{" "}
+                Commands left:{' '}
                 <span className="text-green-600">{commandsLeft}</span>
               </span>
             </div>
