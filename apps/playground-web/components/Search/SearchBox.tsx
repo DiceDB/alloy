@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
-import CommandPage from './command';
+import CommandPage from './CommandPage';
 
 export default function SearchBox() {
   const [search, setSearch] = useState('');

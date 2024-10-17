@@ -24,7 +24,10 @@ export default function Playground() {
 }
 function Header() {
   return (
-    <header className="navbar flex items-center justify-between py-5">
+    <header
+      data-testid="playground-header"
+      className="navbar flex items-center justify-between py-5"
+    >
       <div className="flex items-center">
         <Image
           src="/images/dicedb-logo-light.png"

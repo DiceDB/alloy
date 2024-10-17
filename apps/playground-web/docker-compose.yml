@@ -17,8 +17,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.dev  # Specify the correct Dockerfile for the frontend
+      context: ../../
+      dockerfile: ./apps/playground-web/Dockerfile  # Specify the correct Dockerfile for the frontend
     ports:
       - "3000:3000"
     depends_on:
