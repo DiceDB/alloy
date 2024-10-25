@@ -13,7 +13,7 @@ interface HandleResultProps {
   };
   newOutput: string;
   setOutput: (prevOutput: any) => any; // Adjust type as necessary
-  onCommandExecuted: (commandsLeft: number) => void; // Allow undefined
+  onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void; // Allow undefined
 }
 
 export const handleResult = ({
@@ -37,5 +37,6 @@ export const handleResult = ({
   }
 
   const commandsLeft = Number(result.headers['x-ratelimit-remaining']);
-  onCommandExecuted(commandsLeft);
+  const cleanupTimeLeft = Number(result.headers['x-next-cleanup-time']);
+  onCommandExecuted(commandsLeft, cleanupTimeLeft);
 };
