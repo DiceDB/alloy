@@ -4,7 +4,9 @@ import net from 'net';
 import fs from 'node:fs';
 import path from 'node:path';
 import logger from 'electron-log';
-console.log('running')
+import fixPath from 'fix-path';
+
+fixPath();
 // Only allow one instance of the application
 const gotTheLock = app.requestSingleInstanceLock();
 logger.info('Is there an app already running? ', gotTheLock)
@@ -39,24 +41,23 @@ if (!gotTheLock) {
   const NEXT_SERVER_PORT = 4000; // Adjust this to match your Next.js server port
 
   function createWindow() {
-    console.log('=========> createWindow called')
     const win = new BrowserWindow({
       show: false,
       useContentSize: true,
       backgroundColor: '#0a0a0a',
-      // nodeIntegration: true,
+      nodeIntegration: true,
     });
 
     win.once('ready-to-show', () => {
       win.show();
     });
-    // win.webContents.openDevTools();
-    // win.webContents.on('devtools-opened', () => {
-    //   setImmediate(() => {
-    //     // do whatever you want to do after dev tool completely opened here
-    //     win.focus();
-    //   });
-    // });
+    win.webContents.openDevTools();
+    win.webContents.on('devtools-opened', () => {
+      setImmediate(() => {
+        // do whatever you want to do after dev tool completely opened here
+        win.focus();
+      });
+    });
     // if (app.isPackaged) {
     win.loadURL(`http://localhost:${NEXT_SERVER_PORT}`);
     win.webContents.on('did-fail-load', (e, code, desc) => {
@@ -66,16 +67,62 @@ if (!gotTheLock) {
     // }
   }
 
+  function waitForPort(port, timeout = 10000, interval = 500) {
+    return new Promise((resolve, reject) => {
+      const startTime = Date.now();
+
+      const tryConnect = () => {
+        const socket = new net.Socket();
+
+        socket.setTimeout(interval);
+        socket.on('error', () => {
+          socket.destroy();
+          if (Date.now() - startTime > timeout) {
+            reject(new Error(`Timed out waiting for port ${port}`));
+          } else {
+            setTimeout(tryConnect, interval);
+          }
+        });
+
+        socket.on('timeout', () => {
+          socket.destroy();
+          tryConnect();
+        });
+
+        socket.connect(port, '127.0.0.1', () => {
+          socket.destroy();
+          resolve();
+        });
+      };
+
+      tryConnect();
+    });
+  }
+
   function startNextServer() {
+    logger.info('Starting next server');
     return new Promise((resolve, reject) => {
       const appPath = app.getAppPath();
+      // const nextStartScript = join(appPath, '../node_modules', 'next', 'dist', 'bin', 'next');
+      // const spawnArgs = ['run', 'start'];
+      logger.info(
+        'Path: ',
+        path.resolve('./out/standalone/server.js'),
+        process.cwd(),
+      );
+      // const content = fs.readFileSync(path.resolve(process.cwd(), 'out/standalone/server.js'), 'utf-8')
+      // logger.info(content)
+      // const items = fs.readdirSync(process.cwd()).map(item => {
+      //       return item
+      // });
 
       const serverPath = app.isPackaged
         ? path.join(process.resourcesPath, 'out', 'standalone', 'server.js')
         : path.join(appPath, 'out', 'standalone', 'server.js');
       logger.info('serverPath ', serverPath);
-      logger.info('Node version ', process.version);
+      logger.info('appPath ', appPath);
 
+      logger.info('Node version ', process.version);
       const subprocess = spawn(process.execPath, [serverPath], {
         cwd: process.cwd(),
         // cwd: app.isPackaged ? path.dirname(serverPath) : process.cwd(),
@@ -85,8 +132,6 @@ if (!gotTheLock) {
 
       subprocess.stdout.on('data', (data) => {
         logger.info(data.toString());
-        logger.info('====> started ', data.toString())
-        resolve()
       });
 
       subprocess.stderr.on('data', (data) => {
@@ -103,27 +148,35 @@ if (!gotTheLock) {
           reject(new Error(`Next.js process exited with code ${code}`));
         }
       });
+
+      // We're not resolving here, we'll do that after checking the port
+      resolve(subprocess);
     });
   }
 
   async function startApp() {
     try {
       await app.whenReady();
-      await startNextServer();
+
+      logger.info('Electron app is ready. Starting Next.js server...');
+
+      const nextProcess = await startNextServer();
       logger.info(
         'Next.js server process started. Waiting for server to be ready...',
       );
 
       createWindow()
+      // await waitForPort(NEXT_SERVER_PORT);
+      logger.info('Next.js server is ready. Creating window...');
 
-      // app.on('activate', () => {
-      //   if (BrowserWindow.getAllWindows().length === 0) createWindow();
-      // });
+      app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) createWindow();
+      });
 
-      // nextProcess.on('close', (code) => {
-      //   logger.info(`Next.js process exited with code ${code}`);
-      //   app.quit();
-      // });
+      nextProcess.on('close', (code) => {
+        logger.info(`Next.js process exited with code ${code}`);
+        app.quit();
+      });
     } catch (error) {
       logger.error('Error starting the application:', error);
       app.quit();

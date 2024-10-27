@@ -7,12 +7,17 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.mjs",
-    "**/*.js"
+    "**/*.js",
+    "out/types/**/*.ts"
   ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
