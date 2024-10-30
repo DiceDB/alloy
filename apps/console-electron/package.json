@@ -17,8 +17,8 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@dicedb/eslint-config": "workspace:*",
-    "@dicedb/typescript-config": "workspace:*",
+    "@dicedb/eslint-config": "*",
+    "@dicedb/typescript-config": "*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
