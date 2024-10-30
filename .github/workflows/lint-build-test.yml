@@ -23,6 +23,7 @@ jobs:
           fetch-depth: 2
 
       - name: Enable corepack
+        uses: actions/checkout@v4
         run: corepack enable
 
       - name: Cache turbo build setup
