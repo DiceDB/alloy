@@ -30,7 +30,7 @@ This monorepo includes the following packages/apps:
 
 Ensure you have the following installed:
 - node.js (v18.17.0 or later)
-- pnpm (v9.10.0 or later)
+- yarn (v4.5.1)
 
 ```bash
 nvm install 18.17.0
@@ -38,10 +38,10 @@ nvm use 18.17.0
 ```
 
 ```bash
-npm install -g pnpm@9.10.0
+corepack enable
 ```
 
-> If you're unfamiliar with pnpm, it’s an alternative package manager that is faster and more efficient than npm. Learn more about pnpm [here](https://pnpm.io/).
+> If you're unfamiliar with yarn, it’s an alternative package manager that is faster and more efficient than npm. Learn more about yarn [here](https://yarnpkg.com/getting-started).
 
 
 
@@ -52,7 +52,7 @@ Clone the repository and install the dependencies:
 ```bash
 git clone <repository-url>
 cd alloy
-pnpm install
+yarn install
 ```
 
 > [!NOTE]
@@ -64,7 +64,7 @@ To build all apps and packages, run the following command:
 
 ```
 cd alloy
-pnpm build
+yarn build
 ```
 
 #### Build a specific package/app
@@ -73,12 +73,12 @@ To build a specific package/app, run the following command:
 
 ```
 cd alloy
-pnpm build --filter @dicedb/playground-web
+yarn build --filter @dicedb/playground-web
 ```
 
 These commands will not only build the package requested but also build all the dependencies of the package requested.
 
-> We also have a `pnpm build:playground` alias that does the same thing as `pnpm build --filter @dicedb/playground-web` for convenience.
+> We also have a `yarn build:playground` alias that does the same thing as `yarn build --filter @dicedb/playground-web` for convenience.
 
 ### Develop
 
@@ -86,7 +86,7 @@ To develop all apps and packages, run the following command:
 
 ```
 cd alloy
-pnpm dev
+yarn dev
 ```
 
 #### Develop a specific package/app
@@ -95,12 +95,12 @@ To develop a specific package/app, run the following command:
 
 ```
 cd alloy
-pnpm dev --filter @dicedb/playground-web
+yarn dev --filter @dicedb/playground-web
 ```
 
 These commands will not only start the development server for the package requested but also start the development server for all the dependencies of the package requested.
 
-> We also have a `pnpm dev:playground` alias that does the same thing as `pnpm dev --filter @dicedb/playground-web` for convenience.
+> We also have a `yarn dev:playground` alias that does the same thing as `yarn dev --filter @dicedb/playground-web` for convenience.
 
 
 ### Testing
@@ -109,7 +109,7 @@ To run tests for all apps and packages, run the following command:
 
 ```
 cd alloy
-pnpm test
+yarn test
 ```
 
 #### Test in Watch Mode
@@ -118,7 +118,7 @@ To run tests in watch mode for all apps and packages, run the following command:
 
 ```
 cd alloy
-pnpm test:watch
+yarn test:watch
 ```
 
 
@@ -129,7 +129,7 @@ To format all apps and packages, run the following command:
 
 ```
 cd alloy
-pnpm format
+yarn format
 ```
 
 ### Linting
@@ -138,7 +138,7 @@ To lint all apps and packages, run the following command:
 
 ```
 cd alloy
-pnpm lint
+yarn lint
 ```
 
 ## The Monorepo Structure
