@@ -1,17 +1,17 @@
 FROM node:20-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN npm i -g pnpm@9.10.0
+RUN corepack enable
+RUN corepack prepare yarn@4.5.1 --activate
 
 FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run -r build
-RUN pnpm deploy --filter=playground-web --prod /prod/playground-web
+RUN --mount=type=cache,target=/usr/src/app/.yarn/cache \
+    yarn install --immutable
+RUN yarn run -r build
+RUN yarn workspace playground-web pack --out-dir /prod/playground-web
 
 FROM base 
 COPY --from=build /prod/playground-web /prod/playground-web
 WORKDIR /prod/playground-web
 EXPOSE 3000
-CMD [ "pnpm", "dev" ]
+CMD [ "yarn", "dev" ]
