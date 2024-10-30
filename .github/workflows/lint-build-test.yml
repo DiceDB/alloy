@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
+        run: corepack enable
 
       - name: Cache turbo build setup
         uses: actions/cache@v4
@@ -30,35 +31,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
 
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
- 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
- 
+          cache: 'yarn'
+
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install --immutable
 
       - name: Lint
-        run: pnpm lint
+        run: yarn lint
 
       - name: Check Formatting
-        run: pnpm check:format
+        run: yarn check:format
  
       - name: Build
-        run: pnpm build
+        run: yarn build
  
       - name: Test
-        run: pnpm test
+        run: yarn test
