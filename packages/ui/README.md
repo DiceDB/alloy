@@ -18,10 +18,10 @@ import CLI from '@dicedb/ui/CLI';
 
 ```jsonc
 {
-    /* package.json */
-    "dependencies": {
-        "@dicedb/ui": "workspace:*"
-    }
+  /* package.json */
+  "dependencies": {
+    "@dicedb/ui": "workspace:*",
+  },
 }
 ```
 
@@ -29,6 +29,6 @@ import CLI from '@dicedb/ui/CLI';
 
 ```shell
 cd ./packages/ui
-pnpm generate:component
+yarn generate:component
 
 ```
