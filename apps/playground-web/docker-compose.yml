@@ -1,26 +1,38 @@
 services:
+  dicedbadmin:
+    image: dicedb/dicedb:latest
+    ports:
+      - '7379:7379'
+
   dicedb:
     image: dicedb/dicedb:latest
     ports:
-      - "7379:7379"
+      - '7380:7379'
 
   backend:
     build:
       context: .
-      dockerfile: PlaygroundMonoDockerfile 
+      dockerfile: PlaygroundMonoDockerfile
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
+      - dicedbadmin
       - dicedb
     environment:
+      - DICEDB_ADMIN_ADDR=dicedbadmin:7379
+      - DICEDB_ADMIN_USERNAME=${DICEDB_ADMIN_USERNAME}
+      - DICEDB_ADMIN_PASSWORD=${DICEDB_ADMIN_PASSWORD}
       - DICEDB_ADDR=dicedb:7379
+      - DICEDB_USERNAME=${DICEDB_USERNAME}
+      - DICEDB_PASSWORD=${DICEDB_PASSWORD}
 
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.dev  # Specify the correct Dockerfile for the frontend
+      context: ../../
+      dockerfile: ./apps/playground-web/Dockerfile # Specify the correct Dockerfile for the frontend
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
+      - dicedbadmin
       - dicedb
       - backend

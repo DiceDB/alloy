@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
-import CommandPage from './command';
+import CommandPage from './CommandPage';
 
 export default function SearchBox() {
   const [search, setSearch] = useState('');
@@ -16,7 +16,7 @@ export default function SearchBox() {
   );
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto" data-testid="search-container">
       <div className="mb-4">
         <div className="flex items-center bg-gray-200 border border-gray-200 rounded px-2">
           <Search className="text-gray-900 mr-2" />
@@ -26,6 +26,7 @@ export default function SearchBox() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search commands..."
             className="bg-transparent border-none outline-none w-full py-2 text-gray-900 font-assistant"
+            data-testid="search-input"
           />
         </div>
       </div>
@@ -38,6 +39,7 @@ export default function SearchBox() {
               syntax={cmdMeta.syntax}
               body={cmdMeta.body}
               url={cmdMeta.url}
+              data-testid={`command-title-${cmdMeta.title}`}
             />
           ))}
       </div>
