@@ -58,7 +58,7 @@ function TerminalCounter({
           >
             <Tooltip message="The time remaining until cleanup is initiated." />
             <span>
-              <span className="font-semibold">Cleanup in:</span>{' '}
+              <span className="font-semibold">Cleanup in: </span>
               {formatTime(cleanupTimeLeft)} mins
             </span>
           </div>
@@ -71,7 +71,7 @@ function TerminalCounter({
           >
             <Tooltip message="The number of commands you can execute before cleanup." />{' '}
             <span>
-              <span className="font-semibold">Commands left:</span>
+              <span className="font-semibold">Commands left: </span>
               {commandsLeft}
             </span>
           </div>

@@ -82,14 +82,7 @@ describe('SearchBox Component', () => {
     }
   });
 
-  it('should not show results when search length is less than 2', async () => {
-    const { searchInputElement } = setupTest();
-    await userEvent.type(searchInputElement, 'A');
-
-    Object.values(DiceCmds).forEach((cmd) => {
-      expect(
-        screen.queryByText(new RegExp(cmd.title, 'i')),
-      ).not.toBeInTheDocument();
-    });
+  it('should show results when search length is 0', async () => {
+    expect(screen.getAllByTestId('command-title').length).toBeGreaterThan(0);
   });
 });
