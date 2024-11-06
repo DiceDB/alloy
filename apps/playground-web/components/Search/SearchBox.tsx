@@ -52,9 +52,7 @@ export default function SearchBox() {
 
 const NotFoundPage = () => {
   return (
-    <div
-      className="w-full p-6 bg-gray-100 text-white rounded-lg shadow-lg border border-gray-700 mb-4"
-    >
+    <div className="w-full p-6 bg-gray-100 text-white rounded-lg shadow-lg border border-gray-700 mb-4">
       <h2 className="text-gray-700 text-2xl font-semibold mb-4">
         No matching data was found🥺
       </h2>
