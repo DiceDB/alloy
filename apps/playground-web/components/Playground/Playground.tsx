@@ -10,24 +10,24 @@ export default function Playground() {
   return (
     <div
       data-testid="playground"
-      className="container mx-auto flex flex-col flex-grow min-h-screen bg-white text-gray-900"
+      className="container mx-auto p-4 lg:p-0 flex flex-col flex-grow h-screen bg-white text-gray-900"
     >
       <Header />
 
       <main
         data-testid="playground-main"
-        className="flex flex-col lg:flex-row gap-10 flex-grow overflow-hidden px-4"
+        className="h-full flex flex-col lg:flex-row gap-10 flex-grow overflow-hidden"
       >
-        <div className="w-full lg:w-7/12 flex flex-col">
+        <div className="h-4/6 lg:h-full w-full lg:w-[60%] flex flex-col">
           <TerminalUI />
         </div>
         <div
           data-testid="searchbox-container"
-          className="w-full lg:w-5/12 flex flex-col"
+          className="h-2/6 lg:h-full w-full lg:w-[40%] flex flex-col pb-4"
         >
           <div
             data-testid="searchbox-wrapper"
-            className="flex-grow border border-gray-400 bg-gray-100 p-4 rounded-lg shadow-md mb-4"
+            className="h-full w-full flex-grow border border-gray-400 bg-gray-100 p-4 pb-0 rounded-lg shadow-md"
           >
             <SearchBox />
           </div>
