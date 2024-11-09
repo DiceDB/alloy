@@ -2,16 +2,29 @@
   "name": "@dicedb/console-electron",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
+  "main": "build/main.cjs",
   "type": "module",
   "scripts": {
-    "dev": "concurrently --kill-others \"next dev -p ${PORT:-4000}\" \"electron .\"",
-    "dev:next": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
+    "next:lint": "next lint",
+    "format": "dprint fmt",
+    "postinstall": "electron-builder install-app-deps",
+    "electron:dist": "electron-builder --dir",
+    "electron:dist:deb": "electron-builder --linux deb",
+    "electron:build": "tsup",
+    "build": "run-s next:build electron:build",
+    "dist": "run-s next:build electron:dist",
+    "dev": "npm-run-all --parallel electron:dev next:dev",
+    "electron:build_watch": "tsup --watch",
+    "electron:dev": "npm-run-all --parallel electron:build_watch electron:watch",
+    "electron:watch": "cross-env NODE_ENV='development' nodemon"
   },
   "dependencies": {
+    "@electron-toolkit/utils": "^3.0.0",
+    "get-port-please": "^3.1.2",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18"
@@ -23,11 +36,57 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "concurrently": "^9.0.1",
-    "electron": "^32.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "33.2.0",
+    "electron-builder": "^25.1.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
+    "nodemon": "^3.1.7",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsup": "^8.3.5",
     "typescript": "^5"
+  },
+  "build": {
+    "asar": true,
+    "executableName": "DicDBConsole",
+    "appId": "io.dicedb.console",
+    "asarUnpack": [
+      "node_modules/next",
+      "node_modules/@img",
+      "node_modules/sharp",
+      "**\\*.{node,dll}"
+    ],
+    "files": [
+      "build",
+      {
+        "from": ".next/standalone",
+        "to": "app",
+        "filter": [
+          "!**/.env",
+          "!**/package.json"
+        ]
+      },
+      {
+        "from": ".next/static",
+        "to": "app/.next/static"
+      },
+      {
+        "from": "public",
+        "to": "app/public"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Development"
+    }
   }
 }

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json.schemastore.org/nodemon.json",
+  "exec": "electron .",
+  "watch": ["main"],
+  "ignore": ["build", "public/build"]
+}
+
