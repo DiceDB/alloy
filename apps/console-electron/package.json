@@ -11,7 +11,6 @@
     "next:start": "next start",
     "next:lint": "next lint",
     "format": "dprint fmt",
-    "postinstall": "electron-builder install-app-deps",
     "electron:dist": "electron-builder --dir",
     "electron:dist:deb": "electron-builder --linux deb",
     "electron:build": "tsup",
