@@ -1,7 +1,6 @@
 import { Dice1, Dice3, Dice5, Info } from 'lucide-react';
 import Shell from '../Shell/Shell';
 import { formatTime } from '@/shared/utils/commonUtils';
-import { useTimer } from '@/shared/hooks/useTimer';
 import { useState } from 'react';
 import Tooltip from '../Overlays/Tooltip';
 export function TerminalUI({ initialCommandsLeft = 1000 }) {
@@ -9,7 +8,9 @@ export function TerminalUI({ initialCommandsLeft = 1000 }) {
   const [cleanupTimeLeft, setCleanupTimeLeft] = useState(15 * 60);
   const handleCommandExecuted = (commands: number, cleanup: number) => {
     setCommandsLeft(commands);
-    setCleanupTimeLeft(cleanup);
+    if (cleanup !== -1) {
+      setCleanupTimeLeft(cleanup);
+    }
   };
 
   return (

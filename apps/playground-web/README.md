@@ -19,7 +19,7 @@ Clone the repository and install the dependencies:
 ```bash
 git clone <repository-url>
 cd apps/playground-web
-pnpm install
+yarn install
 ```
 
 ## Environment Variables
@@ -32,7 +32,7 @@ NEXT_PUBLIC_PLAYGROUND_MONO_URL=http://localhost:8080/
 To start the development server, run:
 
 ```bash
-pnpm run dev
+yarn run dev
 ```
 
 This will launch the app on [http://localhost:3000](http://localhost:3000). The app will automatically reload if you make changes to the code.
@@ -89,7 +89,7 @@ To ensure consistent code formatting, we use Prettier. It runs automatically as 
 To run Prettier and fix formatting issues locally:
 
 ```bash
-pnpm run prettier:format
+yarn run prettier:format
 ```
 
 This command will format all `.js`, `.jsx`, `.ts`, `.tsx`, `.json`, and `.css` files.
@@ -108,8 +108,9 @@ To generate a static production build of your Next.js application, follow these 
    Ensure that you have the following line in your `next.config.mjs` file:
 
    ```javascript
-   output: 'export'
+   output: 'export';
    ```
+
 2. **Build the Project:**
 
    Run the following command in your terminal:
@@ -117,6 +118,7 @@ To generate a static production build of your Next.js application, follow these 
    ```bash
    npm run build
    ```
+
 3. **Testing static build locally:**
    ```bash
    npx serve@latest out
@@ -127,13 +129,13 @@ To generate a static production build of your Next.js application, follow these 
 To create a production build:
 
 ```bash
-pnpm run build
+yarn run build
 ```
 
 After the build is complete, you can start the production server with:
 
 ```bash
-pnpm run start
+yarn run start
 ```
 
 ## Running the Test Cases
@@ -141,19 +143,19 @@ pnpm run start
 To run the test cases, execute the following command:
 
 ```bash
-pnpm run test
+yarn run test
 ```
 
 To execute the test cases simultaneously as you make changes to the files, execute the following command:
 
 ```bash
-pnpm run test:watch
+yarn run test:watch
 ```
 
 To get the test coverage of the project, execute the following command:
 
 ```bash
-pnpm run test:coverage
+yarn run test:coverage
 ```
 
 ## Project Structure
