@@ -45,8 +45,8 @@ export const fetchHealthCheck = async (): Promise<{ commandsLeft: number; cleanu
     const response = await WebService.get(healthCheckURL);
 
     if (response?.headers) {
-      const commandsLeft = parseInt(response.headers['X-Commands-Left'] || '1000', 10);
-      const cleanupTimeLeft = parseInt(response.headers['X-Next-Cleanup-Time'] || `${15 * 60}`, 10);
+      const commandsLeft = parseInt(response?.headers['x-commands-left'] || '1000', 10);
+      const cleanupTimeLeft = parseInt(response?.headers['x-next-cleanup-time'] || `${15 * 60}`, 10);
 
       return { commandsLeft, cleanupTimeLeft };
     } else {
