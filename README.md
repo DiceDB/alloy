@@ -28,13 +28,21 @@ This monorepo includes the following packages/apps:
 
 ### Prerequisites
 
+Ensure you have `nvm` installed. If not, run the following command
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+source ~/.bashrc
+```
+
 Ensure you have the following installed:
+
 - node.js (v18.17.0 or later)
 - yarn (v4.5.1)
 
 ```bash
-nvm install 18.17.0
-nvm use 18.17.0
+nvm install 20.0.0
+nvm use 20.0.0
 ```
 
 ```bash
