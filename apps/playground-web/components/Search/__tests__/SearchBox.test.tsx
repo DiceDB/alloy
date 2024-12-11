@@ -84,19 +84,13 @@ describe('SearchBox Component', () => {
 
   it('should show all commands when search length is 0', async () => {
     const { searchInputElement } = setupTest();
-
-    // Check that all commands are rendered when the search is empty
     expect(searchInputElement).toBeInTheDocument();
-
-    // Count the number of commands in DiceCmds
     const totalCommands = Object.values(DiceCmds).length;
-
-    // Use querySelectorAll for more advanced filtering
     const displayedCommands = Array.from(
-        screen.getByTestId('search-container').querySelectorAll('[data-testid^="command-page"]')
+      screen
+        .getByTestId('search-container')
+        .querySelectorAll('[data-testid^="command-page"]'),
     );
-
-    // Ensure the displayed commands match the total
     expect(displayedCommands).toHaveLength(totalCommands);
   });
 });
