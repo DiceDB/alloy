@@ -82,14 +82,15 @@ describe('SearchBox Component', () => {
     }
   });
 
-  it('should not show results when search length is less than 2', async () => {
+  it('should show all commands when search length is 0', async () => {
     const { searchInputElement } = setupTest();
-    await userEvent.type(searchInputElement, 'A');
-
-    Object.values(DiceCmds).forEach((cmd) => {
-      expect(
-        screen.queryByText(new RegExp(cmd.title, 'i')),
-      ).not.toBeInTheDocument();
-    });
+    expect(searchInputElement).toBeInTheDocument();
+    const totalCommands = Object.values(DiceCmds).length;
+    const displayedCommands = Array.from(
+      screen
+        .getByTestId('search-container')
+        .querySelectorAll('[data-testid^="command-page"]'),
+    );
+    expect(displayedCommands).toHaveLength(totalCommands);
   });
 });

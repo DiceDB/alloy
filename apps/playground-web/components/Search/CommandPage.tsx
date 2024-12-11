@@ -31,7 +31,7 @@ export default function CommandPage({
   return (
     <div
       data-testid="command-page"
-      className="p-6 bg-gray-100 text-white rounded-lg shadow-lg border border-gray-700 mb-4"
+      className="w-full p-6 bg-gray-100 text-white rounded-lg shadow-lg border border-gray-700 mb-4"
     >
       <h2
         data-testid="command-title"
@@ -65,7 +65,7 @@ export default function CommandPage({
       <div className="bg-gray-200 rounded-lg relative overflow-x-auto p-4">
         <code
           data-testid="command-syntax"
-          className="font-mono text-sm whitespace-pre text-gray-700 inline-block min-w-full"
+          className="font-mono text-sm text-gray-700 block w-full"
         >
           {syntax}
         </code>
