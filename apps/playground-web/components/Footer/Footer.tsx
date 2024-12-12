@@ -41,7 +41,7 @@ export default function Footer() {
             >
               <Button
                 variant="outline"
-                className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600"
+                className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600 flex items-center justify-center"
                 data-testid="github-button"
               >
                 <GitHub className="mr-2 h-4 w-4" /> GitHub (4k+)

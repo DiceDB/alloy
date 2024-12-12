@@ -11,6 +11,8 @@ const setupTest = () => {
   const terminalContainerElement = screen.getByTestId('terminal-container');
   const searchBoxContainerElement = screen.getByTestId('searchbox-container');
   const searchBoxWrapperElement = screen.getByTestId('searchbox-wrapper');
+  const submitIssueButtonElement = screen.getByTestId('submit-issue-button');
+  const submitIssueLinkElement = screen.getByTestId('submit-issue-link');
 
   return {
     playgroundElement,
@@ -19,6 +21,8 @@ const setupTest = () => {
     terminalContainerElement,
     searchBoxContainerElement,
     searchBoxWrapperElement,
+    submitIssueButtonElement,
+    submitIssueLinkElement,
     ...utils,
   };
 };
@@ -39,5 +43,17 @@ describe('Playground component', () => {
     expect(playgroundMainElement).toBeInTheDocument();
     expect(searchBoxContainerElement).toBeInTheDocument();
     expect(searchBoxWrapperElement).toBeInTheDocument();
+  });
+
+  it('renders the "Submit an Issue" button', () => {
+    const {
+      submitIssueButtonElement,
+      submitIssueLinkElement,
+    } = setupTest();
+    
+    expect(submitIssueButtonElement).toBeInTheDocument();
+    expect(submitIssueLinkElement).toBeInTheDocument();
+    expect(submitIssueLinkElement).toHaveAttribute('href', 'https://github.com/DiceDB/dice/issues/new/choose');
+    expect(submitIssueLinkElement).toHaveAttribute('aria-label', 'Submit an issue or feedback');
   });
 });

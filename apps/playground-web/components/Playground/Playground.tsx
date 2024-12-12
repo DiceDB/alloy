@@ -3,6 +3,9 @@
 import Image from 'next/image';
 import SearchBox from '@/components/Search/SearchBox';
 import { TerminalUI } from './TerminalUI';
+import Link from 'next/link';
+import { Button } from '@dicedb/ui/button';
+import GitHub from "@mui/icons-material/GitHub";
 
 // utils
 
@@ -55,6 +58,22 @@ function Header() {
         />
         <h2 className="font-light text-2xl ml-2">PlayGround</h2>
       </div>
+        <Link
+          href="https://github.com/DiceDB/dice/issues/new/choose"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Submit an issue or feedback"
+          data-testid="submit-issue-link"
+        >
+          <Button
+            variant="outline"
+            className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600 flex items-center justify-center"
+            data-testid="submit-issue-button"
+          >
+            Submit an Issue
+            <GitHub className="ml-2 h-4 w-4" /> 
+          </Button>
+        </Link>
     </header>
   );
 }
