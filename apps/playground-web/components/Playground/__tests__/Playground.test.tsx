@@ -53,7 +53,7 @@ describe('Playground component', () => {
     
     expect(submitIssueButtonElement).toBeInTheDocument();
     expect(submitIssueLinkElement).toBeInTheDocument();
-    expect(submitIssueLinkElement).toHaveAttribute('href', 'https://github.com/DiceDB/dice/issues/new/choose');
+    expect(submitIssueLinkElement).toHaveAttribute('href', 'https://github.com/DiceDB/playground-mono/issues/new');
     expect(submitIssueLinkElement).toHaveAttribute('aria-label', 'Submit an issue or feedback');
   });
 });
