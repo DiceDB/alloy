@@ -13,6 +13,14 @@ yarn install
 
 ## Development
 
+### Pre-requisite
+
+Playground-web depends on `playground-mono` which is the backend.
+Please set up the [`playground-mono` repository](https://github.com/dicedb/playground-mono) locally by following the instructions
+mentioned in the [`README.md`](https://github.com/DiceDB/playground-mono/blob/master/README.md) file.
+
+### Starting the development server
+
 To start the development server, run:
 
 ```bash

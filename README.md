@@ -29,6 +29,11 @@ yarn install
 > [!NOTE]
 > Please go through the README of each package/app to understand how to run and develop them. The READMEs are located in the respective package/app directories. The information below is a quick reference to get you started common for all packages/apps.
 
+## Develop
+
+Please refer to the README of the specific app that you want to
+develop and contribute to. You can find them under the `apps` directory.
+
 ## Build
 
 To build all apps and packages, run the following command:
@@ -46,18 +51,6 @@ yarn build --filter @dicedb/playground-web
 ```
 
 > Alternatively, you can also run `yarn build:playground` to build playground.
-
-## Develop
-
-To develop a specific package/app, run the following command:
-
-```bash
-yarn dev --filter @dicedb/playground-web
-```
-
-These commands will not only start the development server for the package requested but also start the development server for all the dependencies of the package requested.
-
-> Alternatively, you can also run `yarn dev:playground` to build playground.
 
 ## Testing
 
