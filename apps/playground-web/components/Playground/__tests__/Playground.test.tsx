@@ -13,6 +13,8 @@ const setupTest = () => {
   const searchBoxWrapperElement = screen.getByTestId('searchbox-wrapper');
   const submitIssueButtonElement = screen.getByTestId('submit-issue-button');
   const submitIssueLinkElement = screen.getByTestId('submit-issue-link');
+  const dicedbLinkElement = screen.getByTestId('dicedb-url-link');
+  const dicedbImageElement = dicedbLinkElement.querySelector('img');
 
   return {
     playgroundElement,
@@ -23,6 +25,8 @@ const setupTest = () => {
     searchBoxWrapperElement,
     submitIssueButtonElement,
     submitIssueLinkElement,
+    dicedbLinkElement,
+    dicedbImageElement,
     ...utils,
   };
 };
@@ -45,15 +49,34 @@ describe('Playground component', () => {
     expect(searchBoxWrapperElement).toBeInTheDocument();
   });
 
+  it('renders the "DiceDB" image', () => {
+    const { dicedbLinkElement, dicedbImageElement } = setupTest();
+
+    expect(dicedbLinkElement).toBeInTheDocument();
+    expect(dicedbLinkElement).toHaveAttribute('href', 'https://dicedb.io');
+    expect(dicedbLinkElement).toHaveAttribute('target', '_blank');
+    expect(dicedbLinkElement).toHaveAttribute('rel', 'noopener noreferrer');
+
+    expect(dicedbImageElement).toBeInTheDocument();
+    expect(dicedbImageElement).toHaveAttribute(
+      'src',
+      '/images/dicedb-logo-light.png',
+    );
+    expect(dicedbImageElement).toHaveAttribute('alt', 'DiceDB logo');
+  });
+
   it('renders the "Submit an Issue" button', () => {
-    const {
-      submitIssueButtonElement,
-      submitIssueLinkElement,
-    } = setupTest();
-    
+    const { submitIssueButtonElement, submitIssueLinkElement } = setupTest();
+
     expect(submitIssueButtonElement).toBeInTheDocument();
     expect(submitIssueLinkElement).toBeInTheDocument();
-    expect(submitIssueLinkElement).toHaveAttribute('href', 'https://github.com/DiceDB/playground-mono/issues/new');
-    expect(submitIssueLinkElement).toHaveAttribute('aria-label', 'Submit an issue or feedback');
+    expect(submitIssueLinkElement).toHaveAttribute(
+      'href',
+      'https://github.com/DiceDB/playground-mono/issues/new',
+    );
+    expect(submitIssueLinkElement).toHaveAttribute(
+      'aria-label',
+      'Submit an issue or feedback',
+    );
   });
 });
