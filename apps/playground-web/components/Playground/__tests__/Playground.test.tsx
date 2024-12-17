@@ -72,7 +72,7 @@ describe('Playground component', () => {
     expect(submitIssueLinkElement).toBeInTheDocument();
     expect(submitIssueLinkElement).toHaveAttribute(
       'href',
-      'https://github.com/DiceDB/playground-mono/issues/new',
+      'https://github.com/DiceDB/playground-mono/issues/new/choose',
     );
     expect(submitIssueLinkElement).toHaveAttribute(
       'aria-label',
