@@ -47,6 +47,13 @@ function Header() {
       className="navbar flex items-center justify-between py-5"
     >
       <div className="flex items-center">
+        <Link
+            href="https://dicedb.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Submit an issue or feedback"
+            data-testid="submit-issue-link"
+        >
         <Image
           src="/images/dicedb-logo-light.png"
           width={110}
@@ -56,6 +63,7 @@ function Header() {
           className="object-contain"
           unoptimized
         />
+        </Link>
         <h2 className="font-light text-2xl ml-2">PlayGround</h2>
       </div>
         <Link
@@ -67,11 +75,11 @@ function Header() {
         >
           <Button
             variant="outline"
-            className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600 flex items-center justify-center"
+            className="!w-full mt-2 !border-1 !border-gray-700 bg-blue-50 hover:text-blue text-black hover:text-blue-600 flex items-center justify-center rounded-lg"
             data-testid="submit-issue-button"
           >
             Submit an Issue
-            <GitHub className="ml-2 h-4 w-4" /> 
+            <GitHub className="ml-2 h-4 w-4" />
           </Button>
         </Link>
     </header>
