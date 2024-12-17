@@ -67,7 +67,7 @@ function Header() {
         <h2 className="font-light text-2xl ml-2">PlayGround</h2>
       </div>
       <Link
-        href="https://github.com/DiceDB/playground-mono/issues/new"
+        href="https://github.com/DiceDB/playground-mono/issues/new/choose"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Submit an issue or feedback"
