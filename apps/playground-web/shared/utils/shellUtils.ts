@@ -1,8 +1,20 @@
 // src/shared/utils/shellUtils.ts
 
 import { executeShellCommandOnServer } from '@/lib/api';
-import { CommandHandler } from '@/types';
+import { CommandHandler, InvalidCommandHandler } from '@/types';
 import { handleResult } from '@/shared/utils/commonUtils';
+
+export const handleInvalidCommand = async ({
+  command, 
+  setOutput
+}: InvalidCommandHandler) => {
+  const newOutput = `dice > ${command}`;
+  setOutput((prevOutput: any) => [
+    ...prevOutput,
+    newOutput,
+    `(error) ERR unknown command '${command}'`,
+  ]);
+}
 
 export const handleCommand = async ({
   command,
