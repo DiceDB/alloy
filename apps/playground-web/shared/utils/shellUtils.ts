@@ -4,9 +4,9 @@ import { executeShellCommandOnServer } from '@/lib/api';
 import { CommandHandler, InvalidCommandHandler } from '@/types';
 import { handleResult } from '@/shared/utils/commonUtils';
 
-export const handleInvalidCommand = async ({
-  command, 
-  setOutput
+export const handleBlockedCommand = async ({
+  command,
+  setOutput,
 }: InvalidCommandHandler) => {
   const newOutput = `dice > ${command}`;
   setOutput((prevOutput: any) => [
@@ -14,7 +14,7 @@ export const handleInvalidCommand = async ({
     newOutput,
     `(error) ERR unknown command '${command}'`,
   ]);
-}
+};
 
 export const handleCommand = async ({
   command,
