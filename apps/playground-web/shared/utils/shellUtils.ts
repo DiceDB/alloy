@@ -1,13 +1,13 @@
 // src/shared/utils/shellUtils.ts
 
 import { executeShellCommandOnServer } from '@/lib/api';
-import { CommandHandler, InvalidCommandHandler } from '@/types';
+import { CommandHandler, BlockedCommandHandler } from '@/types';
 import { handleResult } from '@/shared/utils/commonUtils';
 
 export const handleBlockedCommand = async ({
   command,
   setOutput,
-}: InvalidCommandHandler) => {
+}: BlockedCommandHandler) => {
   const newOutput = `dice > ${command}`;
   setOutput((prevOutput: any) => [
     ...prevOutput,

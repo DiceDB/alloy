@@ -6,7 +6,7 @@ export interface CommandHandler {
   onCommandExecuted: (commandsLeft: number, cleanupTimeLeft: number) => void;
 }
 
-export interface InvalidCommandHandler {
+export interface BlockedCommandHandler {
   command: string;
   setOutput: React.Dispatch<React.SetStateAction<string[]>>;
 }
