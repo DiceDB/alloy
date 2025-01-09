@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { getAllByTestId, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Shell from '../Shell';
 
@@ -55,13 +55,15 @@ describe('Shell Component', () => {
   });
 
   it('should throw error when user types blocklisted command', async () => {
-    const { cliInputElement, user, getByTestId } = setupTest();
+    const { cliInputElement, user, getAllByTestId } = setupTest();
 
     await user.type(cliInputElement, 'EXEC{enter}');
-    const terminalOutputElement = getByTestId('terminal-output');
-    expect(terminalOutputElement).toHaveTextContent(
-      "(error) ERR unknown command 'EXEC'",
+    const terminalOutputElements = getAllByTestId('terminal-output');
+
+    const errorElement = terminalOutputElements.find((element) =>
+      element.textContent?.includes("(error) ERR unknown command 'EXEC'"),
     );
+    expect(errorElement).toBeDefined();
   });
 
   it('should navigate through command history', async () => {

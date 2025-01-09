@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
 
 // utils
-import { handleCommand } from '@/shared/utils/shellUtils';
+import { handleCommand, handleBlockedCommand } from '@/shared/utils/shellUtils';
 import blocklistedCommands from '@/shared/utils/blocklist';
 
 export const useShell = (
@@ -29,10 +29,7 @@ export const useShell = (
     }
 
     if (blocklistedCommands.includes(commandName)) {
-      setOutput((prevOutput) => [
-        ...prevOutput,
-        `(error) ERR unknown command '${commandName}'`,
-      ]);
+      handleBlockedCommand({ command, setOutput });
     } else {
       handleCommand({ command, setOutput, onCommandExecuted }); // Execute if not blocklisted
     }
