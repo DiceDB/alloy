@@ -1,6 +1,8 @@
-import { MonoSchema } from '@/lib/monoSchema';
+import { MonoSchema,  } from '@/lib/schemas';
 
+import { z } from 'zod';
 import { MonoResponse } from '@/lib/monoResponse';
+import { HealthResponse } from '@/lib//healthResponse';
 
 let PLAYGROUND_MONO_URL = process.env.NEXT_PUBLIC_PLAYGROUND_MONO_URL;
 
@@ -30,7 +32,7 @@ export const WebService = {
     headers: HeadersType,
   ): Promise<{
     headers: { [key: string]: string };
-    body: MonoResponse;
+    body: MonoResponse | HealthResponse;
   }> => {
     const options: RequestOptions = {
       method,
@@ -69,6 +71,11 @@ export const WebService = {
           headers: headers,
           body: { data: parsedBody?.data?.data, error: null },
         };
+      } else if('message' in parsedBody.data) {
+        return {
+          headers: headers,
+          body: { message: parsedBody?.data?.message },
+        };
       } else {
         return {
           headers: headers,
@@ -98,4 +105,5 @@ export const WebService = {
   post: (url: string, data: any, headers: HeadersType = {}) => {
     return WebService.request(url, 'POST', data, headers);
   },
+  
 };

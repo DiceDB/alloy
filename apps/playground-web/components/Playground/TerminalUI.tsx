@@ -1,11 +1,32 @@
 import { Dice1, Dice3, Dice5, Info } from 'lucide-react';
 import Shell from '../Shell/Shell';
 import { formatTime } from '@/shared/utils/commonUtils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import Tooltip from '../Overlays/Tooltip';
-export function TerminalUI({ initialCommandsLeft = 1000 }) {
-  const [commandsLeft, setCommandsLeft] = useState(initialCommandsLeft);
-  const [cleanupTimeLeft, setCleanupTimeLeft] = useState(15 * 60);
+import { fetchHealthCheck } from '@/lib/api';
+
+export function TerminalUI() {
+
+  const [commandsLeft, setCommandsLeft] = useState<number | null>(null);
+  const [cleanupTimeLeft, setCleanupTimeLeft] = useState<number | null>(null);
+
+  useEffect(() => {
+    const initializeHealthCheck = async () => {
+      try {
+        const { commandsLeft, cleanupTimeLeft } = await fetchHealthCheck();
+        setCommandsLeft(commandsLeft);
+        setCleanupTimeLeft(cleanupTimeLeft);
+      } catch (error) {
+        console.error('Error initializing health check:', error);
+        setCommandsLeft(1000); // Fallback value
+        setCleanupTimeLeft(15 * 60); // Fallback value
+      }
+    };
+
+    initializeHealthCheck();
+  }, []);
+  
   const handleCommandExecuted = (commands: number, cleanup: number) => {
     setCommandsLeft(commands);
     if (cleanup !== -1) {
@@ -86,3 +107,4 @@ function TerminalCounter({
     </div>
   );
 }
+
