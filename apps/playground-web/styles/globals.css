@@ -16,3 +16,22 @@ body {
 .width-absolute {
   width: 100%;
 }
+
+.mobile-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobile-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.mobile-scrollbar::-webkit-scrollbar-thumb {
+  background: #88888888;
+  border-radius: 10px;
+  width: 5px;
+}
+
+.mobile-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
