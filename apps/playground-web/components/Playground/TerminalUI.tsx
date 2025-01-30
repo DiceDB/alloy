@@ -16,7 +16,7 @@ export function TerminalUI({ initialCommandsLeft = 1000 }) {
   return (
     <>
       <div
-        className="h-full max-h-[26rem] bg-gray-900 rounded-lg flex flex-col"
+        className="h-full bg-gray-900 rounded-xl flex flex-col"
         data-testid="terminal-container"
       >
         <div className="bg-gray-900 px-4 py-4 flex items-center rounded-lg">
@@ -27,7 +27,7 @@ export function TerminalUI({ initialCommandsLeft = 1000 }) {
           </div>
         </div>
         <div
-          className="h-full md:h-[30rem] bg-gray-100 rounded-lg overflow-hidden shadow-md"
+          className="h-full flex-grow bg-gray-100 rounded-lg overflow-hidden shadow-md"
           data-testid="shell-container"
         >
           <Shell onCommandExecuted={handleCommandExecuted} />
@@ -50,7 +50,13 @@ function TerminalCounter({
 }) {
   return (
     <div className="flex flex-col" data-testid="terminal-counter">
-      <div className="flex flex-row justify-between text-gray-900 mt-4">
+      <div className="flex items-center justify-between text-gray-900 my-4">
+        <div className="flex flex-row items-center justify-center md:justify-start">
+          <Info className="w-4 h-4 text-gray-500 mr-1" />
+          <p className="text-sm text-gray-500">
+            DiceDB instance is shared across all users.
+          </p>
+        </div>
         <div className="flex flex-row items-center space-x-2">
           <div
             className="flex items-center justify-between gap-1 border border-gray-400 text-sm bg-transparent p-3 rounded-lg"
@@ -62,9 +68,6 @@ function TerminalCounter({
               {formatTime(cleanupTimeLeft)} mins
             </span>
           </div>
-        </div>
-
-        <div className="flex flex-row items-center space-x-2">
           <div
             className="flex items-center justify-between gap-1 border border-gray-400 text-sm bg-transparent p-3 rounded-lg"
             data-testid="commands-left"
@@ -76,12 +79,6 @@ function TerminalCounter({
             </span>
           </div>
         </div>
-      </div>
-      <div className="flex flex-row items-center mt-5 justify-center md:justify-start">
-        <Info className="w-4 h-4 text-gray-500 mr-1" />
-        <p className="text-sm text-gray-500">
-          DiceDB instance is shared across all users.
-        </p>
       </div>
     </div>
   );

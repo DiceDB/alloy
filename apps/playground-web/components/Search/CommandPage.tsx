@@ -31,7 +31,7 @@ export default function CommandPage({
   return (
     <div
       data-testid="command-page"
-      className="w-full p-6 bg-gray-100 text-white rounded-lg shadow-lg border border-gray-700 mb-4"
+      className="w-full p-6 bg-gray-100 text-white rounded-lg border border-gray-700/30 mb-4"
     >
       <h2
         data-testid="command-title"
@@ -41,7 +41,7 @@ export default function CommandPage({
       </h2>
 
       <div className="flex items-center justify-between mb-4 pt-4">
-        <h3 className="text-gray-700 text-2xl font-semibold">Syntax</h3>
+        <h3 className="text-gray-700 text-xl font-semibold">Syntax</h3>
         <div className="flex flex-row">
           {isCopied && (
             <div
@@ -71,7 +71,7 @@ export default function CommandPage({
         </code>
       </div>
 
-      <h2 className="text-gray-700 text-2xl font-semibold pt-4 mb-4">
+      <h2 className="text-gray-700 text-xl font-semibold pt-4 mb-4">
         Description
       </h2>
       <div className="bg-gray-200 p-4 rounded-lg mb-4">
