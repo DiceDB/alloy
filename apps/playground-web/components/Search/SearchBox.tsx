@@ -36,7 +36,7 @@ export default function SearchBox() {
       </div>
       <div
         ref={scrollRef}
-        className="mt-4 max-w-full space-y-4 font-mono h-full pr-1 pb-[130px] mobile-scrollbar overflow-y-auto"
+        className="mt-4 max-w-full space-y-4 h-full pr-1 pb-[130px] mobile-scrollbar overflow-y-auto"
       >
         {filteredCommands.map((cmdMeta) => (
           <CommandPage

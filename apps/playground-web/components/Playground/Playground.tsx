@@ -5,7 +5,7 @@ import { TerminalUI } from './TerminalUI';
 import Link from 'next/link';
 import { Button } from '@dicedb/ui/button';
 import GitHub from '@mui/icons-material/GitHub';
-import { Command, Terminal } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 import CommandProvider, { useCommandContext } from '@/context/command';
 import CommandPanel from '../Overlays/CommandPanel';
 
@@ -46,7 +46,7 @@ export default function Playground() {
 }
 
 function Header() {
-  const { setIsOpen } = useCommandContext();
+  const { setIsOpen, isOpen } = useCommandContext();
   return (
     <header
       data-testid="playground-header"
@@ -85,19 +85,21 @@ function Header() {
             className="w-full mt-2 gap-2 border-1 border-gray-700 text-gray-700 hover:scale-95 transition  flex items-center justify-center rounded-lg"
             data-testid="submit-issue-button"
           >
-            <GitHub className="h-4 w-4" />
+            <GitHub fontSize="small" />
             Submit an Issue
           </Button>
         </Link>
-        <Button
-          onClick={() => setIsOpen(true)}
-          variant="outline"
-          className="mt-2 w-fit gap-2 border-1 border-gray-700 !bg-gray-700 hover:scale-95 transition text-white  flex items-center justify-center rounded-lg"
-          data-testid="submit-issue-button"
-        >
-          <Terminal className="h-4 w-4" />
-          Commands
-        </Button>
+        {!isOpen ? (
+          <Button
+            onClick={() => setIsOpen(true)}
+            variant="outline"
+            className="mt-2 w-fit gap-2 border-1 border-gray-700 !bg-gray-700 hover:scale-95 transition text-white  flex items-center justify-center rounded-lg"
+            data-testid="submit-issue-button"
+          >
+            <Terminal className="h-4 w-4" />
+            Commands
+          </Button>
+        ) : null}
       </div>
     </header>
   );
