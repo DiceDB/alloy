@@ -7,6 +7,7 @@ interface ButtonProps {
   className?: string;
   variant?: 'default' | 'outline';
   'data-testid'?: string;
+  onClick?: () => void;
 }
 
 const baseClasses =
@@ -19,6 +20,7 @@ const variantClasses = {
 
 export function Button({
   children,
+  onClick,
   className = '',
   variant = 'default',
   ...props
@@ -26,6 +28,7 @@ export function Button({
   return (
     <button
       data-testid={props['data-testid']}
+      onClick={onClick}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`} // Combine all classes
     >
       {children}

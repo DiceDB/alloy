@@ -1,12 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import { DiceCmds, DiceCmdMeta } from '@/data/command';
 import CommandPage from './CommandPage';
 
 export default function SearchBox() {
   const [search, setSearch] = useState('');
+  const scrollRef = useRef<HTMLDivElement>(null);
   const filteredCommands = useMemo(
     () =>
       Object.values(DiceCmds).filter((cmd: DiceCmdMeta) =>
@@ -33,7 +34,10 @@ export default function SearchBox() {
           />
         </div>
       </div>
-      <div className="mt-4 max-w-full space-y-4 h-full overflow-y-auto">
+      <div
+        ref={scrollRef}
+        className="mt-4 max-w-full space-y-4 h-full pr-1 pb-[130px] mobile-scrollbar overflow-y-auto"
+      >
         {filteredCommands.map((cmdMeta) => (
           <CommandPage
             key={cmdMeta.title}
@@ -44,6 +48,30 @@ export default function SearchBox() {
             data-testid={`command-title-${cmdMeta.title}`}
           />
         ))}
+
+        <button
+          onClick={() =>
+            scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+          }
+          className="fixed bottom-4 right-4 bg-gray-700 hover:bg-gray-800 text-white rounded-full p-3 shadow-lg transition-all duration-300"
+          aria-label="Scroll to top"
+          data-testid="scroll-to-top"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </button>
         {filteredCommands.length === 0 && <NotFoundPage />}
       </div>
     </div>
