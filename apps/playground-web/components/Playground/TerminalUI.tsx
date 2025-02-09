@@ -51,13 +51,8 @@ function TerminalCounter({
   return (
     <div className="flex flex-col" data-testid="terminal-counter">
       <div className="flex items-center justify-between text-gray-900 my-4">
-        <div className="flex flex-row items-center justify-center md:justify-start">
-          <Info className="w-4 h-4 text-gray-500 mr-1" />
-          <p className="text-sm text-gray-500">
-            DiceDB instance is shared across all users.
-          </p>
-        </div>
-        <div className="flex flex-row items-center space-x-2">
+        <InstanceMessage extraClassname="hidden lg:flex" />
+        <div className="w-full flex justify-between md:justify-end items-center space-x-2">
           <div
             className="flex items-center justify-between gap-1 border border-gray-400 text-sm bg-transparent p-3 rounded-lg"
             data-testid="cleanup-timer"
@@ -80,6 +75,24 @@ function TerminalCounter({
           </div>
         </div>
       </div>
+      <InstanceMessage extraClassname="lg:hidden" />
     </div>
   );
 }
+
+const InstanceMessage = ({
+  extraClassname = '',
+}: {
+  extraClassname?: string;
+}) => {
+  return (
+    <div
+      className={`flex flex-row w-full items-center gap-2 justify-center md:justify-start ${extraClassname}`}
+    >
+      <Info className="w-4 h-4 text-gray-500" />
+      <p className="text-sm text-gray-500">
+        DiceDB instance is shared across all users.
+      </p>
+    </div>
+  );
+};
